@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investiční štít</title>
+<meta name="theme-color" content="#080C1A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=localStorage.getItem("stit-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+.topbar{max-width:1180px;justify-content:flex-end!important;margin:0 auto;padding:22px 18px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar .brand{padding:0;font-size:18.2px}
+.topbar .brand small{display:block;font-weight:400;font-size:13.7px;color:var(--muted);-webkit-text-fill-color:var(--muted)}
+.topbar nav{display:flex;gap:6px;flex-wrap:wrap}
+.topbar nav a{color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:99px;border:1px solid var(--rule);font-size:14.8px}
+.topbar nav a:hover{color:var(--ink);background:var(--glass)}
+</style>
+</head>
+<body class="bg-chart">
+<div class="topbar">
+    <nav><a href="#portfolio">Portfolio</a><a href="#simulace">Simulace</a><a href="#temata">Témata</a><a href="#watchlist">Watchlist</a>
+  <button type="button" class="ghost sm" id="themebtn">☀️ Světlý režim</button></nav>
+</div>
+<header class="pagehead"><h1>Investiční štít</h1><p>Dlouhodobé portfolio z watchlistu – přepočet každou neděli</p></header>
+
+<main id="stit">
+<style>
+#stit .zone{white-space:nowrap}
+#stit .sig{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+#stit .sig li{display:flex;gap:10px;align-items:baseline}
+#stit .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,220px));gap:14px;margin-bottom:16px}
+#stit .tcard h3{display:flex;justify-content:space-between;gap:10px}
+#stit .tcard .muted{color:var(--muted);font-size:14.8px;margin:0 0 6px}
+#stit .tcard ul{margin:8px 0 0;padding-left:18px;font-size:14.8px}
+#stit details summary{cursor:pointer;font-weight:600}
+#stit details li{margin:6px 0}
+#stit .stale{color:var(--warn)}
+</style>
+
+<section class="hero"><div>
+  <p class="empty" style="margin:0 0 8px">Data k <b id="s-asof">–</b> <span id="s-stale" class="stale"></span></p>
+  <p class="lede up" id="s-lede">–</p>
+  <ul class="facts">
+    <li>Model drží <b id="s-n">–</b> akcií z watchlistu a <b id="s-res">–</b> hotovostní rezervu.</li>
+    <li>Nejvyšší skóre má <b id="s-top">–</b>.</li>
+    <li>Jde o matematický model, ne o investiční doporučení.</li>
+  </ul>
+</div></section>
+
+<div class="kpis">
+  <div class="k"><span>Medián za 10 let</span><b id="k-med">–</b><span id="k-med-s">–</span></div>
+  <div class="k"><span>Šance na propad přes −35 %</span><b id="k-dd">–</b><span id="k-dd-s">–</span></div>
+  <div class="k"><span>Volatilita portfolia</span><b id="k-vol">–</b><span>ročně, včetně rezervy</span></div>
+  <div class="k"><span>Signály tento týden</span><b id="k-sig">–</b><span>změny proti minulému týdnu</span></div>
+</div>
+
+<section><h2>Co se změnilo tento týden</h2><p class="hint">Nákupy, prodeje a změny pásem proti minulému nedělnímu přepočtu.</p><ul class="sig" id="sig"></ul></section>
+
+<section id="portfolio"><h2>Modelové portfolio</h2><p class="hint">Zadej částky a tabulka spočítá, kolik eur dát do které akcie.</p>
+  <div class="calc">
+    <label for="vklad">Jednorázový vklad (€)<input id="vklad" type="number" min="0" step="500" value="10000"></label>
+    <label for="mesic">Měsíční vklad (€)<input id="mesic" type="number" min="0" step="50" value="300"></label>
+  </div>
+  <div class="wrap"><table><thead><tr><th>Ticker</th><th>Firma</th><th class="n">Váha</th><th class="n">Jednorázově</th><th class="n">Měsíčně</th><th class="n">Skóre</th><th class="n">Oček. výnos</th><th class="n">Týden</th><th>Pásmo</th></tr></thead><tbody id="pf"></tbody></table></div>
+</section>
+
+<section id="simulace"><h2>Kam se může portfolio dostat</h2><p class="hint">Monte Carlo, 10 000 simulací v EUR pro 10 000 € na začátku a 300 € měsíčně. Sloupec je pásmo mezi 10. a 90. percentilem, bod medián.</p>
+  <div class="chartbox"><canvas id="c-mc" role="img" aria-label="Rozpětí hodnoty portfolia po 1 až 10 letech"></canvas></div>
+  <div class="wrap" style="margin-top:14px"><table><thead><tr><th>Varianta</th><th class="n">Medián p.a.</th><th class="n">Medián za 10 let</th><th class="n">Pesimistický decil</th><th class="n">Propad &gt; 35 %</th></tr></thead><tbody id="mc-t"></tbody></table></div>
+</section>
+
+<section id="temata"><h2>Tržní témata</h2><p class="hint">Očekávaný posun ročního výnosu podle scénářů a pravděpodobností. Novinky doplňuje nedělní přepočet.</p><div class="xcards" id="themes"></div></section>
+
+<section id="watchlist"><h2>Celý watchlist</h2>
+  <div class="pills" id="wf">
+    <button type="button" class="sm" data-f="">Vše</button>
+    <button type="button" class="sm pill-off" data-f="in">V portfoliu</button>
+    <button type="button" class="sm pill-off" data-f="out">Mimo portfolio</button>
+    <button type="button" class="sm pill-off" data-f="buy">Nákupní zóna</button>
+  </div>
+  <div class="wrap"><table><thead><tr><th>Ticker</th><th>Firma</th><th class="n">Skóre</th><th class="n">Oček. výnos</th><th class="n">Cena</th><th class="n">Cena vs. VH</th><th>Pásmo</th><th class="n">Fwd P/E</th><th class="n">ROIC</th><th class="n">Volatilita</th><th class="n">12 měs.</th></tr></thead><tbody id="wl"></tbody></table></div>
+</section>
+
+<section><details><summary>Pravidla strategie a jak model počítá</summary>
+  <ol>
+    <li>Jednorázový vklad: 15 % do rezervy. Akcie v nákupní zóně kupuj hned, akcie nad vnitřní hodnotou z třetiny hned a zbytek během 6 měsíců.</li>
+    <li>Měsíční vklad: 85 % do 1–3 pozic nejvíc pod cílovou váhou, 15 % do rezervy, dokud netvoří 15 % portfolia.</li>
+    <li>Propad portfolia o 15 % od maxima: investuj polovinu rezervy. Při −25 % zbytek.</li>
+    <li>Rebalancování jednou ročně v lednu. Prodávej jen pozici nad 12 % portfolia nebo nad dvojnásobkem cílové váhy.</li>
+    <li>Nad Ondřejovou prodejní cenou nepřikupuj. Když k tomu skóre klesne pod 45, prodej polovinu pozice.</li>
+  </ol>
+  <ul>
+    <li>Skóre 0–100: valuace 30 %, kvalita 25 %, růst 20 %, riziko 15 %, témata 10 %.</li>
+    <li>Očekávaný výnos: 60 % CAPM (2,5 % + β × 5 %), 40 % fundamentální odhad, plus tematický posun. Oříznuto na −3 % až +14 %.</li>
+    <li>Váhy: (skóre − 42) / volatilita, 2–8 % na akcii, limity skupin: AI a polovodiče 20 %, megacap tech 25 %, obrana 9 %, fintech 7 %, Čína 5 %.</li>
+    <li>Vnitřní hodnoty a pásma z Ondřejova watchlistu (únor–květen 2026). Ceny Yahoo Finance, fundamenty stockanalysis.com.</li>
+  </ul>
+</details></section>
+<footer>Model, ne investiční doporučení. Rozhodnutí je vždy na tobě.</footer>
+</main>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pct=(v,d=1)=>v==null||isNaN(v)?"–":(v*100).toLocaleString("cs-CZ",{minimumFractionDigits:d,maximumFractionDigits:d})+" %";
+const sg=v=>v==null||isNaN(v)?"–":(v>0?"+":"")+pct(v);
+const eur=v=>v==null||isNaN(v)?"–":Math.round(v).toLocaleString("cs-CZ")+" €";
+const num=(v,d=0)=>v==null||isNaN(v)?"–":Number(v).toLocaleString("cs-CZ",{minimumFractionDigits:d,maximumFractionDigits:d});
+const dte=s=>{if(!s)return"–";const p=s.split("-");return +p[2]+". "+(+p[1])+". "+p[0]};
+const cls=v=>v>0?"up":v<0?"down":"";
+const zb=z=>z?`<span class="badge zone ${z==="velmi atraktivní"||z==="nákupní zóna"?"up":z==="nad prodejní cenou"?"down":z==="nad vnitřní hodnotou"?"warn":"flat"}">${esc(z)}</span>`:"";
+const px=(v,c)=>v==null?"–":num(v,2)+(c==="EUR"?" €":c==="USD"?" $":"");
+
+fetch("stit-data.json?v="+Date.now()).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(D=>{
+  const S=D.souhrn;
+  $("s-asof").textContent=dte(S.data_k);
+  const age=(Date.now()-new Date(S.data_k+"T00:00:00Z"))/864e5; if(age>10)$("s-stale").textContent="· data jsou starší než týden";
+  $("s-lede").textContent="Očekávaný výnos "+pct(S.ocek_vynos)+" ročně";
+  $("s-n").textContent=S.pocet_akcii; $("s-res").textContent=pct(S.rezerva,0); $("s-top").textContent=S.nejvyssi_skore_ticker+" ("+num(S.nejvyssi_skore)+")";
+  $("k-med").textContent=eur(S.median_10let); $("k-med-s").textContent="vloženo "+eur(S.vlozeno_10let)+", index "+eur(S.etf_median_10let);
+  $("k-dd").textContent=pct(S.p_propad35_10let,0); $("k-dd-s").textContent="kdykoli během 10 let (index "+pct(S.etf_p_propad35_10let,0)+")";
+  $("k-vol").textContent=pct(S.volatilita);
+  const real=D.signaly.filter(s=>s.typ!=="info"); $("k-sig").textContent=real.length;
+  $("sig").innerHTML=D.signaly.map(s=>`<li><span class="badge ${s.typ==="nákup"?"up":s.typ==="prodej"||s.typ==="pozor"?"down":s.typ==="pásmo"?"warn":"flat"}">${esc(s.typ)}</span><span>${esc(s.text)}</span></li>`).join("");
+
+  const drawPf=()=>{const a=parseFloat($("vklad").value)||0,m=parseFloat($("mesic").value)||0;let sw=0;
+    $("pf").innerHTML=D.portfolio.map(r=>{sw+=r.vaha||0;return `<tr><th scope="row">${esc(r.ticker)}</th><td>${esc(r.firma)}</td><td class="n">${pct(r.vaha)}</td><td class="n">${eur(r.vaha*a)}</td><td class="n">${eur(r.vaha*m)}</td><td class="n">${r.skore==null?"–":num(r.skore)}</td><td class="n">${pct(r.ocek_vynos)}</td><td class="n chg ${cls(r.zmena_tyden)}">${sg(r.zmena_tyden)}</td><td>${zb(r.pasmo)}</td></tr>`}).join("")
+      +`<tr><th scope="row"><b>Celkem</b></th><td></td><td class="n"><b>${pct(sw)}</b></td><td class="n"><b>${eur(sw*a)}</b></td><td class="n"><b>${eur(sw*m)}</b></td><td></td><td></td><td></td><td></td></tr>`;};
+  ["vklad","mesic"].forEach(id=>$(id).addEventListener("input",drawPf)); drawPf();
+
+  const mc=D.mc, yrs=[...new Set(mc.map(r=>r.rok))], get=k=>yrs.map(y=>mc.find(r=>r.kod===k&&r.rok===y));
+  const A=get("rezerva15"),E=get("etf");
+  if(window.Chart){const css=getComputedStyle(document.documentElement),acc=css.getPropertyValue("--acc").trim()||"#8B7CFF",mut=css.getPropertyValue("--muted").trim()||"#C9D1E8";
+    new Chart($("c-mc"),{data:{labels:yrs.map(y=>"rok "+y),datasets:[
+      {type:"bar",label:"Výběr + 15 % rezerva (pásmo)",data:A.map(r=>[r.p10,r.p90]),backgroundColor:acc+"88",borderRadius:6,barPercentage:.5,order:2},
+      {type:"bar",label:"Indexové ETF (pásmo)",data:E.map(r=>[r.p10,r.p90]),backgroundColor:"rgba(201,209,232,.28)",borderRadius:6,barPercentage:.5,order:2},
+      {type:"line",label:"Medián – výběr",data:A.map(r=>r.median),borderColor:acc,backgroundColor:acc,pointRadius:5,showLine:false,order:1},
+      {type:"line",label:"Medián – ETF",data:E.map(r=>r.median),borderColor:mut,backgroundColor:mut,pointRadius:5,showLine:false,order:1},
+      {type:"line",label:"Vloženo",data:A.map(r=>r.vlozeno),borderColor:"#FFB454",borderDash:[6,4],pointRadius:0,order:0}]},
+      options:{maintainAspectRatio:false,plugins:{legend:{position:"bottom"},tooltip:{callbacks:{label:c=>{const v=c.raw;return c.dataset.label+": "+(Array.isArray(v)?eur(v[0])+" – "+eur(v[1]):eur(v))}}}},
+        scales:{x:{grid:{display:false}},y:{ticks:{callback:v=>(v/1000).toLocaleString("cs-CZ")+" tis."}}}}});}
+  const ten=mc.filter(r=>r.rok===10);
+  $("mc-t").innerHTML=ten.map(r=>`<tr><th scope="row">${esc(r.varianta)}</th><td class="n">${pct(r.vynos_median)}</td><td class="n">${eur(r.median)}</td><td class="n">${eur(r.p10)}</td><td class="n">${pct(r.p_propad35,0)}</td></tr>`).join("");
+
+  $("themes").innerHTML=[...D.temata].sort((a,b)=>a.posun-b.posun).map(t=>{let n=[];try{n=JSON.parse(t.novinky||"[]")}catch(e){}
+    return `<div class="xc tcard"><h3><span>${esc(t.tema)}</span><span class="chg ${t.posun>.001?"up":t.posun<-.001?"down":""}">${sg(t.posun)} p.a.</span></h3><p class="muted">Akcie: ${esc(t.akcie)}</p><p class="muted">${esc(t.scenare)}</p>${n.length?"<ul>"+n.slice(0,3).map(x=>`<li>${dte(x.datum)} · ${/^https:\/\//.test(x.url||"")?`<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.titulek)}</a>`:esc(x.titulek)}</li>`).join("")+"</ul>":""}</div>`}).join("");
+
+  let f="";const drawWl=()=>{$("wl").innerHTML=D.akcie.filter(r=>f===""||(f==="in"&&r.v_portfoliu)||(f==="out"&&!r.v_portfoliu)||(f==="buy"&&(r.pasmo==="nákupní zóna"||r.pasmo==="velmi atraktivní"))).sort((a,b)=>b.skore-a.skore)
+    .map(r=>`<tr><th scope="row">${esc(r.ticker)}${r.v_portfoliu?" •":""}</th><td>${esc(r.firma)}</td><td class="n">${num(r.skore)}</td><td class="n">${pct(r.ocek_vynos)}</td><td class="n">${px(r.cena,r.mena)}</td><td class="n chg ${r.cena_vs_vh<0?"up":r.cena_vs_vh>.2?"down":""}">${sg(r.cena_vs_vh)}</td><td>${zb(r.pasmo)}</td><td class="n">${r.forward_pe==null?"–":num(r.forward_pe,1)}</td><td class="n">${pct(r.roic,0)}</td><td class="n">${pct(r.volatilita,0)}</td><td class="n chg ${cls(r.vynos_12m)}">${sg(r.vynos_12m)}</td></tr>`).join("");};
+  document.querySelectorAll("#wf [data-f]").forEach(b=>b.onclick=()=>{f=b.dataset.f;document.querySelectorAll("#wf [data-f]").forEach(x=>x.classList.toggle("pill-off",x!==b));drawWl();}); drawWl();
+}).catch(e=>{$("s-lede").textContent="Data se nepodařilo načíst";$("s-lede").className="lede down";});
+})();
+</script><script>(function(){var b=document.getElementById("themebtn"),r=document.documentElement;function lab(){b.textContent=r.getAttribute("data-theme")==="light"?"🌙 Tmavý režim":"☀️ Světlý režim"}lab();b.onclick=function(){var n=r.getAttribute("data-theme")==="light"?"dark":"light";r.setAttribute("data-theme",n);try{localStorage.setItem("stit-theme",n)}catch(e){}lab()}})();</script>
+</body></html>
