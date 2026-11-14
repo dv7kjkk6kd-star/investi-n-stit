@@ -1,156 +1,669 @@
 <!doctype html>
-<html lang="cs"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Investiční štít</title>
-<meta name="theme-color" content="#080C1A">
+<meta name="theme-color" content="#F3F7F4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script>try{var t=localStorage.getItem("stit-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-.topbar{max-width:1180px;justify-content:flex-end!important;margin:0 auto;padding:22px 18px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.topbar .brand{padding:0;font-size:18.2px}
-.topbar .brand small{display:block;font-weight:400;font-size:13.7px;color:var(--muted);-webkit-text-fill-color:var(--muted)}
-.topbar nav{display:flex;gap:6px;flex-wrap:wrap}
-.topbar nav a{color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:99px;border:1px solid var(--rule);font-size:14.8px}
-.topbar nav a:hover{color:var(--ink);background:var(--glass)}
+/* Layout: horní lišta, vlevo navigace, vpravo pohledy (Přehled, Akcie, Portfolio, Témata, Simulace, Pravidla) */
+:root{
+  --bg:#F2F6F3; --grid:rgba(21,128,61,.05); --panel:#FFFFFF; --panel2:#F7FAF8; --line:#E2E8E4; --ink:#16201A; --muted:#5F6B64;
+  --brand:#15803D; --brand-soft:#E3F3E8; --up:#16A34A; --down:#DC2626; --warn:#B45309; --hover:#F1F6F2;
+  --pill-up:#E1F5E7; --pill-down:#FDE8E8; --pill-warn:#FDF1DD; --pill-flat:#EEF2EF; --chip:#F2F5F3;
+  --c1:#7C3AED; --c2:#0EA5E9; --c3:#E11D48; --c4:#EA580C; --c5:#0D9488; --c6:#64748B;
+  --sans:"IBM Plex Sans",system-ui,sans-serif; --head:"Sora","IBM Plex Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:16px; --shadow:0 1px 2px rgba(16,32,22,.04),0 8px 24px -16px rgba(16,32,22,.18);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#000000; --grid:rgba(255,255,255,.025); --panel:#1C1C1E; --panel2:#232325; --line:#2E2E31; --ink:#F2F2F7; --muted:#9A9AA2;
+  --brand:#30D158; --brand-soft:rgba(48,209,88,.14); --up:#30D158; --down:#FF453A; --warn:#FFB340; --hover:#26262A;
+  --pill-up:#30D158; --pill-down:#FF453A; --pill-warn:rgba(255,179,64,.2); --pill-flat:#2C2C2E; --chip:#2C2C2E;
+  --c1:#A78BFA; --c2:#38BDF8; --c3:#FB7185; --c4:#FB923C; --c5:#2DD4BF; --c6:#94A3B8; --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#000000; --grid:rgba(255,255,255,.025); --panel:#1C1C1E; --panel2:#232325; --line:#2E2E31; --ink:#F2F2F7; --muted:#9A9AA2;
+  --brand:#30D158; --brand-soft:rgba(48,209,88,.14); --up:#30D158; --down:#FF453A; --warn:#FFB340; --hover:#26262A;
+  --pill-up:#30D158; --pill-down:#FF453A; --pill-warn:rgba(255,179,64,.2); --pill-flat:#2C2C2E; --chip:#2C2C2E;
+  --c1:#A78BFA; --c2:#38BDF8; --c3:#FB7185; --c4:#FB923C; --c5:#2DD4BF; --c6:#94A3B8; --shadow:none; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;background-attachment:fixed;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:6px}
+.mono,.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.up{color:var(--up)} .down{color:var(--down)} .muted{color:var(--muted)}
+[hidden]{display:none!important}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;margin:12px auto 0;max-width:1480px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
+  display:flex;align-items:center;gap:18px;padding:12px 18px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:700;font-size:22px;color:var(--brand);text-decoration:none;white-space:nowrap}
+.logo svg{width:28px;height:28px}
+.tagline{color:var(--muted);font-size:13.5px;max-width:30ch;line-height:1.3}
+.tstats{display:flex;gap:16px;align-items:center;font-family:var(--mono);font-size:13.5px;flex-wrap:wrap}
+.tstats .chipm{border:1px solid var(--line);border-radius:99px;padding:3px 10px;background:var(--panel2)}
+.spacer{flex:1}
+.iconbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);cursor:pointer;font-size:17px;color:var(--ink)}
+.pillbtn{border:0;border-radius:99px;padding:8px 16px;background:var(--brand);color:#fff;font-weight:600;font-family:var(--sans);cursor:pointer;text-decoration:none;font-size:14px}
+:root[data-theme="dark"] .pillbtn{color:#000}
+
+/* app */
+.app{max-width:1480px;margin:16px auto 40px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:20px;align-items:start}
+.side{position:sticky;top:96px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 10px;box-shadow:var(--shadow)}
+.side a{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:10px;text-decoration:none;color:var(--ink);font-size:15px;border:1px solid transparent}
+.side a:hover{background:var(--hover)}
+.side a[aria-current="page"]{background:var(--brand-soft);border-color:color-mix(in srgb,var(--brand) 35%,transparent);font-weight:500}
+.side a small{margin-left:6px;font-family:var(--mono);color:var(--muted);font-size:12px}
+.grp{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-weight:600;margin:16px 12px 6px}
+.side .note{font-size:12.5px;color:var(--muted);padding:14px 12px 4px;line-height:1.45}
+main{min-width:0}
+.view h1{font-family:var(--head);font-weight:700;font-size:clamp(26px,3.2vw,36px);margin:4px 0 6px;letter-spacing:-.01em}
+.lead{color:var(--muted);max-width:72ch;margin:0 0 18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow);min-width:0}
+.card h2{font-family:var(--head);font-size:17px;font-weight:600;margin:0}
+.ch{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
+.ch small{color:var(--muted);font-size:12.5px}
+.cards4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:16px}
+.big{font-family:var(--mono);font-size:34px;font-weight:500;letter-spacing:-.02em;line-height:1.15;margin:4px 0 2px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:14px;margin-top:10px}
+.kv span:nth-child(odd){color:var(--muted)} .kv span:nth-child(even){font-family:var(--mono);text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--brand);border-radius:3px}
+.gauge{display:block;margin:2px auto 0;width:180px;max-width:100%}
+.gl{text-align:center;font-family:var(--mono);font-size:26px;margin-top:-6px}
+.gl small{display:block;font-family:var(--sans);font-size:13px;color:var(--muted)}
+.sig{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.sig li{display:flex;gap:8px;align-items:baseline}
+
+/* pills, chips */
+.pill{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:500;border-radius:7px;padding:2px 8px;white-space:nowrap}
+.p-up{background:var(--pill-up);color:var(--up)} .p-down{background:var(--pill-down);color:var(--down)}
+:root[data-theme="dark"] .p-up,:root[data-theme="dark"] .p-down{color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .p-up,:root:not([data-theme="light"]) .p-down{color:#fff}}
+.p-flat{background:var(--pill-flat);color:var(--muted)} .p-warn{background:var(--pill-warn);color:var(--warn)}
+.status{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:2px 10px;font-size:12.5px;white-space:nowrap;background:var(--panel)}
+.status.in{color:var(--brand);border-color:color-mix(in srgb,var(--brand) 40%,transparent);background:var(--brand-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--chip);border-radius:99px;padding:3px 11px;font-size:13px;cursor:pointer;color:var(--ink);font-family:var(--sans)}
+.chip i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.chip[aria-pressed="true"]{background:var(--brand-soft);border-color:var(--brand);color:var(--brand);font-weight:600}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;border-radius:99px;padding:1px 8px;background:var(--chip);border:1px solid var(--line)}
+.tag i{width:6px;height:6px;border-radius:50%}
+
+/* tables */
+.tw{overflow-x:auto;margin:0 -4px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th.sort{cursor:pointer;user-select:none} th.sort:hover{color:var(--ink)} th[aria-sort] {color:var(--brand)}
+td{padding:10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
+td.n,th.n{text-align:right}
+tbody tr.click{cursor:pointer} tbody tr.click:hover td{background:var(--hover)}
+.nm b{display:block;font-weight:600;font-size:14.5px} .nm span{font-size:12.5px;color:var(--muted)}
+tr.total td{font-weight:600;border-bottom:0}
+
+/* apple stocks */
+.stocks{display:grid;grid-template-columns:330px minmax(0,1fr);gap:0;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);min-height:720px}
+.slist{border-right:1px solid var(--line);background:var(--panel2);display:flex;flex-direction:column;min-width:0}
+.search{margin:14px;position:relative}
+.search input{width:100%;padding:9px 12px 9px 34px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted)}
+.lhead{font-weight:700;font-size:16px;margin:4px 16px 6px;display:flex;justify-content:space-between;align-items:center}
+.lhead select{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:3px 6px}
+.rows{overflow-y:auto;max-height:860px;padding:0 8px 10px}
+.srow{display:grid;grid-template-columns:minmax(0,1fr) 64px 92px;gap:4px 10px;align-items:center;padding:9px 10px;border-radius:12px;cursor:pointer;border-bottom:1px solid var(--line);background:none;width:100%;text-align:left;color:var(--ink);font:inherit;border-left:0;border-right:0;border-top:0}
+.srow:hover{background:var(--hover)} .srow[aria-selected="true"]{background:var(--hover);box-shadow:inset 3px 0 0 var(--brand)}
+.srow b{display:block;font-size:16px;font-weight:700;letter-spacing:-.01em}
+.srow .sn{font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.srow .sp{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.srow .sp b{font-family:var(--mono);font-size:15px;font-weight:500}
+.srow .sp .pill{min-width:74px;text-align:right;font-size:13px;padding:2px 7px}
+.sdet{padding:22px 26px;min-width:0}
+.dhead{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.dhead h2{font-family:var(--head);font-size:34px;font-weight:700;margin:0;letter-spacing:-.02em;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.dhead h2 span{font-family:var(--sans);font-weight:400;font-size:20px;color:var(--muted);letter-spacing:0}
+.dprice{text-align:right;font-family:var(--mono)}
+.dprice b{font-size:22px;font-weight:600} .dprice small{display:block;color:var(--muted);font-family:var(--sans);font-size:12.5px}
+.dsub{color:var(--muted);font-size:13px;margin:2px 0 14px}
+.ranges{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0 10px}
+.ranges button{border:0;background:none;color:var(--ink);font:600 14px var(--sans);padding:5px 11px;border-radius:8px;cursor:pointer}
+.ranges button[aria-pressed="true"]{background:var(--chip)}
+.chart{position:relative;height:300px}
+.chart svg{display:block;width:100%;height:100%}
+.chart .tip{position:absolute;top:4px;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-family:var(--mono);font-size:12.5px;white-space:nowrap;box-shadow:var(--shadow)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);margin-top:12px}
+.stats div{display:flex;justify-content:space-between;gap:8px;padding:7px 12px 7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.stats div span{color:var(--muted)} .stats div b{font-family:var(--mono);font-weight:500;text-align:right}
+.stats div:nth-child(3n+2),.stats div:nth-child(3n+3){padding-left:12px;border-left:1px solid var(--line)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}
+.sbar{display:grid;grid-template-columns:90px 1fr 34px;gap:10px;align-items:center;font-size:13.5px;margin:7px 0}
+.sbar .bar{margin:0;height:8px}
+.news{display:flex;flex-direction:column;gap:14px}
+.news a{text-decoration:none;display:block}
+.news a:hover b{text-decoration:underline}
+.news small{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.news b{display:block;font-size:15.5px;line-height:1.3;margin-top:2px}
+.hl{font-weight:600}
+
+/* themes, sim */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.tc h3{margin:0 0 4px;font-family:var(--head);font-size:16px;display:flex;justify-content:space-between;gap:8px}
+.tc p{margin:4px 0;font-size:13.5px;color:var(--muted)}
+.tc ul{margin:10px 0 0;padding-left:18px;font-size:13.5px}
+.scen{display:flex;height:8px;border-radius:4px;overflow:hidden;margin:10px 0 4px}
+.scen i:nth-child(1){background:var(--up)} .scen i:nth-child(2){background:var(--c6)} .scen i:nth-child(3){background:var(--down)}
+.calc{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.calc label{display:flex;flex-direction:column;font-size:12.5px;color:var(--muted);gap:4px}
+.calc input{font:500 15px var(--mono);padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);width:10rem}
+.wbars .sbar{grid-template-columns:120px 1fr 52px}
+details summary{cursor:pointer;font-weight:600}
+ol li,ul.rules li{margin:6px 0;line-height:1.55}
+.foot{color:var(--muted);font-size:12.5px;margin-top:18px}
+
+.ihead{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.ihead .pill{font-family:var(--sans);font-size:13.5px;padding:4px 12px;border-radius:99px}
+.src{color:var(--muted);font-size:13px;margin:-6px 0 16px}.src a{color:var(--muted)}
+.stat .v{font-family:var(--head);font-size:28px;font-weight:700;line-height:1.15;margin:6px 0 4px}.stat .v.flat{color:var(--ink)}
+.stat .k{color:var(--muted);font-size:13.5px}.stat .nn{color:var(--muted);font-size:13px;line-height:1.4}
+.icard{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink)}.icard:hover{border-color:var(--brand)}
+.icard .t{display:flex;flex-direction:column;align-items:flex-start;gap:6px}.icard .t b{font-family:var(--head);font-size:18px}.icard .t .pill{white-space:normal;font-family:var(--sans);border-radius:99px;padding:2px 10px}
+.icard p{margin:0;font-size:14px;color:var(--muted);line-height:1.45}
+.icard .mini{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:13.5px;border-top:1px solid var(--line);padding-top:8px;margin-top:auto}
+.icard .mini span:nth-child(even){font-family:var(--mono);text-align:right}
+.icard .go{font-size:13px;color:var(--brand);font-weight:600}
+a.chip{text-decoration:none}
+.news .ni{border-bottom:1px solid var(--line);padding-bottom:12px}.news .ni:last-child{border-bottom:0;padding-bottom:0}
+.news .ni p{margin:0;font-size:15px;line-height:1.5}.news .ni a{display:inline;color:var(--muted);font-size:12.5px;text-decoration:underline}
+.cal{margin:14px 6px 0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);font-size:13px}
+.cal b{display:block;font-family:var(--mono);font-size:15px;margin-top:2px}
+.view{animation:none}
+@media (prefers-reduced-motion:no-preference){.view:not([hidden]){animation:vin .18s ease-out}@keyframes vin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}}
+@media (max-width:1000px){ .stocks{grid-template-columns:1fr} .slist{border-right:0;border-bottom:1px solid var(--line)} .rows{max-height:340px} }
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .side{position:static;display:flex;flex-wrap:wrap;gap:4px;padding:8px}
+  .side .grp,.side .note,.side .cats,.side .cal{display:none}
+  #inv-nav{display:contents}
+  .side a{padding:7px 11px;font-size:14px}
+  .side a{white-space:nowrap}
+  .top{position:static} .tagline{display:none}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats div:nth-child(3n+2),.stats div:nth-child(3n+3){padding-left:0;border-left:0}
+  .stats div:nth-child(2n){padding-left:12px;border-left:1px solid var(--line)}
+  .sdet{padding:16px}
+  .dhead h2{font-size:28px}
+}
+@media (prefers-reduced-motion:no-preference){ .srow,.chip,.side a{transition:background .12s} }
 </style>
 </head>
-<body class="bg-chart">
-<div class="topbar">
-    <nav><a href="#portfolio">Portfolio</a><a href="#simulace">Simulace</a><a href="#temata">Témata</a><a href="#watchlist">Watchlist</a>
-  <button type="button" class="ghost sm" id="themebtn">☀️ Světlý režim</button></nav>
+<body>
+<header class="top">
+  <a class="logo" href="#prehled" aria-label="Investiční štít – přehled">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 5 7v8c0 7 4.6 12 11 14 6.4-2 11-7 11-14V7L16 3Z" fill="currentColor" opacity=".18"/><path d="M16 3 5 7v8c0 7 4.6 12 11 14 6.4-2 11-7 11-14V7L16 3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m10 19 4-5 3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Investiční štít</a>
+  <span class="tagline">33 akcií z watchlistu, model se přepočítává každou neděli</span>
+  <div class="tstats"><span id="t-date">Data k –</span><span class="chipm" id="t-model">model –</span><span id="t-pf">Portfolio včera –</span></div>
+  <span class="spacer"></span>
+  <span class="status in" id="t-next">Obnova každou neděli</span>
+  <button class="iconbtn" id="themebtn" type="button" aria-label="Přepnout světlý a tmavý režim">🌙</button>
+</header>
+
+<div class="app">
+  <nav class="side" aria-label="Sekce">
+    <p class="grp" style="margin-top:6px">Akcie</p>
+    <a href="#prehled" data-v="prehled">Přehled akcií</a>
+    <a href="#akcie" data-v="akcie">Akcie <small id="n-akcie">33</small></a>
+    <a href="#portfolio" data-v="portfolio">Portfolio <small id="n-pf">–</small></a>
+    <a href="#temata" data-v="temata">Tržní témata <small>9</small></a>
+    <a href="#simulace" data-v="simulace">Simulace</a>
+    <a href="#pravidla" data-v="pravidla">Pravidla</a>
+    <p class="grp">Další investice</p>
+    <a href="#investice" data-v="investice">Přehled investic</a>
+    <div id="inv-nav"></div>
+    <p class="grp">Skupiny akcií</p>
+    <div class="cats" id="cats"></div>
+    <div class="cal" id="cal"></div>
+    <p class="note">Model pro dlouhodobé investování. Výsledky nejsou předpovědí budoucích výnosů ani investičním doporučením.</p>
+  </nav>
+
+  <main>
+    <!-- PŘEHLED -->
+    <section class="view" id="v-prehled">
+      <h1>Přehled štítu</h1>
+      <p class="lead">Všech 33 akcií z watchlistu prochází stejným modelem: valuace proti vnitřní hodnotě, kvalita firmy, růst, riziko z 5 let cen v eurech a tržní témata se scénáři. Z toho vychází portfolio s limitem propadu −35 % a 15% rezervou.</p>
+      <div class="cards4">
+        <div class="card"><div class="ch"><h2>Portfolio</h2><small>model, EUR</small></div>
+          <div class="big up" id="o-ret">–</div><div class="muted" style="font-size:13.5px">očekávaný výnos ročně</div>
+          <div class="kv"><span>Volatilita</span><span id="o-vol">–</span><span>Akcií v portfoliu</span><span id="o-n">–</span><span>Hotovostní rezerva</span><span id="o-res">–</span><span>Nejvyšší skóre</span><span id="o-top">–</span></div></div>
+        <div class="card"><div class="ch"><h2>Riziko propadu</h2><small>10 let</small></div>
+          <svg class="gauge" id="o-gauge" viewBox="0 0 200 112" role="img" aria-label="Šance na propad přes 35 procent"></svg>
+          <div class="gl" id="o-dd">–<small>šance na propad přes −35 %</small></div>
+          <div class="kv"><span>Indexové ETF</span><span id="o-dd-etf">–</span><span>Medián nejhoršího propadu</span><span id="o-mdd">–</span></div></div>
+        <div class="card"><div class="ch"><h2>Simulace 10 let</h2><small>10 000 € + 300 €/měs.</small></div>
+          <div class="big" id="o-med">–</div><div class="muted" style="font-size:13.5px">medián hodnoty po 10 letech</div>
+          <div class="kv"><span>Vloženo</span><span id="o-paid">–</span><span>Pesimistický decil</span><span id="o-p10">–</span><span>Optimistický decil</span><span id="o-p90">–</span><span>Indexové ETF (medián)</span><span id="o-etf">–</span></div></div>
+        <div class="card"><div class="ch"><h2>Tento týden</h2><small id="o-wk">–</small></div><ul class="sig" id="o-sig"></ul></div>
+      </div>
+      <div class="card">
+        <div class="ch"><h2>Žebříček akcií</h2><small>řazení kliknutím na sloupec · řádek otevře detail akcie</small></div>
+        <div class="chips" id="lb-chips"></div>
+        <div class="tw"><table id="lb">
+          <thead><tr>
+            <th class="n">#</th><th>Akcie</th><th>Křivka 1 rok</th>
+            <th class="n sort" data-k="vynos_12m">Výnos 12M</th><th class="n sort" data-k="zmena_tyden">Týden</th><th class="n sort" data-k="skore">Skóre</th>
+            <th class="n sort" data-k="ocek_vynos">Oček. výnos</th><th class="n sort" data-k="cena_vs_vh">Cena vs VH</th><th class="n sort" data-k="volatilita">Volatilita</th>
+            <th class="n sort" data-k="max_propad">Max DD</th><th class="n sort" data-k="forward_pe">Fwd P/E</th><th class="n sort" data-k="vaha">Váha</th><th>Stav</th>
+          </tr></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+
+    <!-- AKCIE (Apple) -->
+    <section class="view" id="v-akcie" hidden>
+      <div class="stocks">
+        <div class="slist">
+          <div class="search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="m13 13 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="q" type="search" placeholder="Akcie" aria-label="Hledat akcii"></div>
+          <div class="lhead">Moje symboly
+            <select id="lsort" aria-label="Řazení seznamu"><option value="pf">Portfolio první</option><option value="den">Denní změna</option><option value="skore">Skóre</option><option value="abc">Abecedně</option></select></div>
+          <div class="rows" id="srows" role="listbox" aria-label="Seznam akcií"></div>
+        </div>
+        <div class="sdet" id="sdet">
+          <div class="dhead"><h2 id="d-t">–<span id="d-n"></span></h2><div class="dprice"><b id="d-p">–</b> <span id="d-c" class="pill p-flat">–</span><small id="d-pz">při uzavření</small></div></div>
+          <div class="dsub" id="d-sub">–</div>
+          <div class="ranges" id="ranges">
+            <button type="button" data-r="1T">1T</button><button type="button" data-r="1M">1M</button><button type="button" data-r="3M">3M</button><button type="button" data-r="6M">6M</button>
+            <button type="button" data-r="YTD">Od začátku roku</button><button type="button" data-r="1R" aria-pressed="true">1R</button><button type="button" data-r="5L">5L</button><button type="button" data-r="10L">10L</button>
+          </div>
+          <div class="chart" id="chart"></div>
+          <div class="stats" id="d-stats"></div>
+          <div class="two">
+            <div><h3 class="hl" style="margin:0 0 8px">Model</h3><div id="d-model"></div></div>
+            <div><h3 class="hl" style="margin:0 0 8px">Zprávy k tématům</h3><div class="news" id="d-news"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="view" id="v-portfolio" hidden>
+      <h1>Modelové portfolio</h1>
+      <p class="lead">Zadej, kolik chceš investovat, a tabulka spočítá částku pro každou akcii. Váhy se mění jen nedělním přepočtem.</p>
+      <div class="two" style="margin-top:0;margin-bottom:16px">
+        <div class="card"><div class="ch"><h2>Kolik investovat</h2></div>
+          <div class="calc"><label for="vklad">Jednorázový vklad (€)<input id="vklad" type="number" min="0" step="500" value="10000"></label>
+          <label for="mesic">Měsíční vklad (€)<input id="mesic" type="number" min="0" step="50" value="300"></label></div>
+          <p class="muted" style="margin:0;font-size:13.5px">15 % vkladu jde do rezervy (spořicí účet nebo peněžní ETF) a čeká na propad trhu.</p></div>
+        <div class="card wbars"><div class="ch"><h2>Váha podle skupin</h2><small>limity drží riziko</small></div><div id="pf-groups"></div></div>
+      </div>
+      <div class="card"><div class="tw"><table id="pf"><thead><tr><th>Akcie</th><th>Křivka 1 rok</th><th class="n">Váha</th><th class="n">Jednorázově</th><th class="n">Měsíčně</th><th class="n">Skóre</th><th class="n">Oček. výnos</th><th class="n">Týden</th><th>Pásmo dle Ondřeje</th></tr></thead><tbody></tbody></table></div></div>
+    </section>
+
+    <!-- TÉMATA -->
+    <section class="view" id="v-temata" hidden>
+      <h1>Tržní témata</h1>
+      <p class="lead">Každé téma má tři scénáře s pravděpodobností a dopadem na roční výnos dotčených akcií. Zelená část pruhu je býčí scénář, šedá základní, červená medvědí. Novinky doplňuje nedělní přepočet.</p>
+      <div class="tgrid" id="tgrid"></div>
+    </section>
+
+    <!-- SIMULACE -->
+    <section class="view" id="v-simulace" hidden>
+      <h1>Kam se může portfolio dostat</h1>
+      <p class="lead">Monte Carlo: 10 000 možných budoucností v eurech s tlustými chvosty (krachy přicházejí častěji, než říká normální rozdělení). 10 000 € na začátku a 300 € každý měsíc.</p>
+      <div class="card" style="margin-bottom:16px"><div class="ch"><h2>Rozpětí hodnoty portfolia</h2><small>bod = medián · sloupec = 10.–90. percentil · čárkovaně vloženo</small></div><div class="chart" id="fan" style="height:340px"></div></div>
+      <div class="card"><div class="tw"><table id="mct"><thead><tr><th>Varianta</th><th class="n">Medián p.a.</th><th class="n">Medián 10 let</th><th class="n">Pesimistický decil</th><th class="n">Optimistický decil</th><th class="n">Propad &gt; 35 % (10 let)</th><th class="n">Medián max. propadu</th></tr></thead><tbody></tbody></table></div></div>
+    </section>
+
+    <!-- DALŠÍ INVESTICE -->
+    <section class="view" id="v-investice" hidden>
+      <h1>Další investice</h1>
+      <p class="lead" id="inv-lead">Nemovitosti, auta, mince a zlato: týden v kostce a příležitosti na nový týden.</p>
+      <div class="cards4" id="inv-cards"></div>
+    </section>
+    <section class="view" id="v-invtab" hidden>
+      <div class="ihead"><h1 id="it-h">–</h1><span class="pill" id="it-trend">–</span></div>
+      <p class="lead" id="it-lead">–</p>
+      <div class="cards4" id="it-stats"></div>
+      <p class="src" id="it-src"></p>
+      <div class="card" style="margin-bottom:16px"><div class="ch"><h2>Příležitosti na tento týden</h2></div><div id="it-opps"></div></div>
+      <div class="card" style="margin-bottom:16px"><div class="ch"><h2>Co se stalo</h2><small id="it-week"></small></div><div class="news" id="it-news"></div></div>
+      <div class="two" style="margin-top:0">
+        <div class="card"><div class="ch"><h2>Na co si dát pozor</h2></div><ul class="rules" id="it-watch"></ul></div>
+        <div class="card"><div class="ch"><h2>Kde hledat nabídky a data</h2></div><div class="chips" id="it-links" style="margin:0"></div></div>
+      </div>
+    </section>
+
+    <!-- PRAVIDLA -->
+    <section class="view" id="v-pravidla" hidden>
+      <h1>Pravidla strategie</h1>
+      <p class="lead">Pravidla jsou napsaná předem, aby rozhodnutí v propadu neřídily emoce.</p>
+      <div class="two" style="margin-top:0">
+        <div class="card"><div class="ch"><h2>Co dělat</h2></div><ol>
+          <li><b>Jednorázový vklad:</b> 15 % do rezervy. Akcie v nákupní zóně kupuj hned, akcie nad vnitřní hodnotou z třetiny hned a zbytek během 6 měsíců.</li>
+          <li><b>Měsíční vklad:</b> 85 % do 1–3 pozic nejvíc pod cílovou váhou, 15 % do rezervy, dokud netvoří 15 % portfolia.</li>
+          <li><b>Propad:</b> při −15 % od maxima investuj polovinu rezervy, při −25 % zbytek. Pak rezervu znovu doplňuj.</li>
+          <li><b>Rebalancování:</b> jednou ročně v lednu. Prodávej jen pozici nad 12 % portfolia nebo nad dvojnásobkem cílové váhy.</li>
+          <li><b>Prodej:</b> nad Ondřejovou prodejní cenou nepřikupuj. Když k tomu skóre klesne pod 45, prodej polovinu pozice.</li>
+          <li><b>Kontrola:</b> každé pondělí se podívej na signály týdne. Po výsledcích firem (únor, květen, srpen, listopad) zkontroluj teze.</li>
+        </ol></div>
+        <div class="card"><div class="ch"><h2>Jak model počítá</h2></div><ul class="rules">
+          <li><b>Skóre 0–100:</b> valuace 30 %, kvalita 25 %, růst 20 %, riziko 15 %, témata 10 %. Pořadí v rámci watchlistu.</li>
+          <li><b>Očekávaný výnos:</b> 60 % CAPM (2,5 % + β × 5 %), 40 % fundamentální odhad (přiblížení k vnitřní hodnotě za 7 let, růst zisku, dividenda) plus tematický posun. Oříznuto na −3 % až +14 %.</li>
+          <li><b>Váhy:</b> (skóre − 42) / volatilita, 2–8 % na akcii. Limity skupin: AI a polovodiče 20 %, megacap tech 25 %, obrana 9 %, fintech 7 %, Čína 5 %.</li>
+          <li><b>Riziko:</b> volatilita a korelace z 5 let měsíčních cen v eurech, takže zahrnují i kurz dolaru.</li>
+          <li><b>Zdroje:</b> ceny Yahoo Finance, fundamenty stockanalysis.com, vnitřní hodnoty a pásma z Ondřejova watchlistu (únor–květen 2026).</li>
+        </ul></div>
+      </div>
+    </section>
+    <p class="foot">Investiční štít je vzdělávací model. Nejde o investiční doporučení; rozhodnutí je vždy na tobě.</p>
+  </main>
 </div>
-<header class="pagehead"><h1>Investiční štít</h1><p>Dlouhodobé portfolio z watchlistu – přepočet každou neděli</p></header>
-
-<main id="stit">
-<style>
-#stit .zone{white-space:nowrap}
-#stit .sig{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-#stit .sig li{display:flex;gap:10px;align-items:baseline}
-#stit .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,220px));gap:14px;margin-bottom:16px}
-#stit .tcard h3{display:flex;justify-content:space-between;gap:10px}
-#stit .tcard .muted{color:var(--muted);font-size:14.8px;margin:0 0 6px}
-#stit .tcard ul{margin:8px 0 0;padding-left:18px;font-size:14.8px}
-#stit details summary{cursor:pointer;font-weight:600}
-#stit details li{margin:6px 0}
-#stit .stale{color:var(--warn)}
-</style>
-
-<section class="hero"><div>
-  <p class="empty" style="margin:0 0 8px">Data k <b id="s-asof">–</b> <span id="s-stale" class="stale"></span></p>
-  <p class="lede up" id="s-lede">–</p>
-  <ul class="facts">
-    <li>Model drží <b id="s-n">–</b> akcií z watchlistu a <b id="s-res">–</b> hotovostní rezervu.</li>
-    <li>Nejvyšší skóre má <b id="s-top">–</b>.</li>
-    <li>Jde o matematický model, ne o investiční doporučení.</li>
-  </ul>
-</div></section>
-
-<div class="kpis">
-  <div class="k"><span>Medián za 10 let</span><b id="k-med">–</b><span id="k-med-s">–</span></div>
-  <div class="k"><span>Šance na propad přes −35 %</span><b id="k-dd">–</b><span id="k-dd-s">–</span></div>
-  <div class="k"><span>Volatilita portfolia</span><b id="k-vol">–</b><span>ročně, včetně rezervy</span></div>
-  <div class="k"><span>Signály tento týden</span><b id="k-sig">–</b><span>změny proti minulému týdnu</span></div>
-</div>
-
-<section><h2>Co se změnilo tento týden</h2><p class="hint">Nákupy, prodeje a změny pásem proti minulému nedělnímu přepočtu.</p><ul class="sig" id="sig"></ul></section>
-
-<section id="portfolio"><h2>Modelové portfolio</h2><p class="hint">Zadej částky a tabulka spočítá, kolik eur dát do které akcie.</p>
-  <div class="calc">
-    <label for="vklad">Jednorázový vklad (€)<input id="vklad" type="number" min="0" step="500" value="10000"></label>
-    <label for="mesic">Měsíční vklad (€)<input id="mesic" type="number" min="0" step="50" value="300"></label>
-  </div>
-  <div class="wrap"><table><thead><tr><th>Ticker</th><th>Firma</th><th class="n">Váha</th><th class="n">Jednorázově</th><th class="n">Měsíčně</th><th class="n">Skóre</th><th class="n">Oček. výnos</th><th class="n">Týden</th><th>Pásmo</th></tr></thead><tbody id="pf"></tbody></table></div>
-</section>
-
-<section id="simulace"><h2>Kam se může portfolio dostat</h2><p class="hint">Monte Carlo, 10 000 simulací v EUR pro 10 000 € na začátku a 300 € měsíčně. Sloupec je pásmo mezi 10. a 90. percentilem, bod medián.</p>
-  <div class="chartbox"><canvas id="c-mc" role="img" aria-label="Rozpětí hodnoty portfolia po 1 až 10 letech"></canvas></div>
-  <div class="wrap" style="margin-top:14px"><table><thead><tr><th>Varianta</th><th class="n">Medián p.a.</th><th class="n">Medián za 10 let</th><th class="n">Pesimistický decil</th><th class="n">Propad &gt; 35 %</th></tr></thead><tbody id="mc-t"></tbody></table></div>
-</section>
-
-<section id="temata"><h2>Tržní témata</h2><p class="hint">Očekávaný posun ročního výnosu podle scénářů a pravděpodobností. Novinky doplňuje nedělní přepočet.</p><div class="xcards" id="themes"></div></section>
-
-<section id="watchlist"><h2>Celý watchlist</h2>
-  <div class="pills" id="wf">
-    <button type="button" class="sm" data-f="">Vše</button>
-    <button type="button" class="sm pill-off" data-f="in">V portfoliu</button>
-    <button type="button" class="sm pill-off" data-f="out">Mimo portfolio</button>
-    <button type="button" class="sm pill-off" data-f="buy">Nákupní zóna</button>
-  </div>
-  <div class="wrap"><table><thead><tr><th>Ticker</th><th>Firma</th><th class="n">Skóre</th><th class="n">Oček. výnos</th><th class="n">Cena</th><th class="n">Cena vs. VH</th><th>Pásmo</th><th class="n">Fwd P/E</th><th class="n">ROIC</th><th class="n">Volatilita</th><th class="n">12 měs.</th></tr></thead><tbody id="wl"></tbody></table></div>
-</section>
-
-<section><details><summary>Pravidla strategie a jak model počítá</summary>
-  <ol>
-    <li>Jednorázový vklad: 15 % do rezervy. Akcie v nákupní zóně kupuj hned, akcie nad vnitřní hodnotou z třetiny hned a zbytek během 6 měsíců.</li>
-    <li>Měsíční vklad: 85 % do 1–3 pozic nejvíc pod cílovou váhou, 15 % do rezervy, dokud netvoří 15 % portfolia.</li>
-    <li>Propad portfolia o 15 % od maxima: investuj polovinu rezervy. Při −25 % zbytek.</li>
-    <li>Rebalancování jednou ročně v lednu. Prodávej jen pozici nad 12 % portfolia nebo nad dvojnásobkem cílové váhy.</li>
-    <li>Nad Ondřejovou prodejní cenou nepřikupuj. Když k tomu skóre klesne pod 45, prodej polovinu pozice.</li>
-  </ol>
-  <ul>
-    <li>Skóre 0–100: valuace 30 %, kvalita 25 %, růst 20 %, riziko 15 %, témata 10 %.</li>
-    <li>Očekávaný výnos: 60 % CAPM (2,5 % + β × 5 %), 40 % fundamentální odhad, plus tematický posun. Oříznuto na −3 % až +14 %.</li>
-    <li>Váhy: (skóre − 42) / volatilita, 2–8 % na akcii, limity skupin: AI a polovodiče 20 %, megacap tech 25 %, obrana 9 %, fintech 7 %, Čína 5 %.</li>
-    <li>Vnitřní hodnoty a pásma z Ondřejova watchlistu (únor–květen 2026). Ceny Yahoo Finance, fundamenty stockanalysis.com.</li>
-  </ul>
-</details></section>
-<footer>Model, ne investiční doporučení. Rozhodnutí je vždy na tobě.</footer>
-</main>
 
 <script>
 (function(){
+"use strict";
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const pct=(v,d=1)=>v==null||isNaN(v)?"–":(v*100).toLocaleString("cs-CZ",{minimumFractionDigits:d,maximumFractionDigits:d})+" %";
-const sg=v=>v==null||isNaN(v)?"–":(v>0?"+":"")+pct(v);
-const eur=v=>v==null||isNaN(v)?"–":Math.round(v).toLocaleString("cs-CZ")+" €";
-const num=(v,d=0)=>v==null||isNaN(v)?"–":Number(v).toLocaleString("cs-CZ",{minimumFractionDigits:d,maximumFractionDigits:d});
-const dte=s=>{if(!s)return"–";const p=s.split("-");return +p[2]+". "+(+p[1])+". "+p[0]};
-const cls=v=>v>0?"up":v<0?"down":"";
-const zb=z=>z?`<span class="badge zone ${z==="velmi atraktivní"||z==="nákupní zóna"?"up":z==="nad prodejní cenou"?"down":z==="nad vnitřní hodnotou"?"warn":"flat"}">${esc(z)}</span>`:"";
-const px=(v,c)=>v==null?"–":num(v,2)+(c==="EUR"?" €":c==="USD"?" $":"");
+const nf=(v,d=0)=>v==null||isNaN(v)?"–":Number(v).toLocaleString("cs-CZ",{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct=(v,d=1)=>v==null||isNaN(v)?"–":nf(v*100,d)+" %";
+const sg=(v,d=1)=>v==null||isNaN(v)?"–":(v>0?"+":v<0?"−":"")+nf(Math.abs(v)*100,d)+" %";
+const eur=v=>v==null||isNaN(v)?"–":nf(Math.round(v))+" €";
+const cur=c=>c==="EUR"?" €":c==="USD"?" $":"";
+const px=(v,c)=>v==null?"–":nf(v,2)+cur(c);
+const dte=s=>{if(!s)return"–";const p=String(s).split("-");return +p[2]+". "+(+p[1])+". "+p[0]};
+const ymd=n=>{n=String(n);return new Date(Date.UTC(+n.slice(0,4),+n.slice(4,6)-1,n.length>6?+n.slice(6,8):1))};
+const pillCls=v=>v==null||isNaN(v)?"p-flat":v>0?"p-up":v<0?"p-down":"p-flat";
+const zoneCls=z=>z==="velmi atraktivní"||z==="nákupní zóna"?"p-up":z==="nad prodejní cenou"?"p-down":z==="nad vnitřní hodnotou"?"p-warn":"p-flat";
+const GCOL={"AI/polovodiče":"var(--c1)","Megacap tech":"var(--c2)","Čína":"var(--c3)","Fintech":"var(--c4)","Obrana":"var(--c5)","Ostatní":"var(--c6)"};
+const GSHORT={"AI/polovodiče":"AI a čipy","Megacap tech":"Megacap","Čína":"Čína","Fintech":"Fintech","Obrana":"Obrana","Ostatní":"Ostatní"};
 
-fetch("stit-data.json?v="+Date.now()).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(D=>{
-  const S=D.souhrn;
-  $("s-asof").textContent=dte(S.data_k);
-  const age=(Date.now()-new Date(S.data_k+"T00:00:00Z"))/864e5; if(age>10)$("s-stale").textContent="· data jsou starší než týden";
-  $("s-lede").textContent="Očekávaný výnos "+pct(S.ocek_vynos)+" ročně";
-  $("s-n").textContent=S.pocet_akcii; $("s-res").textContent=pct(S.rezerva,0); $("s-top").textContent=S.nejvyssi_skore_ticker+" ("+num(S.nejvyssi_skore)+")";
-  $("k-med").textContent=eur(S.median_10let); $("k-med-s").textContent="vloženo "+eur(S.vlozeno_10let)+", index "+eur(S.etf_median_10let);
-  $("k-dd").textContent=pct(S.p_propad35_10let,0); $("k-dd-s").textContent="kdykoli během 10 let (index "+pct(S.etf_p_propad35_10let,0)+")";
-  $("k-vol").textContent=pct(S.volatilita);
-  const real=D.signaly.filter(s=>s.typ!=="info"); $("k-sig").textContent=real.length;
-  $("sig").innerHTML=D.signaly.map(s=>`<li><span class="badge ${s.typ==="nákup"?"up":s.typ==="prodej"||s.typ==="pozor"?"down":s.typ==="pásmo"?"warn":"flat"}">${esc(s.typ)}</span><span>${esc(s.text)}</span></li>`).join("");
+/* theme */
+const root=document.documentElement;
+const isDark=()=>root.getAttribute("data-theme")==="dark"||(!root.getAttribute("data-theme")&&matchMedia("(prefers-color-scheme: dark)").matches);
+const themeLabel=()=>{$("themebtn").textContent=isDark()?"☀️":"🌙"};
+themeLabel();
+$("themebtn").onclick=()=>{const n=isDark()?"light":"dark";root.setAttribute("data-theme",n);try{localStorage.setItem("stit-theme",n)}catch(e){}themeLabel();redrawCharts()};
 
-  const drawPf=()=>{const a=parseFloat($("vklad").value)||0,m=parseFloat($("mesic").value)||0;let sw=0;
-    $("pf").innerHTML=D.portfolio.map(r=>{sw+=r.vaha||0;return `<tr><th scope="row">${esc(r.ticker)}</th><td>${esc(r.firma)}</td><td class="n">${pct(r.vaha)}</td><td class="n">${eur(r.vaha*a)}</td><td class="n">${eur(r.vaha*m)}</td><td class="n">${r.skore==null?"–":num(r.skore)}</td><td class="n">${pct(r.ocek_vynos)}</td><td class="n chg ${cls(r.zmena_tyden)}">${sg(r.zmena_tyden)}</td><td>${zb(r.pasmo)}</td></tr>`}).join("")
-      +`<tr><th scope="row"><b>Celkem</b></th><td></td><td class="n"><b>${pct(sw)}</b></td><td class="n"><b>${eur(sw*a)}</b></td><td class="n"><b>${eur(sw*m)}</b></td><td></td><td></td><td></td><td></td></tr>`;};
+/* sparkline */
+function spark(arr,w=96,h=30){
+  if(!arr||arr.length<2)return"";
+  const mn=Math.min(...arr),mx=Math.max(...arr),r=mx-mn||1;
+  const pts=arr.map((v,i)=>[(i/(arr.length-1))*w,h-2-((v-mn)/r)*(h-4)]);
+  const up=arr[arr.length-1]>=arr[0],col=up?"var(--up)":"var(--down)";
+  const d="M"+pts.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join("L");
+  const y0=(h-2-((arr[0]-mn)/r)*(h-4)).toFixed(1);
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><line x1="0" x2="${w}" y1="${y0}" y2="${y0}" stroke="var(--muted)" stroke-dasharray="1.5 2.5" stroke-width="1" opacity=".6"/><path d="${d}L${w},${h}L0,${h}Z" fill="${col}" opacity=".10"/><path d="${d}" fill="none" stroke="${col}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+}
+
+let D=null,SER=null,serLoading=null,sel=null,range="1R",lbSort={k:"skore",dir:-1},lbGroup="",redrawers=[];
+function redrawCharts(){redrawers.forEach(f=>f())}
+addEventListener("resize",()=>{clearTimeout(window.__rt);window.__rt=setTimeout(redrawCharts,120)});
+
+/* routing */
+let INV=null,CFG=null;
+const VIEWS=["prehled","akcie","portfolio","temata","simulace","pravidla","investice","invtab"];
+function route(){
+  const h=(location.hash||"#prehled").slice(1).split("/");
+  let v=h[0],tab=null;
+  if(INV&&INV.tabs.some(t=>t.id===v)){tab=v;v="invtab"}
+  if(!tab&&(v==="invtab"||!VIEWS.includes(v)))v="prehled";
+  VIEWS.forEach(x=>{$("v-"+x).hidden=x!==v});
+  const cur=tab||v;
+  document.querySelectorAll(".side a[data-v]").forEach(a=>{if(a.dataset.v===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  const titles={prehled:"Přehled akcií",akcie:"Akcie",portfolio:"Portfolio",temata:"Tržní témata",simulace:"Simulace",pravidla:"Pravidla",investice:"Další investice"};
+  document.title=(tab?(INV.tabs.find(t=>t.id===tab).name):titles[v])+" · Investiční štít";
+  window.scrollTo(0,0);
+  if(v==="investice")drawInvOverview();
+  if(v==="invtab")drawInvTab(tab);
+  if(!D)return;
+  if(v==="akcie"){const t=h[1]&&decodeURIComponent(h[1]);if(t&&D.akcie.some(a=>a.ticker===t))sel=t;if(!sel)sel=D.akcie[0].ticker;drawList();drawDetail();}
+  if(v==="simulace")drawFan();
+}
+addEventListener("hashchange",route);
+
+function loadSeries(){if(SER)return Promise.resolve(SER);if(!serLoading)serLoading=fetch("stit-series.json?v="+(D?.souhrn?.data_k||"")).then(r=>r.ok?r.json():{}).then(j=>(SER=j)).catch(()=>(SER={}));return serLoading}
+
+fetch("investice.json?v="+Date.now()).then(r=>r.ok?r.json():null).then(j=>{if(!j)return;INV=j;initInv();route();}).catch(()=>{});
+fetch("config.json?v="+Date.now()).then(r=>r.ok?r.json():null).then(j=>{CFG=j;drawCal();}).catch(()=>{});
+fetch("stit-data.json?v="+Date.now()).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(j=>{D=j;init();route();}).catch(()=>{$("o-ret").textContent="Data se nepodařilo načíst";});
+
+function init(){
+  const S=D.souhrn, A=D.akcie;
+  $("t-date").textContent="Data k "+dte(S.data_k);
+  $("t-model").textContent="model "+pct(S.ocek_vynos)+" p.a.";
+  const pf=D.portfolio.filter(r=>r.ticker!=="Rezerva"), dd=pf.reduce((s,r)=>s+(r.vaha||0)*((A.find(a=>a.ticker===r.ticker)||{}).zmena_den||0),0);
+  $("t-pf").innerHTML=`Portfolio za poslední den <span class="${dd>0?"up":dd<0?"down":""}">${sg(dd,2)}</span>`;
+  $("n-pf").textContent=S.pocet_akcii;
+  // overview cards
+  $("o-ret").textContent=pct(S.ocek_vynos); $("o-vol").textContent=pct(S.volatilita); $("o-n").textContent=S.pocet_akcii; $("o-res").textContent=pct(S.rezerva,0);
+  $("o-top").textContent=S.nejvyssi_skore_ticker+" · "+nf(S.nejvyssi_skore);
+  $("o-dd").firstChild.textContent=pct(S.p_propad35_10let,0); $("o-dd-etf").textContent=pct(S.etf_p_propad35_10let,0);
+  const m10=D.mc.find(r=>r.kod==="rezerva15"&&r.rok===10)||{}; $("o-mdd").textContent=sg(m10.median_max_propad,0);
+  $("o-med").textContent=eur(S.median_10let); $("o-paid").textContent=eur(S.vlozeno_10let); $("o-p10").textContent=eur(S.p10_10let); $("o-p90").textContent=eur(S.p90_10let); $("o-etf").textContent=eur(S.etf_median_10let);
+  gauge($("o-gauge"),S.p_propad35_10let,S.etf_p_propad35_10let);
+  $("o-wk").textContent=S.minuly_tyden?"proti "+dte(S.minuly_tyden):"výchozí týden";
+  $("o-sig").innerHTML=D.signaly.slice(0,6).map(s=>`<li><span class="pill ${s.typ==="nákup"?"p-up":s.typ==="prodej"||s.typ==="pozor"?"p-down":s.typ==="pásmo"?"p-warn":"p-flat"}">${esc(s.typ)}</span><span>${esc(s.text)}</span></li>`).join("");
+  // categories
+  const groups=[...new Set(A.map(a=>a.skupina))].sort((a,b)=>a==="Ostatní"?1:b==="Ostatní"?-1:a.localeCompare(b,"cs"));
+  $("cats").innerHTML=groups.map(g=>`<a href="#prehled" data-g="${esc(g)}"><span><span class="tag" style="border:0;background:none;padding:0"><i style="background:${GCOL[g]}"></i></span> ${esc(g)}</span><small>${A.filter(a=>a.skupina===g).length}</small></a>`).join("");
+  $("cats").querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{lbGroup=a.dataset.g;drawLb()}));
+  $("lb-chips").innerHTML=`<button class="chip" type="button" data-g="" aria-pressed="true">Vše</button>`+groups.map(g=>`<button class="chip" type="button" data-g="${esc(g)}" aria-pressed="false"><i style="background:${GCOL[g]}"></i>${esc(g)}</button>`).join("")+`<button class="chip" type="button" data-g="__pf" aria-pressed="false">Jen portfolio</button>`;
+  $("lb-chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;lbGroup=b.dataset.g;drawLb()});
+  document.querySelectorAll("#lb th.sort").forEach(th=>th.addEventListener("click",()=>{const k=th.dataset.k;lbSort={k,dir:lbSort.k===k?-lbSort.dir:(k==="volatilita"||k==="cena_vs_vh"||k==="forward_pe"?1:-1)};drawLb()}));
+  drawLb();
+  // akcie list controls
+  $("q").addEventListener("input",drawList); $("lsort").addEventListener("change",drawList);
+  $("ranges").addEventListener("click",e=>{const b=e.target.closest("button[data-r]");if(!b)return;range=b.dataset.r;$("ranges").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));drawChart()});
+  // portfolio
   ["vklad","mesic"].forEach(id=>$(id).addEventListener("input",drawPf)); drawPf();
+  // themes, sim table
+  drawThemes(); drawMcTable();
+  loadSeries();
+}
 
-  const mc=D.mc, yrs=[...new Set(mc.map(r=>r.rok))], get=k=>yrs.map(y=>mc.find(r=>r.kod===k&&r.rok===y));
-  const A=get("rezerva15"),E=get("etf");
-  if(window.Chart){const css=getComputedStyle(document.documentElement),acc=css.getPropertyValue("--acc").trim()||"#8B7CFF",mut=css.getPropertyValue("--muted").trim()||"#C9D1E8";
-    new Chart($("c-mc"),{data:{labels:yrs.map(y=>"rok "+y),datasets:[
-      {type:"bar",label:"Výběr + 15 % rezerva (pásmo)",data:A.map(r=>[r.p10,r.p90]),backgroundColor:acc+"88",borderRadius:6,barPercentage:.5,order:2},
-      {type:"bar",label:"Indexové ETF (pásmo)",data:E.map(r=>[r.p10,r.p90]),backgroundColor:"rgba(201,209,232,.28)",borderRadius:6,barPercentage:.5,order:2},
-      {type:"line",label:"Medián – výběr",data:A.map(r=>r.median),borderColor:acc,backgroundColor:acc,pointRadius:5,showLine:false,order:1},
-      {type:"line",label:"Medián – ETF",data:E.map(r=>r.median),borderColor:mut,backgroundColor:mut,pointRadius:5,showLine:false,order:1},
-      {type:"line",label:"Vloženo",data:A.map(r=>r.vlozeno),borderColor:"#FFB454",borderDash:[6,4],pointRadius:0,order:0}]},
-      options:{maintainAspectRatio:false,plugins:{legend:{position:"bottom"},tooltip:{callbacks:{label:c=>{const v=c.raw;return c.dataset.label+": "+(Array.isArray(v)?eur(v[0])+" – "+eur(v[1]):eur(v))}}}},
-        scales:{x:{grid:{display:false}},y:{ticks:{callback:v=>(v/1000).toLocaleString("cs-CZ")+" tis."}}}}});}
-  const ten=mc.filter(r=>r.rok===10);
-  $("mc-t").innerHTML=ten.map(r=>`<tr><th scope="row">${esc(r.varianta)}</th><td class="n">${pct(r.vynos_median)}</td><td class="n">${eur(r.median)}</td><td class="n">${eur(r.p10)}</td><td class="n">${pct(r.p_propad35,0)}</td></tr>`).join("");
+function gauge(svg,p,etf){
+  const a=v=>Math.PI*(1-Math.min(1,Math.max(0,v)));
+  const pt=(v,r)=>[100+r*Math.cos(a(v)),100-r*Math.sin(a(v))];
+  const arc=(v0,v1,col,w)=>{const [x0,y0]=pt(v0,80),[x1,y1]=pt(v1,80);return `<path d="M${x0},${y0}A80,80 0 0 1 ${x1},${y1}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`};
+  const [nx,ny]=pt(p,62),[ex,ey]=pt(etf,92);
+  svg.innerHTML=arc(0,.2,"var(--up)",14)+arc(.2,.35,"var(--warn)",14)+arc(.35,1,"var(--down)",14)+
+    `<line x1="100" y1="100" x2="${nx}" y2="${ny}" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/><circle cx="100" cy="100" r="5" fill="var(--ink)"/>`+
+    `<circle cx="${ex}" cy="${ey}" r="4" fill="var(--muted)"><title>Indexové ETF ${pct(etf,0)}</title></circle>`;
+}
 
-  $("themes").innerHTML=[...D.temata].sort((a,b)=>a.posun-b.posun).map(t=>{let n=[];try{n=JSON.parse(t.novinky||"[]")}catch(e){}
-    return `<div class="xc tcard"><h3><span>${esc(t.tema)}</span><span class="chg ${t.posun>.001?"up":t.posun<-.001?"down":""}">${sg(t.posun)} p.a.</span></h3><p class="muted">Akcie: ${esc(t.akcie)}</p><p class="muted">${esc(t.scenare)}</p>${n.length?"<ul>"+n.slice(0,3).map(x=>`<li>${dte(x.datum)} · ${/^https:\/\//.test(x.url||"")?`<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.titulek)}</a>`:esc(x.titulek)}</li>`).join("")+"</ul>":""}</div>`}).join("");
+function stateCell(a){return a.v_portfoliu?`<span class="status in">v portfoliu ${pct(a.vaha)}</span>`:`<span class="pill ${zoneCls(a.pasmo)}">${esc(a.pasmo)}</span>`}
+function drawLb(){
+  $("lb-chips").querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c.dataset.g===lbGroup));
+  document.querySelectorAll("#lb th.sort").forEach(th=>{if(th.dataset.k===lbSort.k)th.setAttribute("aria-sort",lbSort.dir<0?"descending":"ascending");else th.removeAttribute("aria-sort");th.textContent=th.textContent.replace(/ [↑↓]$/,"")+(th.dataset.k===lbSort.k?(lbSort.dir<0?" ↓":" ↑"):"")});
+  const k=lbSort.k;
+  const rows=D.akcie.filter(a=>!lbGroup||(lbGroup==="__pf"?a.v_portfoliu:a.skupina===lbGroup)).slice().sort((a,b)=>{const x=a[k]??-Infinity,y=b[k]??-Infinity;return (x>y?1:x<y?-1:0)*lbSort.dir});
+  $("lb").tBodies[0].innerHTML=rows.map((a,i)=>`<tr class="click" data-t="${esc(a.ticker)}" tabindex="0">
+    <td class="n muted">${i+1}</td>
+    <td class="nm"><b>${esc(a.firma)}</b><span class="tag"><i style="background:${GCOL[a.skupina]}"></i>${esc(a.ticker)}</span> <span>${esc(GSHORT[a.skupina]||a.skupina)} · ${px(a.cena,a.mena)}</span></td>
+    <td>${spark(a.krivka)}</td>
+    <td class="n ${a.vynos_12m>0?"up":"down"}">${sg(a.vynos_12m)}</td>
+    <td class="n ${a.zmena_tyden>0?"up":a.zmena_tyden<0?"down":""}">${sg(a.zmena_tyden)}</td>
+    <td class="n">${nf(a.skore)}</td><td class="n">${pct(a.ocek_vynos)}</td>
+    <td class="n ${a.cena_vs_vh<0?"up":a.cena_vs_vh>.2?"down":""}">${sg(a.cena_vs_vh,0)}</td>
+    <td class="n">${pct(a.volatilita,0)}</td><td class="n">${pct(Math.abs(a.max_propad),0)}</td>
+    <td class="n">${a.forward_pe==null?"–":nf(a.forward_pe,1)}</td><td class="n">${a.vaha?pct(a.vaha):"–"}</td><td>${stateCell(a)}</td></tr>`).join("");
+  $("lb").tBodies[0].querySelectorAll("tr").forEach(tr=>{const go=()=>{location.hash="akcie/"+encodeURIComponent(tr.dataset.t)};tr.onclick=go;tr.onkeydown=e=>{if(e.key==="Enter")go()}});
+}
 
-  let f="";const drawWl=()=>{$("wl").innerHTML=D.akcie.filter(r=>f===""||(f==="in"&&r.v_portfoliu)||(f==="out"&&!r.v_portfoliu)||(f==="buy"&&(r.pasmo==="nákupní zóna"||r.pasmo==="velmi atraktivní"))).sort((a,b)=>b.skore-a.skore)
-    .map(r=>`<tr><th scope="row">${esc(r.ticker)}${r.v_portfoliu?" •":""}</th><td>${esc(r.firma)}</td><td class="n">${num(r.skore)}</td><td class="n">${pct(r.ocek_vynos)}</td><td class="n">${px(r.cena,r.mena)}</td><td class="n chg ${r.cena_vs_vh<0?"up":r.cena_vs_vh>.2?"down":""}">${sg(r.cena_vs_vh)}</td><td>${zb(r.pasmo)}</td><td class="n">${r.forward_pe==null?"–":num(r.forward_pe,1)}</td><td class="n">${pct(r.roic,0)}</td><td class="n">${pct(r.volatilita,0)}</td><td class="n chg ${cls(r.vynos_12m)}">${sg(r.vynos_12m)}</td></tr>`).join("");};
-  document.querySelectorAll("#wf [data-f]").forEach(b=>b.onclick=()=>{f=b.dataset.f;document.querySelectorAll("#wf [data-f]").forEach(x=>x.classList.toggle("pill-off",x!==b));drawWl();}); drawWl();
-}).catch(e=>{$("s-lede").textContent="Data se nepodařilo načíst";$("s-lede").className="lede down";});
+/* ---------- Apple-style list + detail ---------- */
+function drawList(){
+  const q=$("q").value.trim().toLowerCase(), s=$("lsort").value;
+  let rows=D.akcie.filter(a=>!q||a.ticker.toLowerCase().includes(q)||a.firma.toLowerCase().includes(q));
+  rows=rows.slice().sort((a,b)=>s==="den"?(b.zmena_den??-9)-(a.zmena_den??-9):s==="skore"?b.skore-a.skore:s==="abc"?a.ticker.localeCompare(b.ticker):((b.v_portfoliu-a.v_portfoliu)||(b.vaha-a.vaha)||(b.skore-a.skore)));
+  $("srows").innerHTML=rows.map(a=>{const sp=a.krivka?a.krivka.slice(-14):null;return `<button type="button" class="srow" role="option" data-t="${esc(a.ticker)}" aria-selected="${a.ticker===sel}">
+    <span style="min-width:0"><b>${esc(a.ticker)}</b><span class="sn">${esc(a.firma)}</span></span>
+    <span>${spark(sp,64,28)}</span>
+    <span class="sp"><b>${nf(a.cena,2)}</b><span class="pill ${pillCls(a.zmena_den)}">${sg(a.zmena_den,2)}</span></span></button>`}).join("")||`<p class="muted" style="padding:10px">Nic nenalezeno.</p>`;
+  $("srows").querySelectorAll(".srow").forEach(b=>b.onclick=()=>{location.hash="akcie/"+encodeURIComponent(b.dataset.t)});
+}
+
+function drawDetail(){
+  const a=D.akcie.find(x=>x.ticker===sel); if(!a)return;
+  $("d-t").firstChild.textContent=a.ticker+" "; $("d-n").textContent=a.firma;
+  $("d-p").textContent=px(a.cena,a.mena); const c=$("d-c"); c.className="pill "+pillCls(a.zmena_den); c.textContent=sg(a.zmena_den,2);
+  $("d-pz").textContent="při uzavření "+dte(D.souhrn.data_k);
+  $("d-sub").innerHTML=`${esc(a.skupina)} · ${a.v_portfoliu?`<span class="status in">v portfoliu ${pct(a.vaha)}</span>`:"mimo portfolio"} · <span class="pill ${zoneCls(a.pasmo)}">${esc(a.pasmo)}</span>`;
+  const st=[["Cena",px(a.cena,a.mena)],["52T max",px(a.max_52t,a.mena)],["Vnitřní hodnota",px(a.vnitrni_hodnota,a.mena)],
+    ["Týden",sg(a.zmena_tyden)],["52T min",px(a.min_52t,a.mena)],["Nákupní zóna od",px(a.nakupni_zona,a.mena)],
+    ["12 měsíců",sg(a.vynos_12m)],["Fwd P/E",a.forward_pe==null?"–":nf(a.forward_pe,1)],["Prodejní cena",a.prodejni_cena==null?"–":px(a.prodejni_cena,a.mena)],
+    ["Volatilita",pct(a.volatilita,0)],["ROIC",pct(a.roic,0)],["Cíl analytiků",sg(a.cil_analytiku,0)],
+    ["Max. propad",pct(Math.abs(a.max_propad),0)],["Provozní marže",pct(a.provozni_marze,0)],["FCF yield",pct(a.fcf_yield)],
+    ["Beta",nf(a.beta,2)],["Růst tržeb 3R",pct(a.rust_trzeb_3r)],["Dividenda",pct(a.dividenda)]];
+  $("d-stats").innerHTML=st.map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join("");
+  const sb=(lab,v)=>`<div class="sbar"><span class="muted">${lab}</span><span class="bar"><i style="width:${Math.max(2,v||0)}%"></i></span><span class="mono">${nf(v)}</span></div>`;
+  $("d-model").innerHTML=`<div class="kv" style="margin:0 0 10px"><span>Skóre</span><span><b>${nf(a.skore)}</b> / 100</span><span>Očekávaný výnos</span><span>${pct(a.ocek_vynos)} ročně</span><span>Tematický posun</span><span>${sg(a.tematicky_posun,2)}</span><span>Riziko dle Ondřeje</span><span>${a.riziko_ondrej} / 10</span></div>`
+    +sb("Valuace",a.valuace)+sb("Kvalita",a.kvalita)+sb("Růst",a.rust)+sb("Riziko",a.riziko)+sb("Témata",a.temata)
+    +`<p class="muted" style="font-size:12.5px;margin:10px 0 0">Vnitřní hodnota a pásma z Ondřejova odhadu ${dte(a.odhad_ondrej)}.</p>`;
+  const th=D.temata.filter(t=>t.akcie.split(",").map(x=>x.trim()).includes(a.ticker));
+  const news=[];th.forEach(t=>{let n=[];try{n=JSON.parse(t.novinky||"[]")}catch(e){}n.forEach(x=>news.push({...x,tema:t.tema}))});
+  news.sort((x,y)=>String(y.datum).localeCompare(String(x.datum)));
+  $("d-news").innerHTML=news.length?news.slice(0,5).map(n=>{const u=/^https:\/\//.test(n.url||"")?n.url:null;let host="";try{host=u?new URL(u).hostname.replace(/^www\./,""):""}catch(e){}
+    return `<${u?`a href="${esc(u)}" target="_blank" rel="noopener"`:"div"}><small>${esc(n.tema)} · ${esc(host)} · ${dte(n.datum)}</small><b>${esc(n.titulek)}</b></${u?"a":"div"}>`}).join(""):`<p class="muted" style="margin:0">K této akcii model nesleduje žádné téma.</p>`;
+  drawChart();
+}
+
+function sliceSeries(t){
+  const s=SER&&SER[t]; if(!s)return null;
+  const last=ymd(s.d[s.d.length-1][0]);
+  const back=(days)=>{const lim=new Date(+last-days*864e5);return s.d.filter(p=>ymd(p[0])>=lim)};
+  switch(range){
+    case"1T":return {pts:back(7),daily:true};case"1M":return {pts:back(31),daily:true};case"3M":return {pts:back(92),daily:true};
+    case"6M":return {pts:back(183),daily:true};case"1R":return {pts:s.d,daily:true};
+    case"YTD":{const y=last.getUTCFullYear();const p=s.d.filter(q=>String(q[0]).slice(0,4)==String(y));const prev=s.d.filter(q=>String(q[0]).slice(0,4)<String(y)).slice(-1);return {pts:prev.concat(p),daily:true}}
+    case"5L":return {pts:s.m.slice(-61),daily:false};case"10L":return {pts:s.m,daily:false};
+  }
+}
+
+function lineChart(box,pts,opts){
+  const W=Math.max(280,box.clientWidth),H=box.clientHeight||300,m={t:12,r:62,b:26,l:8};
+  if(!pts||pts.length<2){box.innerHTML=`<p class="muted" style="padding:20px 0">Graf se načítá…</p>`;return}
+  const vals=pts.map(p=>p[1]),mn=Math.min(...vals),mx=Math.max(...vals),pad=(mx-mn)*.08||mx*.02;
+  const y0=mn-pad,y1=mx+pad,X=i=>m.l+i/(pts.length-1)*(W-m.l-m.r),Y=v=>m.t+(1-(v-y0)/(y1-y0))*(H-m.t-m.b);
+  const up=vals[vals.length-1]>=vals[0],col=up?"var(--up)":"var(--down)";
+  const ticks=[];const step=(y1-y0)/4;for(let i=0;i<=4;i++)ticks.push(y0+step*i);
+  const d="M"+pts.map((p,i)=>X(i).toFixed(1)+","+Y(p[1]).toFixed(1)).join("L");
+  const nx=Math.min(6,pts.length),xl=[];for(let i=0;i<nx;i++){const k=Math.round(i*(pts.length-1)/(nx-1));xl.push(k)}
+  const lab=k=>{const dt=ymd(pts[k][0]);return opts.daily&&(range==="1T"||range==="1M")?dt.getUTCDate()+". "+(dt.getUTCMonth()+1)+".":(dt.getUTCMonth()+1)+"/"+String(dt.getUTCFullYear()).slice(2)};
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.label)}">
+    <defs><linearGradient id="gfill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="${up?"var(--up)":"var(--down)"}" stop-opacity=".22"/><stop offset="1" stop-color="${up?"var(--up)":"var(--down)"}" stop-opacity="0"/></linearGradient></defs>
+    ${ticks.map(t=>`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--line)"/><text x="${W-m.r+8}" y="${Y(t)+4}" font-family="var(--mono)" font-size="11.5" fill="var(--muted)">${nf(t,t>=1000?0:t>=100?1:2)}</text>`).join("")}
+    <line x1="${m.l}" x2="${W-m.r}" y1="${Y(vals[0])}" y2="${Y(vals[0])}" stroke="var(--muted)" stroke-dasharray="2 4" opacity=".8"/>
+    <path d="${d}L${X(pts.length-1)},${H-m.b}L${X(0)},${H-m.b}Z" fill="url(#gfill)"/>
+    <path d="${d}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round"/>
+    ${xl.map(k=>`<text x="${X(k)}" y="${H-6}" text-anchor="${k===0?"start":k===pts.length-1?"end":"middle"}" font-family="var(--mono)" font-size="11.5" fill="var(--muted)">${lab(k)}</text>`).join("")}
+    <g id="hv" visibility="hidden"><line id="hvl" y1="${m.t}" y2="${H-m.b}" stroke="var(--muted)"/><circle id="hvc" r="4.5" fill="${col}" stroke="var(--panel)" stroke-width="2"/></g>
+    <rect x="${m.l}" y="0" width="${W-m.l-m.r}" height="${H}" fill="transparent" id="hvr"/></svg><div class="tip" hidden></div>`;
+  const tip=box.querySelector(".tip"),hv=box.querySelector("#hv"),r=box.querySelector("#hvr");
+  const move=e=>{const b=box.getBoundingClientRect(),x=(e.clientX-b.left)*(W/b.width);let i=Math.round((x-m.l)/(W-m.l-m.r)*(pts.length-1));i=Math.max(0,Math.min(pts.length-1,i));
+    hv.setAttribute("visibility","visible");box.querySelector("#hvl").setAttribute("x1",X(i));box.querySelector("#hvl").setAttribute("x2",X(i));box.querySelector("#hvc").setAttribute("cx",X(i));box.querySelector("#hvc").setAttribute("cy",Y(pts[i][1]));
+    const dt=ymd(pts[i][0]),ch=pts[i][1]/vals[0]-1;tip.hidden=false;tip.innerHTML=`${opts.daily?dt.getUTCDate()+". ":""}${dt.getUTCMonth()+1}. ${dt.getUTCFullYear()} · <b>${nf(pts[i][1],2)}</b> <span class="${ch>=0?"up":"down"}">${sg(ch)}</span>`;
+    const px_=X(i)/W*b.width;tip.style.left=Math.min(Math.max(0,px_-80),b.width-200)+"px"};
+  r.addEventListener("pointermove",move);r.addEventListener("pointerdown",move);r.addEventListener("pointerleave",()=>{hv.setAttribute("visibility","hidden");tip.hidden=true});
+  return {first:vals[0],last:vals[vals.length-1]};
+}
+
+function drawChart(){
+  const box=$("chart");if(!sel)return;
+  if(!SER){box.innerHTML=`<p class="muted" style="padding:20px 0">Graf se načítá…</p>`;loadSeries().then(drawChart);return}
+  const a=D.akcie.find(x=>x.ticker===sel),s=sliceSeries(sel);
+  if(!s||!s.pts||s.pts.length<2){box.innerHTML=`<p class="muted" style="padding:20px 0">Pro tuto akcii a období nejsou data.</p>`;return}
+  lineChart(box,s.pts,{daily:s.daily,label:`${a.ticker}: vývoj ceny za zvolené období`});
+}
+redrawers.push(()=>{if(!$("v-akcie").hidden)drawChart()});
+
+/* ---------- portfolio ---------- */
+function drawPf(){
+  const v=parseFloat($("vklad").value)||0,m=parseFloat($("mesic").value)||0;let sw=0;
+  $("pf").tBodies[0].innerHTML=D.portfolio.map(r=>{sw+=r.vaha||0;const a=D.akcie.find(x=>x.ticker===r.ticker);const res=r.ticker==="Rezerva";
+    return `<tr${res?"":` class="click" data-t="${esc(r.ticker)}"`}><td class="nm"><b>${esc(r.firma)}</b><span class="tag"><i style="background:${res?"var(--muted)":GCOL[a?.skupina]}"></i>${esc(r.ticker)}</span></td>
+    <td>${a?spark(a.krivka,84,26):""}</td><td class="n">${pct(r.vaha)}</td><td class="n">${eur(r.vaha*v)}</td><td class="n">${eur(r.vaha*m)}</td>
+    <td class="n">${r.skore==null?"–":nf(r.skore)}</td><td class="n">${pct(r.ocek_vynos)}</td><td class="n ${r.zmena_tyden>0?"up":r.zmena_tyden<0?"down":""}">${res?"–":sg(r.zmena_tyden)}</td>
+    <td>${r.pasmo?`<span class="pill ${zoneCls(r.pasmo)}">${esc(r.pasmo)}</span>`:""}</td></tr>`}).join("")
+    +`<tr class="total"><td>Celkem</td><td></td><td class="n">${pct(sw)}</td><td class="n">${eur(sw*v)}</td><td class="n">${eur(sw*m)}</td><td></td><td></td><td></td><td></td></tr>`;
+  $("pf").tBodies[0].querySelectorAll("tr.click").forEach(tr=>tr.onclick=()=>{location.hash="akcie/"+encodeURIComponent(tr.dataset.t)});
+  const g={};D.portfolio.forEach(r=>{const a=D.akcie.find(x=>x.ticker===r.ticker);const k=r.ticker==="Rezerva"?"Rezerva":a.skupina;g[k]=(g[k]||0)+r.vaha});
+  const CAP={"AI/polovodiče":.2*.85,"Megacap tech":.25*.85,"Čína":.05*.85,"Fintech":.07*.85,"Obrana":.09*.85};
+  $("pf-groups").innerHTML=Object.entries(g).sort((x,y)=>y[1]-x[1]).map(([k,w])=>`<div class="sbar"><span>${esc(k)}</span><span class="bar"><i style="width:${w/0.45*100}%;background:${k==="Rezerva"?"var(--muted)":GCOL[k]}"></i></span><span class="mono" style="text-align:right">${pct(w,0)}</span></div>`).join("")
+    +`<p class="muted" style="font-size:12.5px;margin:8px 0 0">Limity z celku: AI a čipy ${pct(CAP["AI/polovodiče"],0)}, megacap ${pct(CAP["Megacap tech"],0)}, obrana ${pct(CAP["Obrana"],0)}, fintech ${pct(CAP["Fintech"],0)}, Čína ${pct(CAP["Čína"],0)}.</p>`;
+}
+
+/* ---------- themes ---------- */
+function drawThemes(){
+  $("tgrid").innerHTML=[...D.temata].sort((a,b)=>a.posun-b.posun).map(t=>{let n=[];try{n=JSON.parse(t.novinky||"[]")}catch(e){}
+    const pr=(t.popis_scenaru||"").split(" | ").map(s=>{const m=s.match(/–\s*(\d+)\s*%/);return m?+m[1]:0});
+    const sc=(t.popis_scenaru||"").split(" | ").map(s=>`<li>${esc(s.replace(/(\d)\.(\d)/g,"$1,$2").replace(/-(\d)/g,"−$1"))}</li>`).join("");
+    return `<div class="card tc"><h3><span>${esc(t.tema)}</span><span class="pill ${pillCls(t.posun>.0005?1:t.posun<-.0005?-1:0)}">${sg(t.posun,2)} p.a.</span></h3>
+      <div class="scen" aria-hidden="true">${pr.map(p=>`<i style="width:${p}%"></i>`).join("")}</div>
+      <p>Akcie: ${esc(t.akcie)}</p><ul style="margin-top:6px">${sc}</ul>
+      ${n.length?`<div class="news" style="margin-top:12px">`+n.slice(0,3).map(x=>{const u=/^https:\/\//.test(x.url||"")?x.url:null;return `<${u?`a href="${esc(u)}" target="_blank" rel="noopener"`:"div"}><small>${dte(x.datum)}</small><b style="font-size:14px">${esc(x.titulek)}</b></${u?"a":"div"}>`}).join("")+`</div>`:""}</div>`}).join("");
+}
+
+/* ---------- simulation ---------- */
+function drawMcTable(){
+  const ten=D.mc.filter(r=>r.rok===10);
+  $("mct").tBodies[0].innerHTML=ten.map(r=>`<tr><td class="nm"><b>${esc(r.varianta)}</b></td><td class="n">${pct(r.vynos_median)}</td><td class="n">${eur(r.median)}</td><td class="n">${eur(r.p10)}</td><td class="n">${eur(r.p90)}</td><td class="n">${pct(r.p_propad35,0)}</td><td class="n">${sg(r.median_max_propad,0)}</td></tr>`).join("");
+}
+function drawFan(){
+  const box=$("fan");const rows=D.mc.filter(r=>r.kod==="rezerva15"||r.kod==="etf");
+  const W=Math.max(300,box.clientWidth),H=box.clientHeight||340,m={t:30,r:16,b:28,l:62};
+  const yrs=[...new Set(rows.map(r=>r.rok))],mx=Math.max(...rows.map(r=>r.p90))*1.06;
+  const bw=(W-m.l-m.r)/yrs.length,X=i=>m.l+bw*(i+.5),Y=v=>m.t+(1-v/mx)*(H-m.t-m.b);
+  const off=k=>k==="rezerva15"?-Math.min(14,bw/5):Math.min(14,bw/5),col=k=>k==="rezerva15"?"var(--brand)":"var(--muted)";
+  const st=[10000,20000,25000,50000,100000].find(x=>mx/x<=6)||200000;const ticks=[];for(let t=0;t<=mx;t+=st)ticks.push(t);
+  const paid=rows.filter(r=>r.kod==="rezerva15");
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Rozpětí hodnoty portfolia po 1 až 10 letech">
+   ${ticks.map(t=>`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--line)"/><text x="${m.l-8}" y="${Y(t)+4}" text-anchor="end" font-family="var(--mono)" font-size="11.5" fill="var(--muted)">${nf(t/1000)} tis.</text>`).join("")}
+   <path d="M${paid.map(r=>X(yrs.indexOf(r.rok))+","+Y(r.vlozeno)).join("L")}" fill="none" stroke="var(--warn)" stroke-width="1.6" stroke-dasharray="5 4"/>
+   ${rows.map(r=>{const x=X(yrs.indexOf(r.rok))+off(r.kod);return `<g><line x1="${x}" x2="${x}" y1="${Y(r.p10)}" y2="${Y(r.p90)}" stroke="${col(r.kod)}" stroke-width="5" stroke-linecap="round" opacity=".55"/><circle cx="${x}" cy="${Y(r.median)}" r="6" fill="${col(r.kod)}" stroke="var(--panel)" stroke-width="2"><title>${esc(r.varianta)}, rok ${r.rok}: medián ${eur(r.median)}, pásmo ${eur(r.p10)} – ${eur(r.p90)}, vloženo ${eur(r.vlozeno)}</title></circle></g>`}).join("")}
+   ${yrs.map((y,i)=>`<text x="${X(i)}" y="${H-8}" text-anchor="middle" font-family="var(--mono)" font-size="12" fill="var(--muted)">rok ${y}</text>`).join("")}
+   ${rows.filter(r=>r.rok===yrs[yrs.length-1]).map(r=>`<text x="${X(yrs.length-1)+off(r.kod)+(r.kod==="rezerva15"?-12:12)}" y="${Y(r.median)+4}" text-anchor="${r.kod==="rezerva15"?"end":"start"}" font-family="var(--mono)" font-size="12.5" fill="var(--ink)">${eur(r.median)}</text>`).join("")}
+   <g transform="translate(${m.l},14)"><circle r="5" cy="-4" fill="var(--brand)"/><text x="10" font-size="12.5" fill="var(--ink)">Výběr + 15 % rezerva</text><circle r="5" cx="190" cy="-4" fill="var(--muted)"/><text x="200" font-size="12.5" fill="var(--ink)">100 % indexové ETF</text></g></svg>`;
+}
+redrawers.push(()=>{if(!$("v-simulace").hidden)drawFan()});
+
+/* ---------- další investice ---------- */
+const TREND={up:"p-up",down:"p-down",flat:"p-flat"};
+const safeUrl=u=>/^https:\/\//.test(u||"")?u:null;
+function initInv(){
+  $("inv-nav").innerHTML=INV.tabs.map(t=>`<a href="#${esc(t.id)}" data-v="${esc(t.id)}"><span>${esc(t.icon||"")} ${esc(t.name)}</span><small class="${t.trend==="up"?"up":t.trend==="down"?"down":""}">${t.trend==="up"?"▲":t.trend==="down"?"▼":"●"}</small></a>`).join("");
+}
+function drawInvOverview(){
+  if(!INV){$("inv-cards").innerHTML=`<p class="muted">Data se načítají…</p>`;return}
+  $("inv-lead").textContent=`Týden ${INV.week||""}. Nemovitosti, auta, mince a zlato v kostce. Další obnova: ${INV.next||"neděle večer"}.`;
+  const stock=D?`<a class="card icard" href="#prehled"><span class="t"><b>📈 Akcie</b><span class="pill p-up">model ${pct(D.souhrn.ocek_vynos)} p.a.</span></span>
+    <p>Portfolio ${D.souhrn.pocet_akcii} akcií z watchlistu a 15% rezerva. Šance na propad přes −35 % za 10 let: ${pct(D.souhrn.p_propad35_10let,0)}.</p>
+    <span class="mini"><span>Medián za 10 let</span><span>${eur(D.souhrn.median_10let)}</span><span>Data k</span><span>${dte(D.souhrn.data_k)}</span></span><span class="go">Otevřít akcie →</span></a>`:"";
+  $("inv-cards").innerHTML=stock+INV.tabs.map(t=>`<a class="card icard" href="#${esc(t.id)}"><span class="t"><b>${esc(t.icon||"")} ${esc(t.name)}</b><span class="pill ${TREND[t.trend]||"p-flat"}">${esc(t.trendText)}</span></span>
+    <p>${esc(t.lead)}</p>
+    <span class="mini">${(t.stats||[]).slice(0,2).map(x=>`<span>${esc(x.k)}</span><span class="${x.cls==="up"?"up":x.cls==="down"?"down":""}">${esc(x.v)}</span>`).join("")}</span><span class="go">Otevřít ${esc(t.name.toLowerCase())} →</span></a>`).join("");
+}
+function drawInvTab(id){
+  const t=INV.tabs.find(x=>x.id===id);if(!t)return;
+  $("it-h").textContent=(t.icon?t.icon+" ":"")+t.name;
+  const tr=$("it-trend");tr.className="pill "+(TREND[t.trend]||"p-flat");tr.textContent=t.trendText;
+  $("it-lead").textContent=t.lead;
+  $("it-stats").innerHTML=(t.stats||[]).map(x=>`<div class="card stat"><div class="k">${esc(x.k)}</div><div class="v ${x.cls==="up"?"up":x.cls==="down"?"down":"flat"}">${esc(x.v)}</div><div class="nn">${esc(x.n||"")}</div></div>`).join("");
+  const su=t.statsSrc&&safeUrl(t.statsSrc.u);
+  $("it-src").innerHTML=t.statsSrc?`Zdroj: ${su?`<a href="${esc(su)}" target="_blank" rel="noopener">${esc(t.statsSrc.t)}</a>`:esc(t.statsSrc.t)}`:"";
+  const opps=t.opps||t.opportunities||[];
+  $("it-opps").innerHTML=opps.length?`<div class="news">`+opps.map(o=>{const u=safeUrl(o.u);return `<div class="ni"><p>${esc(o.t)}${u?` <a href="${esc(u)}" target="_blank" rel="noopener">${esc(o.s||"odkaz")}</a>`:""}</p></div>`}).join("")+`</div>`:`<p class="muted" style="margin:0">Seznam konkrétních nabídek doplní nedělní obnova.</p>`;
+  $("it-week").textContent=INV.week?"týden "+INV.week:"";
+  $("it-news").innerHTML=(t.news||[]).map(n=>{const u=safeUrl(n.u);return `<div class="ni"><p>${esc(n.t)} ${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n.s||"zdroj")}</a>`:`<span class="muted" style="font-size:12.5px">${esc(n.s||"")}</span>`}</p></div>`}).join("")||`<p class="muted">Tento týden bez zpráv.</p>`;
+  $("it-watch").innerHTML=(t.watch||[]).map(w=>`<li>${esc(w)}</li>`).join("");
+  $("it-links").innerHTML=(t.links||[]).map(l=>{const u=safeUrl(l[1]);return u?`<a class="chip" href="${esc(u)}" target="_blank" rel="noopener">${esc(l[0])}</a>`:""}).join("");
+}
+function drawCal(){
+  if(!CFG||!CFG.fomc)return;
+  const today=new Date().toISOString().slice(0,10),next=CFG.fomc.find(d=>d>=today);
+  const cpi=(CFG.cpi||[]).find(d=>d>=today);
+  $("cal").innerHTML=`<span class="muted">Příští rozhodnutí Fedu</span><b>${next?dte(next):"–"}</b>`+(cpi?`<span class="muted" style="display:block;margin-top:8px">Inflace CPI</span><b>${dte(cpi)}</b>`:"");
+}
 })();
-</script><script>(function(){var b=document.getElementById("themebtn"),r=document.documentElement;function lab(){b.textContent=r.getAttribute("data-theme")==="light"?"🌙 Tmavý režim":"☀️ Světlý režim"}lab();b.onclick=function(){var n=r.getAttribute("data-theme")==="light"?"dark":"light";r.setAttribute("data-theme",n);try{localStorage.setItem("stit-theme",n)}catch(e){}lab()}})();</script>
-</body></html>
+</script>
+</body>
+</html>
