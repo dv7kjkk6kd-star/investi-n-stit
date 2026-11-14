@@ -102,7 +102,120 @@
      "https://csu.gov.cz/produkty/ceny_bytu"
     ]
    ],
-   "icon": "🏠"
+   "icon": "🏠",
+   "opps": [
+    {
+     "t": "26. 11. rozhodne ČNB o limitech pro hypotéky (LTV, DTI). Kdo plánuje investiční byt na hypotéku, má do té doby jistotu dnešních pravidel.",
+     "s": "ČBA Hypomonitor, 13. 11. 2026",
+     "u": "https://www.cbamonitor.cz/aktuality/cba-hypomonitor-pokracujici-podzimni-sila-pri-mirne-vyssi-sazbe-524"
+    },
+    {
+     "t": "Nabídka nových bytů v Praze klesla o 11 % na 6 062 jednotek. Vyjednávací prostor je spíš u starších bytů a v regionech než u novostaveb.",
+     "s": "Deloitte Develop Index, 2. 11. 2026",
+     "u": "https://www.deloitte.com/cz-sk/cs/about/press-room/z-nabidky-prazskych-developeru-ubyla-vice-nez-desetina-bytu.html"
+    },
+    {
+     "t": "Byty v Praze zdražily za čtvrtletí jen o 0,7 %, zatímco pozemky o 10,5 % meziročně. Pražský trh se zpomaluje rychleji než zbytek země.",
+     "s": "ČTK, 9. 11. 2026",
+     "u": "https://www.ceskenoviny.cz/zpravy/2899385"
+    },
+    {
+     "t": "Aktuální dražby a insolvenční prodeje nemovitostí najdeš na Portálu dražeb, státní dražby na stránkách Finanční správy.",
+     "s": "Portál dražeb",
+     "u": "https://www.portaldrazeb.cz"
+    }
+   ],
+   "world": {
+    "trend": "up",
+    "trendText": "Evropa roste, USA drží drahé hypotéky",
+    "lead": "Ceny bydlení v EU rostou o 4,7 % ročně, nejvíc na jihu a východě Evropy. Německo stojí na místě a reálně zlevňuje. V USA jsou hypotéky nad 7 % a prodeje domů na 30letém minimu.",
+    "stats": [
+     {
+      "k": "Ceny bydlení v EU, 2. čtvrtletí",
+      "v": "+4,7 %",
+      "cls": "up",
+      "n": "meziročně, reálně +1,5 % (Eurostat přes Euronews)"
+     },
+     {
+      "k": "Portugalsko / Španělsko",
+      "v": "+16,5 % / +12,1 %",
+      "cls": "up",
+      "n": "nejrychlejší růst v EU, Česko +8,6 %"
+     },
+     {
+      "k": "Německo",
+      "v": "+0,6 %",
+      "cls": "flat",
+      "n": "meziročně, pod inflací, reálně pokles"
+     },
+     {
+      "k": "Hypotéka USA, 30 let",
+      "v": "7,18 %",
+      "cls": "up",
+      "n": "Freddie Mac 5. 11., před rokem 6,22 %"
+     }
+    ],
+    "statsSrc": {
+     "t": "Euronews 3. 10. 2026 (Eurostat Q2 2026); AP/WCAX 5. 11. 2026 (Freddie Mac)",
+     "u": "https://euronews.com/2026/10/03/house-prices-keep-rising-across-europe-which-countries-saw-the-biggest-increases-and-why"
+    },
+    "news": [
+     {
+      "t": "Průměrná 30letá hypotéka v USA klesla třetí týden v řadě na 7,18 % (15letá 6,57 %). Začátkem října byla na 7,4 %, nejvýš za téměř tři roky. Prodeje existujících domů jsou na 30letém minimu.",
+      "s": "AP / WCAX, 5. 11. 2026",
+      "u": "https://www.wcax.com/2026/11/05/average-us-30-year-mortgage-rate-falls-718-this-week-its-third-straight-decline/"
+     },
+     {
+      "t": "Cizinci ve Španělsku koupili v 1. pololetí 62 327 bytů, o 13 % méně, nejvíc od covidu. Nerezidenti dokonce o 18 % méně, přitom průměrná cena jim stoupla o 9,4 % na 2 644 €/m².",
+      "s": "Euro Weekly News, 31. 10. 2026",
+      "u": "https://euroweeklynews.com/2026/10/31/spains-housing-market-sends-shockwaves-as-foreign-purchases-plunge/"
+     },
+     {
+      "t": "Ceny bydlení v EU ve 2. čtvrtletí meziročně +4,7 % při inflaci 3,2 %. Nejvíc Portugalsko (+16,5 %), Bulharsko (+15,5 %) a Litva (+14,3 %), Německo jen +0,6 %.",
+      "s": "Euronews, 3. 10. 2026",
+      "u": "https://euronews.com/2026/10/03/house-prices-keep-rising-across-europe-which-countries-saw-the-biggest-increases-and-why"
+     }
+    ],
+    "opps": [
+     {
+      "t": "Španělsko: zájem zahraničních kupců padá nejrychleji od covidu (nerezidenti −18 %). U prodejců, kteří spoléhali na cizince, roste prostor k vyjednávání, hlavně na Baleárech a ve Valencii (−15 % obchodů).",
+      "s": "Euro Weekly News",
+      "u": "https://euroweeklynews.com/2026/10/31/spains-housing-market-sends-shockwaves-as-foreign-purchases-plunge/"
+     },
+     {
+      "t": "Německo: ceny rostou pod inflací, takže reálně zlevňují. Pro dlouhodobého kupce je to jeden z mála velkých trhů v EU bez přehřátí.",
+      "s": "Euronews",
+      "u": "https://euronews.com/2026/10/03/house-prices-keep-rising-across-europe-which-countries-saw-the-biggest-increases-and-why"
+     },
+     {
+      "t": "Portugalsko a Bulharsko rostou přes 15 % ročně. Tam je riziko, že kupuješ blízko vrcholu.",
+      "s": "Euronews",
+      "u": "https://euronews.com/2026/10/03/house-prices-keep-rising-across-europe-which-countries-saw-the-biggest-increases-and-why"
+     }
+    ],
+    "links": [
+     [
+      "Eurostat, ceny bydlení",
+      "https://ec.europa.eu/eurostat/web/housing-price-statistics"
+     ],
+     [
+      "Global Property Guide",
+      "https://www.globalpropertyguide.com"
+     ],
+     [
+      "Idealista (ES, PT, IT)",
+      "https://www.idealista.com"
+     ],
+     [
+      "ImmobilienScout24 (DE)",
+      "https://www.immobilienscout24.de"
+     ],
+     [
+      "Freddie Mac, sazby USA",
+      "https://www.freddiemac.com/pmms"
+     ]
+    ]
+   }
   },
   {
    "id": "auta",
@@ -202,7 +315,114 @@
      "https://aukro.cz"
     ]
    ],
-   "icon": "🚗"
+   "icon": "🚗",
+   "opps": [
+    {
+     "t": "Sobota 14. 11.: aukce Retro Garáž v Lysé nad Labem (12:30–16:00, i online přes Aukro): 9 aut a 41 motocyklů, mimo jiné Praga 350 BCS a Tatra 603.",
+     "s": "Motorkáři.cz",
+     "u": "https://www.motorkari.cz/clanky/veterani/podzimni-retro-garaz-50-veteranu-v-aukci-56014.html"
+    },
+    {
+     "t": "Burzy veteránů: Svitavy 15. 11., Nupaky 21. 11. a 5. 12., Chotusice 12. 12. Na burzách se dá koupit levněji než v inzerci, hlavně díly a vozy k renovaci.",
+     "s": "i-Veterán",
+     "u": "https://www.iveteran.cz/kalendar"
+    },
+    {
+     "t": "Ceny některých typů klesají z covidových maxim. Kdo kupuje na dlouho, může vyjednávat hlavně u běžných modelů v horším stavu.",
+     "s": "Newstream",
+     "u": "https://www.newstream.cz/enjoy/blazni-nebo-predvidavi-investori-embecko-muze-stat-klidne-i-milion-a-zajem-je-i-o-trabanty"
+    }
+   ],
+   "world": {
+    "trend": "up",
+    "trendText": "Rekordy nahoře, slabší střed trhu",
+    "lead": "Světový trh sběratelských aut je rozdělený. Nejvzácnější kusy lámou rekordy, ale starší Ferrari, předválečné vozy a průměrné klasiky se často neprodají nebo jdou pod odhadem.",
+    "stats": [
+     {
+      "k": "Monterey Car Week 2026",
+      "v": "747,9 mil. $",
+      "cls": "up",
+      "n": "rekord, 11 aut za víc než 10 mil. $"
+     },
+     {
+      "k": "Prodaných lotů v Monterey",
+      "v": "75 %",
+      "cls": "flat",
+      "n": "844 z 1 124"
+     },
+     {
+      "k": "Nejdražší auto roku",
+      "v": "42,9 mil. $",
+      "cls": "up",
+      "n": "Shelby Cobra Daytona Coupe, Gooding Christie's"
+     },
+     {
+      "k": "RM Sotheby's Paříž",
+      "v": "78 %",
+      "cls": "flat",
+      "n": "prodaných aut, asi 30 % pod odhadem"
+     }
+    ],
+    "statsSrc": {
+     "t": "Motorious 18. 8. 2026; Magneto Magazine (Paříž 2026)",
+     "u": "https://www.motorious.com/articles/all/monterey-car-week-2026-auction-results-747-9-million-11-eight-figure-cars-and-a-pile-of-broken-records/"
+    },
+    "news": [
+     {
+      "t": "Aukce Monterey Car Week vynesly rekordních 747,9 mil. $, prodalo se 75 % lotů. Nejdražší byla Shelby Cobra Daytona Coupe za 42,9 mil. $.",
+      "s": "Motorious, 18. 8. 2026",
+      "u": "https://www.motorious.com/articles/all/monterey-car-week-2026-auction-results-747-9-million-11-eight-figure-cars-and-a-pile-of-broken-records/"
+     },
+     {
+      "t": "Pařížské aukce 2026: Ferrari 250 GT SWB California Spider za 14,1 mil. €, ale starší Ferrari a předválečná Alfa Romeo se často neprodala. Bonhams prodal 39 % aut pod odhadem.",
+      "s": "Magneto Magazine",
+      "u": "https://www.magnetomagazine.com/articles/2026-paris-auctions-records-fall-but-older-ferraris-and-pre-war-cars-struggle/"
+     },
+     {
+      "t": "RM Sotheby's dražba 9. 12. 2026 v Abú Dhabí: Ferrari Scuderia Spider 16M (odhad 700–850 tis. $), Lancia Delta HF Integrale Evo „Martini 5“ bez rezervy.",
+      "s": "Khaleej Times, 27. 10. 2026",
+      "u": "https://www.khaleejtimes.com/business/some-of-worlds-rarest-cars-to-be-auctioned-in-abu-dhabi-in-december"
+     }
+    ],
+    "opps": [
+     {
+      "t": "RM Sotheby's Abú Dhabí 9. 12. 2026: část vozů bez rezervy (Lancia Delta Integrale Evo, Ferrari 612 Scaglietti za odhad 80–120 tis. $). Bez rezervy se prodá za nejvyšší nabídku.",
+      "s": "Khaleej Times",
+      "u": "https://www.khaleejtimes.com/business/some-of-worlds-rarest-cars-to-be-auctioned-in-abu-dhabi-in-december"
+     },
+     {
+      "t": "Slabší poptávka po starších Ferrari a předválečných vozech znamená nižší ceny pro trpělivé kupce. Nejlépe se drží moderní limitované vozy a youngtimery.",
+      "s": "Magneto Magazine",
+      "u": "https://www.magnetomagazine.com/articles/2026-paris-auctions-records-fall-but-older-ferraris-and-pre-war-cars-struggle/"
+     }
+    ],
+    "links": [
+     [
+      "RM Sotheby's",
+      "https://rmsothebys.com"
+     ],
+     [
+      "Bonhams Cars",
+      "https://cars.bonhams.com"
+     ],
+     [
+      "Bring a Trailer",
+      "https://bringatrailer.com"
+     ],
+     [
+      "Classic.com",
+      "https://www.classic.com"
+     ],
+     [
+      "Hagerty, ceny",
+      "https://www.hagerty.com/valuation-tools"
+     ],
+     [
+      "Collecting Cars",
+      "https://collectingcars.com"
+     ]
+    ]
+   }
   },
   {
    "id": "mince",
@@ -287,7 +507,120 @@
      "https://www.sbazar.cz"
     ]
    ],
-   "icon": "🪙"
+   "icon": "🪙",
+   "opps": [
+    {
+     "t": "Zlato je asi 28 % pod lednovým maximem. Kdo chce investiční zlato, nakupuje teď výrazně levněji než na začátku roku; sleduj rozdíl nákupní a výkupní ceny.",
+     "s": "Zlatemince.cz, 13. 11. 2026",
+     "u": "https://zlatemince.cz/kurzzlata.htm"
+    },
+    {
+     "t": "Aurea Numismatika: eAukce odznaků 22.–24. 11., 120. sálová aukce 5. 12., eAukce mincí, medailí a vyznamenání 6.–9. 12. 2026.",
+     "s": "Aurea",
+     "u": "https://www.aurea.cz"
+    },
+    {
+     "t": "Historické mince rostou pomaleji a stabilněji než novodobé zlaté ražby, které kopírují cenu zlata. Při poklesu zlata jsou méně zasažené.",
+     "s": "E15",
+     "u": "https://www.e15.cz/finexpert/servis/drazi-se-unikaty-za-85-milionu-tahne-rekordni-zlato-i-sberatelske-mince-1432363"
+    }
+   ],
+   "world": {
+    "trend": "down",
+    "trendText": "Zlato kolísá, centrální banky kupují",
+    "lead": "Zlato je asi 28 % pod lednovým maximem a po silnější americké inflaci 10. 11. spadlo o 2,6 %. Centrální banky ale nakupují dál a poptávka po vzácných mincích drží rekordy.",
+    "stats": [
+     {
+      "k": "Zlato, 11. 11. 2026",
+      "v": "4 013 $",
+      "cls": "down",
+      "n": "za unci, maximum 5 589 $ (28. 1. 2026)"
+     },
+     {
+      "k": "Centrální banky, 3. čtvrtletí",
+      "v": "321 t",
+      "cls": "up",
+      "n": "+42 % meziročně, od ledna 675 t"
+     },
+     {
+      "k": "Zlaté ETF, 3. čtvrtletí",
+      "v": "+211 t",
+      "cls": "up",
+      "n": "rekordní čtvrtletní příliv"
+     },
+     {
+      "k": "Rekord mince, Heritage",
+      "v": "2,93 mil. $",
+      "cls": "up",
+      "n": "1792 Half Disme, říjen 2026"
+     }
+    ],
+    "statsSrc": {
+     "t": "TradingNews 11. 11. 2026 (WGC); CoinWeek 13. 10. 2026",
+     "u": "https://www.tradingnews.com/news/gold-defends-4k-usd-after-107-usd-cpi-drop-as-central-banks-add-321-tonnes"
+    },
+    "news": [
+     {
+      "t": "Říjnová inflace v USA vyšla nad odhad (0,4 %), zlato 10. 11. spadlo o 107,60 $ na 4 031 $. Trh čeká zvýšení sazeb Fedu v prosinci.",
+      "s": "TradingNews, 11. 11. 2026",
+      "u": "https://www.tradingnews.com/news/gold-defends-4k-usd-after-107-usd-cpi-drop-as-central-banks-add-321-tonnes"
+     },
+     {
+      "t": "Centrální banky koupily ve 3. čtvrtletí 321 tun zlata (+42 %), zlaté ETF přijaly rekordních 211 tun. V posledních dnech ale z ETF peníze odtékají.",
+      "s": "TradingNews, 11. 11. 2026",
+      "u": "https://www.tradingnews.com/news/gold-defends-4k-usd-after-107-usd-cpi-drop-as-central-banks-add-321-tonnes"
+     },
+     {
+      "t": "World Gold Council: silná americká data a menší čekání na snižování sazeb jsou pro zlato krátkodobě protivítr.",
+      "s": "World Gold Council, 9. 11. 2026",
+      "u": "https://www.gold.org/goldhub/gold-focus/2026/11/weekly-markets-monitor-surprise-surprise"
+     },
+     {
+      "t": "Heritage Auctions prodal minci 1792 Half Disme za rekordních 2,93 mil. $, celkem obě aukce přes 19 mil. $.",
+      "s": "CoinWeek, 13. 10. 2026",
+      "u": "https://coinweek.com/1792-half-disme-shatters-record-at-2-93-million-as-heritage-auctions-top-19-million/"
+     }
+    ],
+    "opps": [
+     {
+      "t": "Künker (Německo), online aukce eLive 95: 1.–4. 12. 2026. Dostupnější evropské a německé mince, přihazovat jde z Česka.",
+      "s": "Künker",
+      "u": "https://www.kuenker.de/auctions/information/auction-calender/"
+     },
+     {
+      "t": "Zlato 28 % pod maximem při rekordních nákupech centrálních bank: kdo věří dlouhodobému růstu, může přikupovat po částech, ne jednorázově.",
+      "s": "TradingNews",
+      "u": "https://www.tradingnews.com/news/gold-defends-4k-usd-after-107-usd-cpi-drop-as-central-banks-add-321-tonnes"
+     }
+    ],
+    "links": [
+     [
+      "World Gold Council",
+      "https://www.gold.org/goldhub"
+     ],
+     [
+      "Heritage Auctions",
+      "https://coins.ha.com"
+     ],
+     [
+      "Künker",
+      "https://www.kuenker.de"
+     ],
+     [
+      "NumisBids",
+      "https://numisbids.com"
+     ],
+     [
+      "Stack's Bowers",
+      "https://www.stacksbowers.com"
+     ],
+     [
+      "Kitco, cena zlata",
+      "https://www.kitco.com"
+     ]
+    ]
+   }
   }
- ]
+ ],
+ "updated": "14. 11. 2026"
 }
