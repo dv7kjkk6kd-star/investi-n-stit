@@ -215,6 +215,354 @@
       "https://www.freddiemac.com/pmms"
      ]
     ]
+   },
+   "guide": {
+    "rules": [
+     {
+      "v": "30 %",
+      "k": "vlastní zdroje",
+      "t": "Na investiční byt půjčí banka od dubna 2026 jen 70 % ceny. U bytu za 4 mil. Kč je to 1,2 mil. Kč z vlastního, o 400 tisíc víc než dřív.",
+      "u": "https://artem-saykin.cz/poradna/nova-regulace-cnb-od-dubna-2026-co-znamena-pro-investory-do-bytu/"
+     },
+     {
+      "v": "+20 %",
+      "k": "rezerva na opravy",
+      "t": "Rozpočet rekonstrukce navyš aspoň o pětinu. Náklady se skoro vždy podcení.",
+      "u": "https://artem-saykin.cz/poradna/atypicke-nemovitosti-proc-se-jich-nebat-a-jak-v-nich-videt-potencial/"
+     },
+     {
+      "v": "2–3 %",
+      "k": "poplatky navíc",
+      "t": "Z ceny bytu si odlož na odhad, právníka, poplatky a nečekané výdaje.",
+      "u": "https://artem-saykin.cz/financovani-nemovitosti/hypoteka-pro-prvokupce-v-roce-2026/"
+     },
+     {
+      "v": "10 let",
+      "k": "držet",
+      "t": "Dobré byty drž dlouhodobě. Nájmy rostou a po 10 letech se při prodeji neplatí daň z příjmu.",
+      "u": "https://artem-saykin.cz/poradna/nova-regulace-cnb-od-dubna-2026-co-znamena-pro-investory-do-bytu/"
+     },
+     {
+      "v": "6–8 týdnů",
+      "k": "schválení hypotéky",
+      "t": "Rezervační smlouvu podepisuj, až když hypotéka běží. Rezervační lhůta ideálně kolem 2 měsíců.",
+      "u": "https://artem-saykin.cz/financovani-nemovitosti/hypoteka-pro-prvokupce-v-roce-2026/"
+     }
+    ],
+    "principles": [
+     {
+      "h": "Lokalita na prvním místě",
+      "t": "Doprava, občanská vybavenost, rozvoj čtvrti a hlavně poptávka po nájmu. Levný byt je špatná investice, když v okolí nikdo nechce bydlet.",
+      "s": "Atypické nemovitosti, 24. 3. 2026",
+      "u": "https://artem-saykin.cz/poradna/atypicke-nemovitosti-proc-se-jich-nebat-a-jak-v-nich-videt-potencial/"
+     },
+     {
+      "h": "Počítej s pravidly ČNB",
+      "t": "LTV 70 % a DTI 7 platí pro byty na pronájem a pro třetí a každou další nemovitost. U investorů s více hypotékami bývá přísnější limit DTI než LTV. Do 36 let jde první byt na 90 %, druhý jen výjimkou, třetí až šestý na 70 % a od sedmého některé banky jen 60 %.",
+      "s": "Nová regulace ČNB, 17. 6. 2026",
+      "u": "https://artem-saykin.cz/poradna/nova-regulace-cnb-od-dubna-2026-co-znamena-pro-investory-do-bytu/"
+     },
+     {
+      "h": "Rezerva navíc, ne jen 30 %",
+      "t": "Kromě vlastních zdrojů měj hotovost na daně, poplatky a rekonstrukci. Bez rezervy tě první velká oprava může donutit prodat v nevhodnou chvíli.",
+      "s": "Nová regulace ČNB, 17. 6. 2026",
+      "u": "https://artem-saykin.cz/poradna/nova-regulace-cnb-od-dubna-2026-co-znamena-pro-investory-do-bytu/"
+     },
+     {
+      "h": "Kvalitní odhad ceny",
+      "t": "Banka půjčuje z odhadní ceny, ne z kupní. U bank, které to dovolí, může kvalitní odhad zvýšit uznanou hodnotu a snížit hotovost, kterou potřebuješ.",
+      "s": "Hypotéka 2026, 17. 3. 2026",
+      "u": "https://artem-saykin.cz/financovani-nemovitosti/hypoteka-2026-regulace-cnb-investice/"
+     },
+     {
+      "h": "Atypické byty jako příležitost",
+      "t": "Podkroví, suterény, malé garsonky, lofty nebo byty u rušné silnice jsou levnější a mají menší konkurenci, takže je čas vyjednávat. Chytré úpravy světla, úložných prostor a dispozice přidají hodnotu. Prověř ale technický stav a co povolí stavební úřad.",
+      "s": "Atypické nemovitosti, 24. 3. 2026",
+      "u": "https://artem-saykin.cz/poradna/atypicke-nemovitosti-proc-se-jich-nebat-a-jak-v-nich-videt-potencial/"
+     },
+     {
+      "h": "Nekupuj srdcem",
+      "t": "Rozhoduje výpočet, ne dojem z prohlídky. Nepřeceňuj potenciál, některé vady rekonstrukce nevyřeší. Ověř, jestli o tenhle typ bytu v lokalitě je zájem.",
+      "s": "Atypické nemovitosti, 24. 3. 2026",
+      "u": "https://artem-saykin.cz/poradna/atypicke-nemovitosti-proc-se-jich-nebat-a-jak-v-nich-videt-potencial/"
+     },
+     {
+      "h": "Drž a neflipuj",
+      "t": "Dobrý byt v dobré lokalitě drž. Prodávej hlavně tehdy, když kapitál potřebuješ na lepší příležitost. Nákupy a prodeje každých pár měsíců ti u bank můžou zavřít dveře.",
+      "s": "Nová regulace ČNB, 17. 6. 2026",
+      "u": "https://artem-saykin.cz/poradna/nova-regulace-cnb-od-dubna-2026-co-znamena-pro-investory-do-bytu/"
+     },
+     {
+      "h": "Když chybí vlastní zdroje",
+      "t": "Zastav další nemovitost (chatu nebo byt v rodině) a po zhodnocení ji uvolni. Nebo vezmi úvěr ze stavebního spoření bez zajištění, až 2,5 mil. Kč na až 25 let.",
+      "s": "Hypotéka 2026, 17. 3. 2026",
+      "u": "https://artem-saykin.cz/financovani-nemovitosti/hypoteka-2026-regulace-cnb-investice/"
+     },
+     {
+      "h": "OSVČ a příjem z nájmu",
+      "t": "Banky snáz uznají příjem z nájmu při paušálních výdajích 30 % než při skutečných nákladech. Daňové přiznání podej včas, jinak banka příjem nezapočítá.",
+      "s": "Hypotéka 2026, 17. 3. 2026",
+      "u": "https://artem-saykin.cz/financovani-nemovitosti/hypoteka-2026-regulace-cnb-investice/"
+     },
+     {
+      "h": "Družstevní byty a předprodej",
+      "t": "Dřív kupoval garsonky v předprodeji developerských projektů a sázel na růst cen do dokončení. Později hlavně družstevní byty, které nepotřebují hypotéku, což pomáhá u hranice bonity.",
+      "s": "Newstream, rozhovor 2024 (starší)",
+      "u": "https://www.newstream.cz/reality/byt-prodate-i-diky-fotce-z-mobilu-ale-pod-cenou-rika-makler-roku"
+     }
+    ],
+    "yield": {
+     "lead": "Rychlý test je hrubý výnos: roční nájem děleno cenou. Byt za 5 mil. Kč s nájmem 20 000 Kč měsíčně má asi 4,8 %. V Česku je běžně 3–6 %, průměr podle UniCredit klesl k 3,65 %, zatímco státní dluhopisy nesou kolem 4,5 %.",
+     "bands": [
+      {
+       "from": 0,
+       "to": 3.5,
+       "l": "Slabé",
+       "t": "Méně než bezrizikové státní dluhopisy. Dává smysl jen při sázce na růst ceny.",
+       "c": "bad"
+      },
+      {
+       "from": 3.5,
+       "to": 4.5,
+       "l": "Průměr",
+       "t": "Typické pro Prahu a Brno. Nájem často nepokryje splátku hypotéky.",
+       "c": "ok"
+      },
+      {
+       "from": 4.5,
+       "to": 5.5,
+       "l": "Dobré",
+       "t": "Nad dluhopisy, s hypotékou bývá cashflow kolem nuly.",
+       "c": "good"
+      },
+      {
+       "from": 5.5,
+       "to": 8,
+       "l": "Výborné",
+       "t": "Spíš mimo Prahu a Brno. Ověř, že je o nájem v místě zájem.",
+       "c": "good"
+      }
+     ],
+     "note": "Hrubý výnos přeceňuje skutečnost: fond oprav, pojištění, daně, údržba, prázdné měsíce a úroky ho snižují. Aby dnešní ceny bytů dávaly smysl, musely by podle UniCredit a ČNB růst asi o 7 % ročně, což obě instituce považují za nereálné.",
+     "s": "Forbes, 3. 2. 2026",
+     "u": "https://forbes.cz/kdy-investicni-byt-koupit-a-kdy-naopak-prodat-polozte-si-dve-zasadni-otazky/"
+    },
+    "sources": [
+     {
+      "t": "Nová regulace ČNB od dubna 2026: co znamená pro investory do bytů",
+      "s": "artem-saykin.cz · 17. 6. 2026",
+      "u": "https://artem-saykin.cz/poradna/nova-regulace-cnb-od-dubna-2026-co-znamena-pro-investory-do-bytu/"
+     },
+     {
+      "t": "Hypotéka 2026: jak na regulace ČNB",
+      "s": "artem-saykin.cz · 17. 3. 2026",
+      "u": "https://artem-saykin.cz/financovani-nemovitosti/hypoteka-2026-regulace-cnb-investice/"
+     },
+     {
+      "t": "Atypické nemovitosti: proč se jich nebát",
+      "s": "artem-saykin.cz · 24. 3. 2026",
+      "u": "https://artem-saykin.cz/poradna/atypicke-nemovitosti-proc-se-jich-nebat-a-jak-v-nich-videt-potencial/"
+     },
+     {
+      "t": "Hypotéka pro prvokupce v roce 2026",
+      "s": "artem-saykin.cz · 16. 8. 2026",
+      "u": "https://artem-saykin.cz/financovani-nemovitosti/hypoteka-pro-prvokupce-v-roce-2026/"
+     },
+     {
+      "t": "YouTube kanál Artema Saykina (videa o nákupu investičních bytů)",
+      "s": "youtube.com",
+      "u": "https://www.youtube.com/@artem.saykin/videos"
+     },
+     {
+      "t": "Rozhovor Hustle & Chill: „Vlastní 40 bytů ve 26 letech“",
+      "s": "YouTube",
+      "u": "https://www.youtube.com/watch?v=lKB8BrVggDc"
+     },
+     {
+      "t": "Kdy investiční byt koupit a kdy prodat",
+      "s": "Forbes · 3. 2. 2026",
+      "u": "https://forbes.cz/kdy-investicni-byt-koupit-a-kdy-naopak-prodat-polozte-si-dve-zasadni-otazky/"
+     }
+    ],
+    "fin_tips": [
+     {
+      "t": "Zastav další nemovitost (chata, byt v rodině) jako doplňkové zajištění a po zhodnocení ji uvolni.",
+      "u": "https://artem-saykin.cz/poradna/nova-regulace-cnb-od-dubna-2026-co-znamena-pro-investory-do-bytu/"
+     },
+     {
+      "t": "Úvěr ze stavebního spoření bez zajištění: až 2,5 mil. Kč na až 25 let, méně zatíží bonitu.",
+      "u": "https://artem-saykin.cz/financovani-nemovitosti/hypoteka-2026-regulace-cnb-investice/"
+     },
+     {
+      "t": "Kvalitní odhad: banka půjčuje z odhadní ceny, vyšší odhad znamená méně hotovosti.",
+      "u": "https://artem-saykin.cz/poradna/nova-regulace-cnb-od-dubna-2026-co-znamena-pro-investory-do-bytu/"
+     },
+     {
+      "t": "Hypotéku vyřizuj před rezervací, schválení trvá 6–8 týdnů.",
+      "u": "https://artem-saykin.cz/financovani-nemovitosti/hypoteka-pro-prvokupce-v-roce-2026/"
+     },
+     {
+      "t": "Porovnej víc bank, sazby se liší o desetiny procenta. Typicky 4,4–5,2 % podle fixace a LTV.",
+      "u": "https://artem-saykin.cz/financovani-nemovitosti/hypoteka-pro-prvokupce-v-roce-2026/"
+     }
+    ],
+    "checklist": [
+     [
+      "Lokalita",
+      [
+       [
+        "Doprava",
+        "MHD nebo vlak do centra do 15–20 minut"
+       ],
+       [
+        "Občanská vybavenost",
+        "obchod, škola, lékař, park v docházce"
+       ],
+       [
+        "Poptávka po nájmu",
+        "srovnej inzeráty: kolik podobných bytů je volných a jak dlouho"
+       ],
+       [
+        "Rozvoj čtvrti",
+        "plánované stavby, územní plán, nová doprava"
+       ],
+       [
+        "Hluk a okolí",
+        "navštiv byt večer i ve všední den"
+       ]
+      ]
+     ],
+     [
+      "Dům a byt",
+      [
+       [
+        "Střecha, fasáda, izolace",
+        "stáří a plánované opravy domu"
+       ],
+       [
+        "Rozvody",
+        "elektřina, voda, odpady, topení: kdy se měnily"
+       ],
+       [
+        "Vlhkost a plísně",
+        "hlavně suterén, koupelna, rohy u oken"
+       ],
+       [
+        "Energetický štítek (PENB)",
+        "horší třída znamená vyšší náklady a riziko povinných úprav"
+       ],
+       [
+        "Fond oprav a SVJ",
+        "výše fondu, úvěry SVJ, zápisy ze schůzí"
+       ],
+       [
+        "Co povolí stavební úřad",
+        "u podkroví a atypických bytů ověř možné úpravy"
+       ]
+      ]
+     ],
+     [
+      "Právní stránka",
+      [
+       [
+        "List vlastnictví",
+        "zástavy, věcná břemena, exekuce, předkupní práva"
+       ],
+       [
+        "Nabývací titul prodávajícího",
+        "jak byt nabyl, dědictví, spoluvlastníci"
+       ],
+       [
+        "Kolaudace a skutečný stav",
+        "odpovídá dispozice dokumentaci?"
+       ],
+       [
+        "Družstevní byt",
+        "stanovy družstva, převod podílu, úvěr družstva"
+       ],
+       [
+        "Rezervační smlouva",
+        "lhůta aspoň 2 měsíce, vratnost zálohy při zamítnutí hypotéky"
+       ]
+      ]
+     ],
+     [
+      "Finance",
+      [
+       [
+        "Předschválená hypotéka",
+        "schválení trvá 6–8 týdnů"
+       ],
+       [
+        "30 % vlastních zdrojů",
+        "u investiční hypotéky (LTV 70 %)"
+       ],
+       [
+        "Rezerva 2–3 % a 20 % na opravy",
+        "poplatky, odhad, právník, rekonstrukce"
+       ],
+       [
+        "Odhad ceny",
+        "banka půjčuje z odhadní ceny"
+       ],
+       [
+        "Výpočet výnosu",
+        "čistý výnos a měsíční cashflow v kalkulačce"
+       ],
+       [
+        "DTI do 7",
+        "všechny dluhy nejvýš 7× roční čistý příjem"
+       ]
+      ]
+     ],
+     [
+      "Nájem",
+      [
+       [
+        "Srovnatelné nájmy",
+        "3–5 podobných bytů v okolí"
+       ],
+       [
+        "Cílový nájemník",
+        "student, pár, rodina, firma"
+       ],
+       [
+        "Prázdné měsíce",
+        "počítej aspoň 1 měsíc ročně bez nájmu"
+       ],
+       [
+        "Nájemní smlouva a kauce",
+        "kauce až 3 nájmy, předávací protokol"
+       ],
+       [
+        "Správa",
+        "sám, nebo správce za 8–10 % z nájmu"
+       ]
+      ]
+     ]
+    ]
+   },
+   "presets": {
+    "praha": {
+     "cena": 6500000,
+     "najem": 24000,
+     "fond": 3000
+    },
+    "brno": {
+     "cena": 5000000,
+     "najem": 19000,
+     "fond": 2500
+    },
+    "region": {
+     "cena": 3000000,
+     "najem": 14000,
+     "fond": 2000
+    },
+    "garsonka": {
+     "cena": 2800000,
+     "najem": 12500,
+     "fond": 1500
+    }
    }
   },
   {

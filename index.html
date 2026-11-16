@@ -4,292 +4,415 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Investiční štít</title>
-<meta name="theme-color" content="#F3F7F4">
+<meta name="theme-color" content="#050816">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script>try{var t=localStorage.getItem("stit-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style>
-/* Layout: horní lišta, vlevo navigace, vpravo pohledy (Přehled, Akcie, Portfolio, Témata, Simulace, Pravidla) */
+/* Layout: horní lišta · vlevo navigace po sekcích (Akcie / Nemovitosti / Další) · vpravo jedna stránka naráz.
+   Výchozí vzhled „Půlnoc“: hluboká modř, skleněné panely, elektrická modrá záře; světlý „Den“ jako volba. */
 :root{
-  --bg:#F2F6F3; --grid:rgba(21,128,61,.05); --panel:#FFFFFF; --panel2:#F7FAF8; --line:#E2E8E4; --ink:#16201A; --muted:#5F6B64;
-  --brand:#15803D; --brand-soft:#E3F3E8; --up:#16A34A; --down:#DC2626; --warn:#B45309; --hover:#F1F6F2;
-  --pill-up:#E1F5E7; --pill-down:#FDE8E8; --pill-warn:#FDF1DD; --pill-flat:#EEF2EF; --chip:#F2F5F3;
-  --c1:#7C3AED; --c2:#0EA5E9; --c3:#E11D48; --c4:#EA580C; --c5:#0D9488; --c6:#64748B;
-  --sans:"IBM Plex Sans",system-ui,sans-serif; --head:"Sora","IBM Plex Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
-  --r:16px; --shadow:0 1px 2px rgba(16,32,22,.04),0 8px 24px -16px rgba(16,32,22,.18);
+  --bg:#050816; --bg2:#0A1030; --glass:rgba(255,255,255,.055); --glass2:rgba(255,255,255,.09); --panel:#0D1433; --panel2:#111A40;
+  --line:rgba(160,180,255,.14); --line2:rgba(160,180,255,.26); --ink:#EEF2FF; --muted:#A3AED6; --dim:#6E79A8;
+  --brand:#4F7CFF; --brand2:#7C5CFF; --glow:rgba(79,124,255,.55); --brand-soft:rgba(79,124,255,.16);
+  --up:#2EE6A6; --down:#FF6B8A; --warn:#FFC163; --hover:rgba(255,255,255,.06);
+  --pill-up:rgba(46,230,166,.16); --pill-down:rgba(255,107,138,.16); --pill-warn:rgba(255,193,99,.16); --pill-flat:rgba(255,255,255,.08); --chip:rgba(255,255,255,.06);
+  --c1:#A78BFA; --c2:#38BDF8; --c3:#FB7185; --c4:#FB923C; --c5:#2DD4BF; --c6:#94A3B8;
+  --sans:"Inter","IBM Plex Sans",system-ui,sans-serif; --head:"Unbounded","Sora",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:20px; --shadow:0 30px 60px -40px rgba(0,0,0,.9); --blur:blur(18px) saturate(140%);
+  color-scheme:dark;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#000000; --grid:rgba(255,255,255,.025); --panel:#1C1C1E; --panel2:#232325; --line:#2E2E31; --ink:#F2F2F7; --muted:#9A9AA2;
-  --brand:#30D158; --brand-soft:rgba(48,209,88,.14); --up:#30D158; --down:#FF453A; --warn:#FFB340; --hover:#26262A;
-  --pill-up:#30D158; --pill-down:#FF453A; --pill-warn:rgba(255,179,64,.2); --pill-flat:#2C2C2E; --chip:#2C2C2E;
-  --c1:#A78BFA; --c2:#38BDF8; --c3:#FB7185; --c4:#FB923C; --c5:#2DD4BF; --c6:#94A3B8; --shadow:none; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#000000; --grid:rgba(255,255,255,.025); --panel:#1C1C1E; --panel2:#232325; --line:#2E2E31; --ink:#F2F2F7; --muted:#9A9AA2;
-  --brand:#30D158; --brand-soft:rgba(48,209,88,.14); --up:#30D158; --down:#FF453A; --warn:#FFB340; --hover:#26262A;
-  --pill-up:#30D158; --pill-down:#FF453A; --pill-warn:rgba(255,179,64,.2); --pill-flat:#2C2C2E; --chip:#2C2C2E;
-  --c1:#A78BFA; --c2:#38BDF8; --c3:#FB7185; --c4:#FB923C; --c5:#2DD4BF; --c6:#94A3B8; --shadow:none; color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#EEF2FF; --bg2:#E2E8FF; --glass:rgba(255,255,255,.72); --glass2:rgba(255,255,255,.9); --panel:#FFFFFF; --panel2:#F5F7FF;
+  --line:rgba(40,60,160,.12); --line2:rgba(40,60,160,.22); --ink:#0B1238; --muted:#4B5683; --dim:#7A84AC;
+  --brand:#2B4BFF; --brand2:#6D4BFF; --glow:rgba(43,75,255,.35); --brand-soft:rgba(43,75,255,.10);
+  --up:#0E9F6E; --down:#E0245E; --warn:#B76E00; --hover:rgba(43,75,255,.06);
+  --pill-up:rgba(14,159,110,.12); --pill-down:rgba(224,36,94,.10); --pill-warn:rgba(183,110,0,.12); --pill-flat:rgba(11,18,56,.06); --chip:rgba(11,18,56,.05);
+  --c1:#7C3AED; --c2:#0284C7; --c3:#E11D48; --c4:#EA580C; --c5:#0D9488; --c6:#64748B;
+  --shadow:0 24px 50px -34px rgba(20,30,90,.45); color-scheme:light;
+}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans);
-  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;background-attachment:fixed;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);min-height:100vh;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-20%;z-index:-2;pointer-events:none;
+  background:radial-gradient(40% 35% at 15% 10%,rgba(79,124,255,.30),transparent 70%),radial-gradient(35% 30% at 90% 15%,rgba(124,92,255,.22),transparent 70%),
+  radial-gradient(45% 40% at 70% 95%,rgba(255,120,60,.12),transparent 70%),radial-gradient(30% 30% at 5% 85%,rgba(46,230,166,.08),transparent 70%)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(160,180,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(160,180,255,.05) 1px,transparent 1px);background-size:44px 44px;
+  mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%)}
+:root[data-theme="light"] body::before{opacity:.55}
+@media (prefers-reduced-motion:no-preference){body::before{animation:aur 26s ease-in-out infinite alternate}@keyframes aur{to{transform:translate3d(3%,2%,0) rotate(4deg) scale(1.06)}}}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:6px}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
 .mono,.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .up{color:var(--up)} .down{color:var(--down)} .muted{color:var(--muted)}
 [hidden]{display:none!important}
+.glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
 
 /* top bar */
-.top{position:sticky;top:0;z-index:20;margin:12px auto 0;max-width:1480px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
-  display:flex;align-items:center;gap:18px;padding:12px 18px;flex-wrap:wrap}
-.logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:700;font-size:22px;color:var(--brand);text-decoration:none;white-space:nowrap}
-.logo svg{width:28px;height:28px}
-.tagline{color:var(--muted);font-size:13.5px;max-width:30ch;line-height:1.3}
-.tstats{display:flex;gap:16px;align-items:center;font-family:var(--mono);font-size:13.5px;flex-wrap:wrap}
-.tstats .chipm{border:1px solid var(--line);border-radius:99px;padding:3px 10px;background:var(--panel2)}
+.top{position:sticky;top:10px;z-index:30;margin:10px auto 0;max-width:1520px;background:var(--glass);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);display:flex;align-items:center;gap:18px;padding:10px 14px 10px 12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--head);font-weight:700;font-size:19px;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
+.logo .mark{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:linear-gradient(140deg,var(--brand),var(--brand2));color:#fff;box-shadow:0 10px 26px -8px var(--glow)}
+.logo .mark svg{width:24px;height:24px}
+.logo small{display:block;font:500 10.5px var(--mono);letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.tstats{display:flex;gap:10px;align-items:center;font-family:var(--mono);font-size:12.5px;flex-wrap:wrap;color:var(--muted)}
+.tstats>span{border:1px solid var(--line);border-radius:99px;padding:5px 11px;background:var(--hover)}
+.tstats b{color:var(--ink);font-weight:500}
 .spacer{flex:1}
-.iconbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);cursor:pointer;font-size:17px;color:var(--ink)}
-.pillbtn{border:0;border-radius:99px;padding:8px 16px;background:var(--brand);color:#fff;font-weight:600;font-family:var(--sans);cursor:pointer;text-decoration:none;font-size:14px}
-:root[data-theme="dark"] .pillbtn{color:#000}
+.iconbtn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--hover);cursor:pointer;font-size:17px;color:var(--ink)}
+.iconbtn:hover{border-color:var(--line2)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:10px 16px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;font:600 14px var(--sans);cursor:pointer;text-decoration:none;box-shadow:0 12px 28px -12px var(--glow)}
+.btn.ghost{background:var(--hover);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn:hover{filter:brightness(1.08)}
+.live{display:inline-flex;align-items:center;gap:7px;font:500 12.5px var(--sans);color:var(--up);border:1px solid color-mix(in srgb,var(--up) 35%,transparent);background:var(--pill-up);padding:6px 12px;border-radius:99px}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--up);box-shadow:0 0 0 0 var(--up)}
+@media (prefers-reduced-motion:no-preference){.live i{animation:pulse 2s infinite}@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--up) 60%,transparent)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}}
 
 /* app */
-.app{max-width:1480px;margin:16px auto 40px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:20px;align-items:start}
-.side{position:sticky;top:96px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 10px;box-shadow:var(--shadow)}
-.side a{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:10px;text-decoration:none;color:var(--ink);font-size:15px;border:1px solid transparent}
-.side a:hover{background:var(--hover)}
-.side a[aria-current="page"]{background:var(--brand-soft);border-color:color-mix(in srgb,var(--brand) 35%,transparent);font-weight:500}
-.side a small{margin-left:6px;font-family:var(--mono);color:var(--muted);font-size:12px}
-.grp{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-weight:600;margin:16px 12px 6px}
-.side .note{font-size:12.5px;color:var(--muted);padding:14px 12px 4px;line-height:1.45}
+.app{max-width:1520px;margin:18px auto 40px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:22px;align-items:start}
+.side{position:sticky;top:96px;max-height:calc(100vh - 110px);overflow-y:auto;scrollbar-width:thin;background:var(--glass);border:1px solid var(--line);border-radius:22px;padding:10px;
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shadow)}
+.side a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:12px;text-decoration:none;color:var(--muted);font-size:14.5px;border:1px solid transparent;position:relative}
+.side a svg{width:17px;height:17px;flex:0 0 auto;opacity:.85}
+.side a span.t{flex:1}
+.side a:hover{background:var(--hover);color:var(--ink)}
+.side a[aria-current="page"]{color:#fff;background:linear-gradient(135deg,color-mix(in srgb,var(--brand) 85%,transparent),color-mix(in srgb,var(--brand2) 70%,transparent));box-shadow:0 10px 24px -14px var(--glow)}
+:root[data-theme="light"] .side a[aria-current="page"]{color:#fff}
+.side a small{font-family:var(--mono);color:inherit;opacity:.7;font-size:11.5px}
+.side a.sub{padding-left:38px;font-size:13.5px}
+.grp{font:600 10.5px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:16px 12px 6px;display:flex;align-items:center;gap:8px}
+.grp::after{content:"";flex:1;height:1px;background:var(--line)}
+.side .note{font-size:12px;color:var(--dim);padding:12px 12px 4px;line-height:1.5}
 main{min-width:0}
-.view h1{font-family:var(--head);font-weight:700;font-size:clamp(26px,3.2vw,36px);margin:4px 0 6px;letter-spacing:-.01em}
-.lead{color:var(--muted);max-width:72ch;margin:0 0 18px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow);min-width:0}
-.card h2{font-family:var(--head);font-size:17px;font-weight:600;margin:0}
-.ch{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
-.ch small{color:var(--muted);font-size:12.5px}
-.cards4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:16px}
-.big{font-family:var(--mono);font-size:34px;font-weight:500;letter-spacing:-.02em;line-height:1.15;margin:4px 0 2px}
-.kv{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:14px;margin-top:10px}
+.view h1{font-family:var(--head);font-weight:700;font-size:clamp(28px,3.4vw,44px);margin:6px 0 8px;letter-spacing:-.02em;line-height:1.1;text-wrap:balance}
+.lead{color:var(--muted);max-width:75ch;margin:0 0 20px;font-size:15.5px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:600 11px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--brand)}
+:root:not([data-theme="light"]) .eyebrow{color:#8FA8FF}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);min-width:0;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;position:relative}
+.card h2{font-family:var(--head);font-size:16px;font-weight:600;margin:0;letter-spacing:-.01em}
+a.card{text-decoration:none;color:var(--ink);display:block}
+a.card:hover,.card.lift:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:0 30px 60px -36px var(--glow)}
+.ch{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.ch small{color:var(--dim);font-size:12.5px}
+.cards4{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:18px}
+.big{font-family:var(--head);font-size:34px;font-weight:600;letter-spacing:-.03em;line-height:1.1;margin:6px 0 2px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:5px 12px;font-size:14px;margin-top:12px}
 .kv span:nth-child(odd){color:var(--muted)} .kv span:nth-child(even){font-family:var(--mono);text-align:right}
-.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--brand);border-radius:3px}
+.bar{height:7px;border-radius:4px;background:var(--hover);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:4px}
 .gauge{display:block;margin:2px auto 0;width:180px;max-width:100%}
-.gl{text-align:center;font-family:var(--mono);font-size:26px;margin-top:-6px}
+.gl{text-align:center;font-family:var(--head);font-size:28px;margin-top:-6px}
 .gl small{display:block;font-family:var(--sans);font-size:13px;color:var(--muted)}
-.sig{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.sig{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:14px}
 .sig li{display:flex;gap:8px;align-items:baseline}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:20px}
+.two.split{margin-top:0;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}.two.split.eq{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
 
 /* pills, chips */
-.pill{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:500;border-radius:7px;padding:2px 8px;white-space:nowrap}
+.pill{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:500;border-radius:8px;padding:2px 8px;white-space:nowrap}
 .p-up{background:var(--pill-up);color:var(--up)} .p-down{background:var(--pill-down);color:var(--down)}
-:root[data-theme="dark"] .p-up,:root[data-theme="dark"] .p-down{color:#fff}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .p-up,:root:not([data-theme="light"]) .p-down{color:#fff}}
 .p-flat{background:var(--pill-flat);color:var(--muted)} .p-warn{background:var(--pill-warn);color:var(--warn)}
-.status{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:2px 10px;font-size:12.5px;white-space:nowrap;background:var(--panel)}
-.status.in{color:var(--brand);border-color:color-mix(in srgb,var(--brand) 40%,transparent);background:var(--brand-soft)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
-.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--chip);border-radius:99px;padding:3px 11px;font-size:13px;cursor:pointer;color:var(--ink);font-family:var(--sans)}
+.status{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:2px 10px;font-size:12.5px;white-space:nowrap}
+.status.in{color:var(--brand);border-color:color-mix(in srgb,var(--brand) 45%,transparent);background:var(--brand-soft)}
+:root:not([data-theme="light"]) .status.in{color:#A9BCFF}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--chip);border-radius:99px;padding:5px 12px;font-size:13px;cursor:pointer;color:var(--ink);font-family:var(--sans);text-decoration:none;transition:border-color .15s,background .15s}
+.chip:hover{border-color:var(--line2)}
 .chip i{width:7px;height:7px;border-radius:50%;display:inline-block}
-.chip[aria-pressed="true"]{background:var(--brand-soft);border-color:var(--brand);color:var(--brand);font-weight:600}
+.chip[aria-pressed="true"]{background:var(--brand-soft);border-color:var(--brand);color:var(--ink);font-weight:600}
 .tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;border-radius:99px;padding:1px 8px;background:var(--chip);border:1px solid var(--line)}
 .tag i{width:6px;height:6px;border-radius:50%}
 
 /* tables */
-.tw{overflow-x:auto;margin:0 -4px}
+.tw{overflow-x:auto;margin:0 -6px}
 table{border-collapse:collapse;width:100%;font-size:14px}
-th{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
-th.sort{cursor:pointer;user-select:none} th.sort:hover{color:var(--ink)} th[aria-sort] {color:var(--brand)}
-td{padding:10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
+th{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th.sort{cursor:pointer;user-select:none} th.sort:hover{color:var(--ink)} th[aria-sort]{color:var(--brand)}
+td{padding:11px 10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
 td.n,th.n{text-align:right}
 tbody tr.click{cursor:pointer} tbody tr.click:hover td{background:var(--hover)}
 .nm b{display:block;font-weight:600;font-size:14.5px} .nm span{font-size:12.5px;color:var(--muted)}
 tr.total td{font-weight:600;border-bottom:0}
 
+/* hero bands */
+.hero{position:relative;overflow:hidden;border-radius:28px;padding:30px 32px;margin-bottom:20px;color:#fff;border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(135deg,var(--h1,#1B2BB8),var(--h2,#4F7CFF));box-shadow:0 40px 80px -50px var(--h2,var(--glow))}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 80% at 100% 0%,rgba(255,255,255,.26),transparent 60%),radial-gradient(50% 70% at 0% 100%,rgba(0,0,0,.28),transparent 60%)}
+.hero::after{content:attr(data-mark);position:absolute;right:-10px;bottom:-60px;font:800 210px/1 var(--head);letter-spacing:-.06em;color:rgba(255,255,255,.07);pointer-events:none;white-space:nowrap}
+.hero>*{position:relative;z-index:1}
+.hero h1{color:#fff;margin:6px 0 10px}
+.hero .eyebrow{color:rgba(255,255,255,.8)}
+.hero p{color:rgba(255,255,255,.88);max-width:68ch;margin:0;line-height:1.55}
+
+.shero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:16px;--h1:#0B1A7A;--h2:#3557FF}
+.shero-num b{display:block;font:600 clamp(44px,5.5vw,68px)/1 var(--head);letter-spacing:-.04em}
+.shero-num span{color:rgba(255,255,255,.8);font-size:14px}
+.shero-kpi{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.shero-kpi span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:6px 12px;font-size:13px;color:rgba(255,255,255,.9);backdrop-filter:blur(6px)}
+.shero-kpi b{font-family:var(--mono);color:#fff;font-weight:500;margin-left:4px}
+.shero-chart{min-height:210px;position:relative}
+.shero-chart svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* home */
+.hgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:20px}
+.htile{position:relative;overflow:hidden;border-radius:24px;padding:22px;min-height:230px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(150deg,var(--h1),var(--h2));box-shadow:0 30px 60px -40px var(--h2);transition:transform .2s ease,box-shadow .2s ease}
+.htile:hover{transform:translateY(-5px) rotate(-.3deg);box-shadow:0 40px 70px -36px var(--h2)}
+.htile::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 100% 0%,rgba(255,255,255,.28),transparent 60%);pointer-events:none}
+.htile .ic{font-size:30px;line-height:1;filter:drop-shadow(0 8px 14px rgba(0,0,0,.3))}
+.htile .lab{font:600 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;opacity:.85;margin-top:6px}
+.htile .num{font:600 38px/1.05 var(--head);letter-spacing:-.03em;margin-top:auto;text-shadow:0 6px 30px rgba(0,0,0,.25)}
+.htile .sub{font-size:13.5px;opacity:.88;line-height:1.4}
+.htile .go{font:600 12.5px var(--sans);opacity:.9;margin-top:6px}
+.ticker-strip{display:flex;gap:10px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);margin:0 0 20px}
+.ticker-strip .tk{display:flex;gap:10px;flex:0 0 auto}
+@media (prefers-reduced-motion:no-preference){.ticker-strip .tk{animation:mq 60s linear infinite}@keyframes mq{to{transform:translateX(-100%)}}}
+.ticker-strip .tk span{white-space:nowrap;font:500 13px var(--mono);border:1px solid var(--line);background:var(--glass);padding:6px 12px;border-radius:99px}
+
 /* apple stocks */
-.stocks{display:grid;grid-template-columns:330px minmax(0,1fr);gap:0;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);min-height:720px}
-.slist{border-right:1px solid var(--line);background:var(--panel2);display:flex;flex-direction:column;min-width:0}
+.stocks{display:grid;grid-template-columns:340px minmax(0,1fr);background:var(--glass);border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow);min-height:720px;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
+.slist{border-right:1px solid var(--line);background:var(--hover);display:flex;flex-direction:column;min-width:0}
 .search{margin:14px;position:relative}
-.search input{width:100%;padding:9px 12px 9px 34px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit}
-.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted)}
+.search input{width:100%;padding:10px 12px 10px 36px;border-radius:12px;border:1px solid var(--line);background:var(--glass);color:var(--ink);font:inherit}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted)}
 .lhead{font-weight:700;font-size:16px;margin:4px 16px 6px;display:flex;justify-content:space-between;align-items:center}
 .lhead select{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:3px 6px}
 .rows{overflow-y:auto;max-height:860px;padding:0 8px 10px}
-.srow{display:grid;grid-template-columns:minmax(0,1fr) 64px 92px;gap:4px 10px;align-items:center;padding:9px 10px;border-radius:12px;cursor:pointer;border-bottom:1px solid var(--line);background:none;width:100%;text-align:left;color:var(--ink);font:inherit;border-left:0;border-right:0;border-top:0}
-.srow:hover{background:var(--hover)} .srow[aria-selected="true"]{background:var(--hover);box-shadow:inset 3px 0 0 var(--brand)}
+.srow{display:grid;grid-template-columns:minmax(0,1fr) 64px 92px;gap:4px 10px;align-items:center;padding:9px 10px;border-radius:12px;cursor:pointer;border:0;border-bottom:1px solid var(--line);background:none;width:100%;text-align:left;color:var(--ink);font:inherit}
+.srow:hover{background:var(--hover)} .srow[aria-selected="true"]{background:var(--brand-soft);box-shadow:inset 3px 0 0 var(--brand)}
 .srow b{display:block;font-size:16px;font-weight:700;letter-spacing:-.01em}
 .srow .sn{font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
 .srow .sp{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
 .srow .sp b{font-family:var(--mono);font-size:15px;font-weight:500}
 .srow .sp .pill{min-width:74px;text-align:right;font-size:13px;padding:2px 7px}
-.sdet{padding:22px 26px;min-width:0}
+.sdet{padding:24px 28px;min-width:0}
 .dhead{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
-.dhead h2{font-family:var(--head);font-size:34px;font-weight:700;margin:0;letter-spacing:-.02em;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.dhead h2 span{font-family:var(--sans);font-weight:400;font-size:20px;color:var(--muted);letter-spacing:0}
+.dhead h2{font-family:var(--head);font-size:34px;font-weight:700;margin:0;letter-spacing:-.03em;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.dhead h2 span{font-family:var(--sans);font-weight:400;font-size:19px;color:var(--muted);letter-spacing:0}
 .dprice{text-align:right;font-family:var(--mono)}
 .dprice b{font-size:22px;font-weight:600} .dprice small{display:block;color:var(--muted);font-family:var(--sans);font-size:12.5px}
-.dsub{color:var(--muted);font-size:13px;margin:2px 0 14px}
-.ranges{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0 10px}
-.ranges button{border:0;background:none;color:var(--ink);font:600 14px var(--sans);padding:5px 11px;border-radius:8px;cursor:pointer}
-.ranges button[aria-pressed="true"]{background:var(--chip)}
+.dsub{color:var(--muted);font-size:13px;margin:4px 0 14px}
+.ranges{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0 10px;padding:4px;border-radius:12px;background:var(--hover);width:max-content;max-width:100%}
+.ranges button{border:0;background:none;color:var(--muted);font:600 13.5px var(--sans);padding:6px 11px;border-radius:9px;cursor:pointer}
+.ranges button[aria-pressed="true"]{background:var(--glass2);color:var(--ink);box-shadow:0 4px 12px -6px rgba(0,0,0,.5)}
 .chart{position:relative;height:300px}
 .chart svg{display:block;width:100%;height:100%}
-.chart .tip{position:absolute;top:4px;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-family:var(--mono);font-size:12.5px;white-space:nowrap;box-shadow:var(--shadow)}
+.chart .tip{position:absolute;top:4px;pointer-events:none;background:var(--panel);border:1px solid var(--line2);border-radius:10px;padding:5px 9px;font-family:var(--mono);font-size:12.5px;white-space:nowrap;box-shadow:var(--shadow)}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);margin-top:12px}
-.stats div{display:flex;justify-content:space-between;gap:8px;padding:7px 12px 7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.stats div{display:flex;justify-content:space-between;gap:8px;padding:8px 12px 8px 0;border-bottom:1px solid var(--line);font-size:14px}
 .stats div span{color:var(--muted)} .stats div b{font-family:var(--mono);font-weight:500;text-align:right}
 .stats div:nth-child(3n+2),.stats div:nth-child(3n+3){padding-left:12px;border-left:1px solid var(--line)}
-.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}
 .sbar{display:grid;grid-template-columns:90px 1fr 34px;gap:10px;align-items:center;font-size:13.5px;margin:7px 0}
 .sbar .bar{margin:0;height:8px}
 .news{display:flex;flex-direction:column;gap:14px}
 .news a{text-decoration:none;display:block}
 .news a:hover b{text-decoration:underline}
-.news small{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
-.news b{display:block;font-size:15.5px;line-height:1.3;margin-top:2px}
+.news small{color:var(--dim);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}
+.news b{display:block;font-size:15px;line-height:1.35;margin-top:2px}
 .hl{font-weight:600}
 
-/* themes, sim */
-.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.tc h3{margin:0 0 4px;font-family:var(--head);font-size:16px;display:flex;justify-content:space-between;gap:8px}
+/* themes, sim, portfolio */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+.tc h3{margin:0 0 6px;font-family:var(--head);font-size:15px;display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
 .tc p{margin:4px 0;font-size:13.5px;color:var(--muted)}
 .tc ul{margin:10px 0 0;padding-left:18px;font-size:13.5px}
-.scen{display:flex;height:8px;border-radius:4px;overflow:hidden;margin:10px 0 4px}
+.scen{display:flex;height:8px;border-radius:4px;overflow:hidden;margin:10px 0 4px;gap:2px}
 .scen i:nth-child(1){background:var(--up)} .scen i:nth-child(2){background:var(--c6)} .scen i:nth-child(3){background:var(--down)}
 .calc{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-.calc label{display:flex;flex-direction:column;font-size:12.5px;color:var(--muted);gap:4px}
-.calc input{font:500 15px var(--mono);padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);width:10rem}
+.calc label{display:flex;flex-direction:column;font-size:12.5px;color:var(--muted);gap:5px}
+.calc input{font:500 15px var(--mono);padding:9px 11px;border-radius:12px;border:1px solid var(--line);background:var(--hover);color:var(--ink);width:10rem}
 .wbars .sbar{grid-template-columns:120px 1fr 52px}
 details summary{cursor:pointer;font-weight:600}
-ol li,ul.rules li{margin:6px 0;line-height:1.55}
-.foot{color:var(--muted);font-size:12.5px;margin-top:18px}
+ol li,ul.rules li{margin:7px 0;line-height:1.55}
+.foot{color:var(--dim);font-size:12.5px;margin-top:22px}
 
-.ihead{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.ihead .pill{font-family:var(--sans);font-size:13.5px;padding:4px 12px;border-radius:99px}
-.src{color:var(--muted);font-size:13px;margin:-6px 0 16px}.src a{color:var(--muted)}
-.stat .v{font-family:var(--head);font-size:28px;font-weight:700;line-height:1.15;margin:6px 0 4px}.stat .v.flat{color:var(--ink)}
-.stat .k{color:var(--muted);font-size:13.5px}.stat .nn{color:var(--muted);font-size:13px;line-height:1.4}
-.icard{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink)}.icard:hover{border-color:var(--brand)}
-.icard .t{display:flex;flex-direction:column;align-items:flex-start;gap:6px}.icard .t b{font-family:var(--head);font-size:18px}.icard .t .pill{white-space:normal;font-family:var(--sans);border-radius:99px;padding:2px 10px}
-.icard p{margin:0;font-size:14px;color:var(--muted);line-height:1.45}
-.icard .mini{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:13.5px;border-top:1px solid var(--line);padding-top:8px;margin-top:auto}
-.icard .mini span:nth-child(even){font-family:var(--mono);text-align:right}
-.icard .go{font-size:13px;color:var(--brand);font-weight:600}
-a.chip{text-decoration:none}
-.news .ni{border-bottom:1px solid var(--line);padding-bottom:12px}.news .ni:last-child{border-bottom:0;padding-bottom:0}
-.news .ni p{margin:0;font-size:15px;line-height:1.5}.news .ni a{display:inline;color:var(--muted);font-size:12.5px;text-decoration:underline}
-.cal{margin:14px 6px 0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);font-size:13px}
-.cal b{display:block;font-family:var(--mono);font-size:15px;margin-top:2px}
-.view{animation:none}
-@media (prefers-reduced-motion:no-preference){.view:not([hidden]){animation:vin .18s ease-out}@keyframes vin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}}
-
-/* ---------- art layer ---------- */
-:root{--n1:#0F766E;--n2:#14B8A6;--a1:#C2410C;--a2:#F59E0B;--m1:#A16207;--m2:#FACC15;--s1:#15803D;--s2:#22C55E}
-.eyebrow{display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:600}
-.card{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
-a.card:hover,.icard:hover{transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(16,32,22,.45)}
-.logo .mark{display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:linear-gradient(140deg,var(--s1),var(--s2));color:#fff;box-shadow:0 6px 16px -6px color-mix(in srgb,var(--brand) 70%,transparent)}
-.logo .mark svg{width:22px;height:22px}
-.live{display:inline-flex;align-items:center;gap:6px}.live i{width:7px;height:7px;border-radius:50%;background:var(--up);box-shadow:0 0 0 3px color-mix(in srgb,var(--up) 25%,transparent)}
-.shero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:10px;align-items:stretch;border-radius:22px;padding:24px 26px;margin-bottom:18px;color:#fff;
-  background:radial-gradient(900px 300px at 0% 0%,rgba(255,255,255,.18),transparent 60%),linear-gradient(135deg,#0B3D24 0%,#14532D 45%,#15803D 100%);box-shadow:0 24px 50px -30px rgba(10,60,30,.7)}
-.shero h1{color:#fff;margin:6px 0 10px}
-.shero .eyebrow{color:#A7F3C4}
-.shero-num b{display:block;font-family:var(--mono);font-size:clamp(40px,5vw,58px);font-weight:500;letter-spacing:-.03em;line-height:1}
-.shero-num span{color:#C8EBD5;font-size:14px}
-.shero-kpi{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.shero-kpi span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:99px;padding:5px 12px;font-size:13px;color:#DDF5E6}
-.shero-kpi b{font-family:var(--mono);color:#fff;font-weight:500;margin-left:4px}
-.shero-chart{min-height:200px;position:relative}
-.shero-chart svg{position:absolute;inset:0;width:100%;height:100%}
-.ihero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:16px;border-radius:22px;padding:26px 28px;margin-bottom:18px;color:#fff;
-  background:linear-gradient(135deg,var(--h1),var(--h2));box-shadow:0 24px 50px -30px var(--h1)}
-.ihero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 260px at 100% 0%,rgba(255,255,255,.22),transparent 60%),radial-gradient(500px 240px at 0% 100%,rgba(0,0,0,.18),transparent 60%);pointer-events:none}
-.ihero > *{position:relative}
-.ihero h1{color:#fff;margin:4px 0 12px}
-.ihero .eyebrow{color:rgba(255,255,255,.8)}
-.ilead{margin:14px 0 0;max-width:68ch;line-height:1.55;color:rgba(255,255,255,.92)}
-.ilead .pill{background:rgba(255,255,255,.2)!important;color:#fff!important;font-family:var(--sans);border-radius:99px;padding:3px 11px;margin-right:6px}
+/* investment tabs */
+.ihead{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ihero{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:16px}
 .ihero-art{display:grid;place-items:center}
-.ihero-art svg{width:100%;max-width:240px;height:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.25))}
-.seg{display:inline-flex;padding:4px;border-radius:12px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.2);gap:2px}
-.seg button{border:0;background:none;color:rgba(255,255,255,.85);font:600 14px var(--sans);padding:7px 16px;border-radius:9px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
-.seg button[aria-selected="true"]{background:#fff;color:var(--h1);box-shadow:0 4px 12px -4px rgba(0,0,0,.35)}
+.ihero-art svg{width:100%;max-width:240px;height:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.3))}
+.ilead{margin:14px 0 0}
+.ilead .pill{background:rgba(255,255,255,.2)!important;color:#fff!important;font-family:var(--sans);border-radius:99px;padding:3px 11px;margin-right:6px}
+.seg{display:inline-flex;padding:4px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.2);gap:2px}
+.seg button{border:0;background:none;color:rgba(255,255,255,.85);font:600 14px var(--sans);padding:8px 16px;border-radius:10px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+.seg button[aria-selected="true"]{background:#fff;color:var(--h1,#1B2BB8);box-shadow:0 6px 16px -6px rgba(0,0,0,.4)}
 .seg .flag{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.04em}
-.sec-h{display:flex;align-items:baseline;gap:12px;margin:6px 0 10px}.sec-h h2{font-family:var(--head);font-size:20px;margin:0}
-.sec-h .eyebrow{color:var(--h1,var(--brand))}
+.src{color:var(--dim);font-size:12.5px;margin:-6px 0 18px}.src a{color:var(--muted)}
+.stat{border-top:3px solid color-mix(in srgb,var(--h2,var(--brand)) 80%,transparent)}
+.stat .v{font:600 26px/1.15 var(--head);letter-spacing:-.02em;margin:8px 0 4px}.stat .v.flat{color:var(--ink)}
+.stat .k{color:var(--muted);font-size:13.5px}.stat .nn{color:var(--dim);font-size:12.5px;line-height:1.45}
+.sec-h{display:flex;align-items:baseline;gap:12px;margin:8px 0 12px;flex-wrap:wrap}.sec-h h2{font-family:var(--head);font-size:21px;margin:0;letter-spacing:-.02em}
 .opps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.opp{position:relative;padding:18px 18px 16px 58px;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);min-width:0}
-.opp .num{position:absolute;left:16px;top:16px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font:700 14px var(--mono);color:#fff;background:linear-gradient(140deg,var(--h1),var(--h2))}
+.opp{position:relative;padding:18px 18px 16px 60px;background:var(--glass);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);min-width:0;backdrop-filter:var(--blur)}
+.opp .num{position:absolute;left:16px;top:16px;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font:700 14px var(--mono);color:#fff;background:linear-gradient(140deg,var(--h1,var(--brand)),var(--h2,var(--brand2)));box-shadow:0 8px 18px -8px var(--h2,var(--glow))}
 .opp p{margin:0;font-size:14.5px;line-height:1.5}
 .opp a{display:inline-block;margin-top:8px;font-size:12.5px;color:var(--muted)}
 .tl{position:relative;padding-left:28px}
-.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--line);border-radius:2px}
-.tl .ni{position:relative;padding:0 0 14px}
-.tl .ni::before{content:"";position:absolute;left:-28px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--panel);border:2px solid var(--h1,var(--brand))}
+.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--h2,var(--brand)),transparent);border-radius:2px}
+.tl .ni{position:relative;padding:0 0 15px}
+.tl .ni::before{content:"";position:absolute;left:-28px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--h2,var(--brand));box-shadow:0 0 12px var(--h2,var(--glow))}
 .tl .ni p{margin:0;font-size:14.5px;line-height:1.5}
 .tl .ni a{color:var(--muted);font-size:12.5px}
-.stat{position:relative;overflow:hidden}
-.stat{border-top:3px solid color-mix(in srgb,var(--h1,var(--brand)) 70%,transparent)}
-.icard{position:relative;overflow:hidden}
-.icard .band{height:6px;margin:-18px -20px 8px;background:linear-gradient(90deg,var(--h1),var(--h2))}
+.icard{display:flex;flex-direction:column;gap:9px;overflow:hidden}
+.icard .band{height:5px;margin:-20px -22px 8px;background:linear-gradient(90deg,var(--h1),var(--h2))}
+.icard .t b{font-family:var(--head);font-size:17px}
+.icard p{margin:0;font-size:14px;color:var(--muted);line-height:1.5}
 .icard .reg{display:flex;flex-wrap:wrap;gap:6px}
 .icard .reg .pill{font-family:var(--sans);border-radius:99px;padding:2px 9px;white-space:normal}
 .icard .reg .pill b{font-family:var(--mono);font-size:10.5px;margin-right:4px;opacity:.8}
-@media (max-width:860px){.shero{grid-template-columns:1fr}.shero-chart{min-height:150px}.ihero{grid-template-columns:1fr;padding:20px}.ihero-art{display:none}}
+.icard .mini{display:grid;grid-template-columns:1fr auto;gap:3px 10px;font-size:13.5px;border-top:1px solid var(--line);padding-top:9px;margin-top:auto}
+.icard .mini span:nth-child(even){font-family:var(--mono);text-align:right}
+.icard .go{font-size:13px;color:var(--brand);font-weight:600}
+:root:not([data-theme="light"]) .icard .go{color:#8FA8FF}
+
+/* sub-navigation (nemovitosti) */
+.subnav{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 18px;padding:5px;border-radius:16px;background:var(--glass);border:1px solid var(--line);width:max-content;max-width:100%;backdrop-filter:var(--blur)}
+.subnav a{padding:8px 14px;border-radius:11px;text-decoration:none;color:var(--muted);font:600 13.5px var(--sans);white-space:nowrap}
+.subnav a:hover{color:var(--ink);background:var(--hover)}
+.subnav a[aria-current="page"]{background:linear-gradient(135deg,var(--h1,var(--brand)),var(--h2,var(--brand2)));color:#fff;box-shadow:0 8px 20px -10px var(--h2,var(--glow))}
+
+/* real-estate tools */
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px 16px}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--muted)}
+.fld .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.fld output{font:600 14px var(--mono);color:var(--ink)}
+.fld input[type=number],.fld select{font:500 15px var(--mono);padding:9px 11px;border-radius:12px;border:1px solid var(--line);background:var(--hover);color:var(--ink);width:100%}
+.fld select{font-family:var(--sans)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:4px;background:linear-gradient(90deg,var(--h2,var(--brand)) var(--p,50%),var(--hover) var(--p,50%));outline:none;margin:8px 0 2px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--h2,var(--brand));box-shadow:0 4px 12px -2px var(--h2,var(--glow));cursor:pointer}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--h2,var(--brand));cursor:pointer}
+.presets{display:flex;gap:6px;flex-wrap:wrap}
+.presets button{border:1px solid var(--line);background:var(--hover);color:var(--ink);border-radius:99px;padding:5px 11px;font:500 12.5px var(--sans);cursor:pointer}
+.presets button[aria-pressed="true"]{border-color:var(--h2,var(--brand));background:color-mix(in srgb,var(--h2,var(--brand)) 18%,transparent)}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.res .r{padding:14px 16px;border-radius:16px;background:var(--hover);border:1px solid var(--line)}
+.res .r span{display:block;font-size:12.5px;color:var(--muted)}
+.res .r b{display:block;font:600 24px/1.2 var(--head);letter-spacing:-.02em;margin-top:4px}
+.res .r small{color:var(--dim);font-size:12px}
+.verdict{display:flex;gap:14px;align-items:center;padding:16px 18px;border-radius:18px;margin-bottom:14px;border:1px solid var(--line)}
+.verdict .vi{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px;flex:0 0 auto}
+.verdict b{font-family:var(--head);font-size:17px;display:block}
+.verdict p{margin:2px 0 0;color:var(--muted);font-size:14px}
+.v-good{background:var(--pill-up)} .v-good .vi{background:color-mix(in srgb,var(--up) 25%,transparent)}
+.v-ok{background:var(--pill-warn)} .v-ok .vi{background:color-mix(in srgb,var(--warn) 25%,transparent)}
+.v-bad{background:var(--pill-down)} .v-bad .vi{background:color-mix(in srgb,var(--down) 25%,transparent)}
+.rules-big{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:20px}
+.rb{padding:20px;border-radius:22px;background:linear-gradient(160deg,color-mix(in srgb,var(--h1,#1B2BB8) 55%,transparent),color-mix(in srgb,var(--h2,#4F7CFF) 25%,transparent));border:1px solid rgba(255,255,255,.14);color:#fff;text-align:center;position:relative;overflow:hidden}
+[data-theme="light"] .rb{background:linear-gradient(160deg,#1B2BB8,#3F6BFF)}
+.rb::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 0%,rgba(255,255,255,.2),transparent 70%)}
+.rb b{display:block;font:700 40px/1 var(--head);letter-spacing:-.04em;text-shadow:0 0 30px rgba(120,220,255,.55);position:relative}
+.rb span{display:block;font:600 10.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;opacity:.85;margin-top:8px;position:relative}
+.rb p{margin:10px 0 0;font-size:13.5px;line-height:1.45;opacity:.9;position:relative}
+.princ{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.pc{display:flex;flex-direction:column;gap:8px}
+.pc .no{font:700 13px var(--mono);color:var(--h2,var(--brand));letter-spacing:.06em}
+.pc h3{margin:0;font-family:var(--head);font-size:17px;letter-spacing:-.01em}
+.pc p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.55}
+.pc .src2{font-size:12px;color:var(--dim);margin-top:auto}
+.pc .src2 a{color:var(--muted)}
+.ring{width:120px;height:120px;flex:0 0 auto}
+.cl-head{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.cl-grp{margin-top:16px}
+.cl-grp h3{font-family:var(--head);font-size:15px;margin:0 0 8px;display:flex;justify-content:space-between}
+.cl-item{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:12px;cursor:pointer;border:1px solid transparent}
+.cl-item:hover{background:var(--hover);border-color:var(--line)}
+.cl-item input{appearance:none;-webkit-appearance:none;width:22px;height:22px;border-radius:7px;border:2px solid var(--line2);flex:0 0 auto;margin:1px 0 0;display:grid;place-items:center;cursor:pointer;transition:background .15s}
+.cl-item input:checked{background:linear-gradient(135deg,var(--h1,var(--brand)),var(--h2,var(--brand2)));border-color:transparent}
+.cl-item input:checked::after{content:"✓";color:#fff;font-size:14px;font-weight:700}
+.cl-item span b{display:block;font-weight:600;font-size:14.5px}
+.cl-item span small{color:var(--muted);font-size:13px}
+.cl-item input:checked + span b{text-decoration:line-through;text-decoration-color:var(--dim);color:var(--muted)}
+.tier{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.tier div{padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--hover);text-align:center}
+.tier div.on{border-color:var(--h2,var(--brand));background:color-mix(in srgb,var(--h2,var(--brand)) 16%,transparent);box-shadow:0 0 0 1px var(--h2,var(--brand)) inset}
+.tier b{display:block;font:600 22px var(--head)} .tier span{font-size:12px;color:var(--muted)}
+.toggle{display:inline-flex;padding:4px;border-radius:12px;background:var(--hover);border:1px solid var(--line);gap:2px}
+.toggle button{border:0;background:none;color:var(--muted);font:600 13px var(--sans);padding:7px 12px;border-radius:9px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:linear-gradient(135deg,var(--h1,var(--brand)),var(--h2,var(--brand2)));color:#fff}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.scen-list{display:flex;flex-direction:column;gap:8px}
+.scen-list .sc{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--hover);font-size:13.5px}
+.scen-list .sc b{font-family:var(--mono);font-weight:500}
+.scen-list button{border:0;background:none;color:var(--muted);cursor:pointer;font-size:16px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--panel);border:1px solid var(--line2);color:var(--ink);padding:10px 16px;border-radius:12px;box-shadow:var(--shadow);transition:.25s;z-index:50;font-size:14px}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+.cal{margin:14px 4px 4px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--hover);font-size:12.5px;color:var(--muted)}
+.cal b{display:block;font:600 15px var(--mono);margin-top:2px;color:var(--ink)}
+.view:not([hidden]){animation:vin .25s ease-out}
+@keyframes vin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.view:not([hidden]){animation:none}.card,.htile{transition:none}}
+
+@media (max-width:1180px){.hgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:1000px){ .stocks{grid-template-columns:1fr} .slist{border-right:0;border-bottom:1px solid var(--line)} .rows{max-height:340px} }
 @media (max-width:860px){
   .app{grid-template-columns:1fr}
-  .side{position:static;display:flex;flex-wrap:wrap;gap:4px;padding:8px}
-  .side .grp,.side .note,.side .cats,.side .cal{display:none}
+  .side{position:static;max-height:none;display:flex;flex-wrap:wrap;gap:4px;padding:8px}
+  .side .grp,.side .note,.side .cats,.side .cal,.side a.sub{display:none}
   #inv-nav{display:contents}
-  .side a{padding:7px 11px;font-size:14px}
-  .side a{white-space:nowrap}
-  .top{position:static} .tagline{display:none}
+  .side a{padding:7px 11px;font-size:13.5px} .side a svg{display:none}
+  .top{position:static} .tstats{display:none}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
   .stats div:nth-child(3n+2),.stats div:nth-child(3n+3){padding-left:0;border-left:0}
   .stats div:nth-child(2n){padding-left:12px;border-left:1px solid var(--line)}
-  .sdet{padding:16px}
-  .dhead h2{font-size:28px}
+  .sdet{padding:16px} .dhead h2{font-size:28px}
+  .shero,.ihero{grid-template-columns:1fr}.shero-chart{min-height:150px}.ihero-art{display:none}
+  .hero{padding:22px 20px}.hero::after{font-size:120px}
+  .hgrid{grid-template-columns:1fr}
+  .two.split,.two.split.eq{grid-template-columns:minmax(0,1fr)}
+  .form{grid-template-columns:minmax(0,1fr)!important}
 }
-@media (prefers-reduced-motion:no-preference){ .srow,.chip,.side a{transition:background .12s} }
 </style>
 </head>
 <body>
 <header class="top">
-  <a class="logo" href="#prehled" aria-label="Investiční štít – přehled">
-    <span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 5 7v8c0 7 4.6 12 11 14 6.4-2 11-7 11-14V7L16 3Z" fill="currentColor" opacity=".18"/><path d="M16 3 5 7v8c0 7 4.6 12 11 14 6.4-2 11-7 11-14V7L16 3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m10 19 4-5 3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    Investiční štít</a>
-  <span class="tagline">33 akcií z watchlistu, model se přepočítává každou neděli</span>
-  <div class="tstats"><span id="t-date">Data k –</span><span class="chipm" id="t-model">model –</span><span id="t-pf">Portfolio včera –</span></div>
+  <a class="logo" href="#domu" aria-label="Investiční štít – domů">
+    <span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 5 7v8c0 7 4.6 12 11 14 6.4-2 11-7 11-14V7L16 3Z" fill="currentColor" opacity=".2"/><path d="M16 3 5 7v8c0 7 4.6 12 11 14 6.4-2 11-7 11-14V7L16 3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m10 19 4-5 3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span>Investiční štít<small>Akcie · Nemovitosti · Další</small></span></a>
+  <div class="tstats"><span id="t-date">Data k –</span><span id="t-model">model –</span><span id="t-pf">Portfolio –</span><span id="t-hypo">Hypotéky –</span></div>
   <span class="spacer"></span>
-  <span class="status in live" id="t-next"><i></i>Obnova každou neděli</span>
-  <button class="iconbtn" id="themebtn" type="button" aria-label="Přepnout světlý a tmavý režim">🌙</button>
+  <span class="live" id="t-next"><i></i>Obnova každou neděli</span>
+  <button class="iconbtn" id="themebtn" type="button" aria-label="Přepnout světlý a tmavý režim">☀️</button>
 </header>
 
 <div class="app">
   <nav class="side" aria-label="Sekce">
-    <p class="grp" style="margin-top:6px">Akcie</p>
-    <a href="#prehled" data-v="prehled">Přehled akcií</a>
-    <a href="#akcie" data-v="akcie">Akcie <small id="n-akcie">33</small></a>
-    <a href="#portfolio" data-v="portfolio">Portfolio <small id="n-pf">–</small></a>
-    <a href="#temata" data-v="temata">Tržní témata <small>9</small></a>
-    <a href="#simulace" data-v="simulace">Simulace</a>
-    <a href="#pravidla" data-v="pravidla">Pravidla</a>
+    <a href="#domu" data-v="domu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg><span class="t">Domů</span></a>
+    <p class="grp">Akcie</p>
+    <a href="#prehled" data-v="prehled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="m5 15 4-5 4 3 6-7"/></svg><span class="t">Přehled akcií</span></a>
+    <a href="#akcie" data-v="akcie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg><span class="t">Akcie</span><small id="n-akcie">33</small></a>
+    <a href="#portfolio" data-v="portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v9h9"/><circle cx="12" cy="12" r="9"/></svg><span class="t">Portfolio</span><small id="n-pf">–</small></a>
+    <a href="#temata" data-v="temata"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span class="t">Tržní témata</span><small>9</small></a>
+    <a href="#simulace" data-v="simulace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/><circle cx="12" cy="12" r="1"/></svg><span class="t">Simulace</span></a>
+    <a href="#pravidla" data-v="pravidla"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h10a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4Z"/><path d="M4 16a4 4 0 0 1 4-4h10"/></svg><span class="t">Pravidla</span></a>
+    <p class="grp">Nemovitosti</p>
+    <a href="#nemovitosti" data-v="nem-prehled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-6h4v6"/></svg><span class="t">Přehled nemovitostí</span></a>
+    <a href="#nemovitosti/trh" data-v="nem-trh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="t">Trh Česko a svět</span></a>
+    <a href="#nemovitosti/kalkulacka" data-v="nem-kalk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg><span class="t">Kalkulačka výnosu</span></a>
+    <a href="#nemovitosti/jak-nakupovat" data-v="nem-metodika"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z"/></svg><span class="t">Jak nakupovat</span></a>
+    <a href="#nemovitosti/financovani" data-v="nem-fin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10 12 4l9 6"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18"/></svg><span class="t">Financování 2026</span></a>
+    <a href="#nemovitosti/checklist" data-v="nem-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="m8 12 3 3 5-6"/></svg><span class="t">Checklist před koupí</span><small id="n-check">0/0</small></a>
     <p class="grp">Další investice</p>
-    <a href="#investice" data-v="investice">Přehled investic</a>
-    <div id="inv-nav"></div>
+    <a href="#investice" data-v="investice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg><span class="t">Přehled investic</span></a>
+    <a href="#auta" data-v="auta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16h14l-1.5-6a2 2 0 0 0-2-1.5h-7a2 2 0 0 0-2 1.5Z"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></svg><span class="t">Auta</span></a>
+    <a href="#mince" data-v="mince"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="7" rx="7" ry="3"/><path d="M5 7v5c0 1.7 3.1 3 7 3s7-1.3 7-3V7"/><path d="M5 12v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></svg><span class="t">Mince a zlato</span></a>
     <p class="grp">Skupiny akcií</p>
     <div class="cats" id="cats"></div>
     <div class="cal" id="cal"></div>
-    <p class="note">Model pro dlouhodobé investování. Výsledky nejsou předpovědí budoucích výnosů ani investičním doporučením.</p>
+    <p class="note">Vzdělávací model pro dlouhodobé investování. Výsledky nejsou předpovědí budoucích výnosů ani investičním doporučením.</p>
   </nav>
 
   <main>
     <!-- PŘEHLED -->
     <section class="view" id="v-prehled">
-      <div class="shero">
+      <div class="hero shero" data-mark="AKCIE">
         <div class="shero-txt">
           <span class="eyebrow">Akcie · světový watchlist</span>
           <h1>Přehled štítu</h1>
@@ -380,6 +503,121 @@ a.card:hover,.icard:hover{transform:translateY(-3px);box-shadow:0 18px 40px -24p
       <div class="card"><div class="tw"><table id="mct"><thead><tr><th>Varianta</th><th class="n">Medián p.a.</th><th class="n">Medián 10 let</th><th class="n">Pesimistický decil</th><th class="n">Optimistický decil</th><th class="n">Propad &gt; 35 % (10 let)</th><th class="n">Medián max. propadu</th></tr></thead><tbody></tbody></table></div></div>
     </section>
 
+
+    <!-- DOMŮ -->
+    <section class="view" id="v-domu" hidden>
+      <span class="eyebrow">Investiční štít · týden <span id="d-week">–</span></span>
+      <h1>Všechny tvoje investice <br>na jednom místě</h1>
+      <p class="lead">Akcie počítá matematický model, nemovitosti, auta a zlato hlídají týdenní přehledy trhu. Každou neděli večer se vše obnoví, takže v pondělí ráno máš čistý štít.</p>
+      <div class="hgrid" id="home-tiles"></div>
+      <div class="ticker-strip" aria-hidden="true"><div class="tk" id="tk1"></div><div class="tk" id="tk2"></div></div>
+      <div class="two" style="margin-top:0">
+        <div class="card"><div class="ch"><h2>Co se tento týden stalo</h2><small>výběr ze všech sekcí</small></div><div class="tl" id="home-news"></div></div>
+        <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+          <div class="card"><div class="ch"><h2>Signály akcií</h2><a class="muted" href="#prehled" style="font-size:13px">celý přehled →</a></div><ul class="sig" id="home-sig"></ul></div>
+          <div class="card"><div class="ch"><h2>Rychlý výpočet nemovitosti</h2><a class="muted" href="#nemovitosti/kalkulacka" style="font-size:13px">kalkulačka →</a></div>
+            <div class="form" style="grid-template-columns:1fr 1fr">
+              <label class="fld">Cena bytu (Kč)<input type="number" id="q-cena" value="4000000" step="100000" min="0"></label>
+              <label class="fld">Nájem měsíčně (Kč)<input type="number" id="q-najem" value="17000" step="500" min="0"></label>
+            </div>
+            <div class="res" style="margin-top:12px" id="q-res"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEMOVITOSTI: PŘEHLED -->
+    <section class="view nemv" id="v-nem-prehled" hidden>
+      <nav class="subnav" aria-label="Nemovitosti" data-subnav></nav>
+      <div class="hero" data-mark="REALITY">
+        <span class="eyebrow">Nemovitosti · Česko a svět</span>
+        <h1>Nemovitosti</h1>
+        <p id="np-lead">–</p>
+        <div class="shero-kpi" id="np-kpi"></div>
+      </div>
+      <div class="cards4" id="np-stats"></div>
+      <div class="sec-h"><span class="eyebrow">Nástroje</span><h2>Co tu můžeš dělat</h2></div>
+      <div class="three" style="margin-bottom:22px">
+        <a class="card" href="#nemovitosti/kalkulacka"><span class="eyebrow">01 · Kalkulačka</span><h2 style="margin:8px 0 6px">Vyplatí se ten byt?</h2><p class="muted" style="margin:0;font-size:14px">Zadej cenu, nájem a hypotéku. Uvidíš hrubý a čistý výnos, měsíční cashflow, kolik hotovosti potřebuješ a jak poroste tvůj majetek za 10 let.</p></a>
+        <a class="card" href="#nemovitosti/jak-nakupovat"><span class="eyebrow">02 · Jak nakupovat</span><h2 style="margin:8px 0 6px">Pravidla podle Artema Saykina</h2><p class="muted" style="margin:0;font-size:14px">Co radí makléř a investor se 40 byty: lokalita, 30 % vlastních zdrojů, rezervy, atypické byty, držet a neflipovat.</p></a>
+        <a class="card" href="#nemovitosti/financovani"><span class="eyebrow">03 · Financování</span><h2 style="margin:8px 0 6px">Kolik ti banka půjčí</h2><p class="muted" style="margin:0;font-size:14px">Pravidla ČNB od dubna 2026 v jednom výpočtu: LTV podle věku a počtu bytů, limit DTI 7× příjem a potřebná hotovost.</p></a>
+        <a class="card" href="#nemovitosti/checklist"><span class="eyebrow">04 · Checklist</span><h2 style="margin:8px 0 6px">Než podepíšeš rezervaci</h2><p class="muted" style="margin:0;font-size:14px">27 bodů od lokality po katastr. Odškrtávej, prohlížeč si postup pamatuje.</p></a>
+        <a class="card" href="#nemovitosti/trh"><span class="eyebrow">05 · Trh</span><h2 style="margin:8px 0 6px">Česko a svět tento týden</h2><p class="muted" style="margin:0;font-size:14px">Sazby hypoték, ceny bytů, zprávy a příležitosti. Přepínač Česko / Svět.</p></a>
+      </div>
+      <div class="sec-h"><span class="eyebrow">Česko</span><h2>Příležitosti tohoto týdne</h2></div>
+      <div class="opps" id="np-opps"></div>
+    </section>
+
+    <!-- NEMOVITOSTI: KALKULAČKA -->
+    <section class="view nemv" id="v-nem-kalk" hidden>
+      <nav class="subnav" aria-label="Nemovitosti" data-subnav></nav>
+      <span class="eyebrow">Nemovitosti · nástroj</span>
+      <h1>Kalkulačka výnosu bytu</h1>
+      <p class="lead">Posuvníky mění výpočet okamžitě. Výchozí hodnoty odpovídají typickému bytu za 4 mil. Kč s investiční hypotékou podle pravidel ČNB (70 % LTV). Výpočet je orientační, před koupí ho ověř s hypotečním poradcem a daňovým poradcem.</p>
+      <div class="two split">
+        <div class="card">
+          <div class="ch"><h2>Byt a nájem</h2><div class="presets" id="k-presets"><button type="button" data-p="praha">Praha 2+kk</button><button type="button" data-p="brno">Brno 2+kk</button><button type="button" data-p="region">Krajské město 2+1</button><button type="button" data-p="garsonka">Garsonka</button></div></div>
+          <div class="form" id="k-form"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+          <div id="k-verdict"></div>
+          <div class="card"><div class="ch"><h2>Výsledek</h2><small>za první rok</small></div><div class="res" id="k-res"></div></div>
+          <div class="card"><div class="ch"><h2>Tvůj majetek za 10 let</h2><small>čistý majetek = cena bytu − zbývající hypotéka</small></div><div class="chart" id="k-chart" style="height:260px"></div>
+            <div class="legend"><span><i style="background:var(--brand)"></i>Čistý majetek v bytě</span><span><i style="background:var(--up)"></i>Nasčítaný cashflow</span><span><i style="background:var(--warn)"></i>Vložená hotovost</span></div></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:18px"><div class="ch"><h2>Uložené varianty</h2><button class="btn" type="button" id="k-save">Uložit tuto variantu</button></div><div class="scen-list" id="k-scen"></div></div>
+    </section>
+
+    <!-- NEMOVITOSTI: JAK NAKUPOVAT -->
+    <section class="view nemv" id="v-nem-metodika" hidden>
+      <nav class="subnav" aria-label="Nemovitosti" data-subnav></nav>
+      <div class="hero" data-mark="AS.">
+        <span class="eyebrow">Nemovitosti · jak nakupovat</span>
+        <h1>Pravidla podle Artema Saykina</h1>
+        <p>Artem Saykin je realitní makléř RE/MAX a investor, který podle rozhovorů vlastní kolem 40 bytů. Tady jsou jeho rady z článků a rozhovorů roku 2026, převyprávěné vlastními slovy a doplněné o čísla z trhu. U každé rady je odkaz na zdroj.</p>
+      </div>
+      <div class="rules-big" id="m-rules"></div>
+      <div class="sec-h"><span class="eyebrow">Principy</span><h2>Jak vybírat a kupovat</h2></div>
+      <div class="princ" id="m-princ"></div>
+      <div class="two">
+        <div class="card"><div class="ch"><h2>Jaký výnos je dost?</h2><small>hrubý výnos = roční nájem ÷ cena</small></div><div id="m-yield"></div></div>
+        <div class="card"><div class="ch"><h2>Videa a další zdroje</h2></div><div class="news" id="m-src"></div></div>
+      </div>
+    </section>
+
+    <!-- NEMOVITOSTI: FINANCOVÁNÍ -->
+    <section class="view nemv" id="v-nem-fin" hidden>
+      <nav class="subnav" aria-label="Nemovitosti" data-subnav></nav>
+      <span class="eyebrow">Nemovitosti · financování</span>
+      <h1>Kolik ti banka půjčí v roce 2026</h1>
+      <p class="lead">Od 1. 4. 2026 doporučuje ČNB pro investiční hypotéky (pronájem a každý třetí a další byt) LTV nejvýš 70 % a DTI nejvýš 7. Pro vlastní bydlení zůstává 90 % do 36 let a 80 % nad 36 let. Jde o doporučení, banky mají omezený prostor pro výjimky.</p>
+      <div class="two split eq">
+        <div class="card"><div class="ch"><h2>Tvoje situace</h2></div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div class="fld">Věk žadatele (stačí jeden pod 36)<div class="toggle" id="f-age"><button type="button" data-v="u36" aria-pressed="true">do 36 let</button><button type="button" data-v="o36" aria-pressed="false">36 a více</button></div></div>
+            <div class="fld">Kolikátou nemovitost kupuješ<div class="tier" id="f-tier"></div></div>
+            <div class="form" id="f-form"></div>
+          </div></div>
+        <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+          <div id="f-verdict"></div>
+          <div class="card"><div class="ch"><h2>Výpočet</h2></div><div class="res" id="f-res"></div></div>
+          <div class="card"><div class="ch"><h2>Jak dorovnat chybějící hotovost</h2><small>tipy Artema Saykina</small></div><ul class="rules" id="f-tips"></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEMOVITOSTI: CHECKLIST -->
+    <section class="view nemv" id="v-nem-check" hidden>
+      <nav class="subnav" aria-label="Nemovitosti" data-subnav></nav>
+      <div class="card" style="margin-bottom:18px"><div class="cl-head">
+        <svg class="ring" id="cl-ring" viewBox="0 0 120 120" role="img" aria-label="Postup checklistu"></svg>
+        <div style="flex:1;min-width:220px"><span class="eyebrow">Nemovitosti · checklist</span><h1 style="margin:6px 0">Než podepíšeš rezervaci</h1>
+          <p class="muted" style="margin:0">Projdi body u každého bytu, který vážně zvažuješ. Postup se ukládá jen v tomto prohlížeči.</p>
+          <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn ghost" type="button" id="cl-reset">Začít nový byt</button></div></div>
+      </div></div>
+      <div class="two" style="margin-top:0" id="cl-groups"></div>
+    </section>
+
     <!-- DALŠÍ INVESTICE -->
     <section class="view" id="v-investice" hidden>
       <h1>Další investice</h1>
@@ -387,7 +625,8 @@ a.card:hover,.icard:hover{transform:translateY(-3px);box-shadow:0 18px 40px -24p
       <div class="cards4" id="inv-cards"></div>
     </section>
     <section class="view" id="v-invtab" hidden>
-      <div class="ihero" id="it-hero">
+      <nav class="subnav" id="it-subnav" aria-label="Nemovitosti" hidden></nav>
+      <div class="hero ihero" id="it-hero">
         <div class="ihero-txt">
           <span class="eyebrow" id="it-eyebrow">Další investice</span>
           <div class="ihead"><h1 id="it-h">–</h1></div>
@@ -458,7 +697,7 @@ const GSHORT={"AI/polovodiče":"AI a čipy","Megacap tech":"Megacap","Čína":"�
 
 /* theme */
 const root=document.documentElement;
-const isDark=()=>root.getAttribute("data-theme")==="dark"||(!root.getAttribute("data-theme")&&matchMedia("(prefers-color-scheme: dark)").matches);
+const isDark=()=>root.getAttribute("data-theme")!=="light";
 const themeLabel=()=>{$("themebtn").textContent=isDark()?"☀️":"🌙"};
 themeLabel();
 $("themebtn").onclick=()=>{const n=isDark()?"light":"dark";root.setAttribute("data-theme",n);try{localStorage.setItem("stit-theme",n)}catch(e){}themeLabel();redrawCharts()};
@@ -480,23 +719,35 @@ addEventListener("resize",()=>{clearTimeout(window.__rt);window.__rt=setTimeout(
 
 /* routing */
 let INV=null,CFG=null;
-const VIEWS=["prehled","akcie","portfolio","temata","simulace","pravidla","investice","invtab"];
+const VIEWS=["domu","prehled","akcie","portfolio","temata","simulace","pravidla","investice","invtab","nem-prehled","nem-kalk","nem-metodika","nem-fin","nem-check"];
+const NEMSUB={"":"nem-prehled","trh":"invtab","kalkulacka":"nem-kalk","jak-nakupovat":"nem-metodika","financovani":"nem-fin","checklist":"nem-check"};
+const TITLES={domu:"Domů",prehled:"Přehled akcií",akcie:"Akcie",portfolio:"Portfolio",temata:"Tržní témata",simulace:"Simulace",pravidla:"Pravidla",investice:"Další investice","nem-prehled":"Nemovitosti","nem-kalk":"Kalkulačka výnosu","nem-metodika":"Jak nakupovat nemovitosti","nem-fin":"Financování 2026","nem-check":"Checklist před koupí"};
 function route(){
-  const h=(location.hash||"#prehled").slice(1).split("/");
-  let v=h[0],tab=null;
-  if(INV&&INV.tabs.some(t=>t.id===v)){tab=v;v="invtab"}
-  if(!tab&&(v==="invtab"||!VIEWS.includes(v)))v="prehled";
+  const h=(location.hash||"#domu").slice(1).split("/").map(decodeURIComponent);
+  let v=h[0]||"domu",tab=null,reg=null,cur=v;
+  if(v==="nemovitosti"){v=NEMSUB[h[1]||""]||"nem-prehled";cur=v==="invtab"?"nem-trh":v;if(v==="invtab"){tab="nemovitosti";reg=h[2]}}
+  else if(v==="auta"||v==="mince"){tab=v;reg=h[1];v="invtab";cur=tab}
+  if(!VIEWS.includes(v)||(v==="invtab"&&!INV))v=VIEWS.includes(v)&&v!=="invtab"?v:"domu";
   VIEWS.forEach(x=>{$("v-"+x).hidden=x!==v});
-  const cur=tab||v;
+  if(v!=="invtab"&&cur!=="nem-trh")cur=v;
   document.querySelectorAll(".side a[data-v]").forEach(a=>{if(a.dataset.v===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
-  const titles={prehled:"Přehled akcií",akcie:"Akcie",portfolio:"Portfolio",temata:"Tržní témata",simulace:"Simulace",pravidla:"Pravidla",investice:"Další investice"};
-  document.title=(tab?(INV.tabs.find(t=>t.id===tab).name+(h[1]==="svet"?" ve světě":"")):titles[v])+" · Investiční štít";
+  drawSubnav(cur);
+  document.title=(tab&&INV?(INV.tabs.find(t=>t.id===tab).name+(reg==="svet"?" ve světě":"")):TITLES[v]||"Investiční štít")+" · Investiční štít";
   window.scrollTo(0,0);
+  if(v==="domu")drawHome();
   if(v==="investice")drawInvOverview();
-  if(v==="invtab")drawInvTab(tab,h[1]);
+  if(v==="invtab"&&INV)drawInvTab(tab,reg);
+  if(INV){if(v==="nem-prehled")drawNemPrehled();if(v==="nem-kalk")drawKalk();if(v==="nem-metodika")drawMetodika();if(v==="nem-fin")drawFin();if(v==="nem-check")drawCheck();}
   if(!D)return;
-  if(v==="akcie"){const t=h[1]&&decodeURIComponent(h[1]);if(t&&D.akcie.some(a=>a.ticker===t))sel=t;if(!sel)sel=D.akcie[0].ticker;drawList();drawDetail();}
+  if(v==="akcie"){const t=h[1];if(t&&D.akcie.some(a=>a.ticker===t))sel=t;if(!sel)sel=D.akcie[0].ticker;drawList();drawDetail();}
   if(v==="simulace")drawFan();
+}
+const NEMLINKS=[["nemovitosti","nem-prehled","Přehled"],["nemovitosti/trh","nem-trh","Trh Česko a svět"],["nemovitosti/kalkulacka","nem-kalk","Kalkulačka"],["nemovitosti/jak-nakupovat","nem-metodika","Jak nakupovat"],["nemovitosti/financovani","nem-fin","Financování"],["nemovitosti/checklist","nem-check","Checklist"]];
+function drawSubnav(cur){
+  const html=NEMLINKS.map(([h,v,t])=>`<a href="#${h}"${v===cur?' aria-current="page"':""}>${t}</a>`).join("");
+  document.querySelectorAll("[data-subnav]").forEach(n=>n.innerHTML=html);
+  const it=$("it-subnav");if(it){it.hidden=cur!=="nem-trh";if(cur==="nem-trh")it.innerHTML=html}
+  const p=PAL.nemovitosti;document.querySelectorAll(".nemv").forEach(x=>{x.style.setProperty("--h1",p[0]);x.style.setProperty("--h2",p[1])});
 }
 addEventListener("hashchange",route);
 
@@ -508,10 +759,10 @@ fetch("stit-data.json?v="+Date.now()).then(r=>{if(!r.ok)throw new Error(r.status
 
 function init(){
   const S=D.souhrn, A=D.akcie;
-  $("t-date").textContent="Data k "+dte(S.data_k);
-  $("t-model").textContent="model "+pct(S.ocek_vynos)+" p.a.";
+  $("t-date").innerHTML="Data k <b>"+dte(S.data_k)+"</b>";
+  $("t-model").innerHTML="Model <b>"+pct(S.ocek_vynos)+"</b> p.a.";
   const pf=D.portfolio.filter(r=>r.ticker!=="Rezerva"), dd=pf.reduce((s,r)=>s+(r.vaha||0)*((A.find(a=>a.ticker===r.ticker)||{}).zmena_den||0),0);
-  $("t-pf").innerHTML=`Portfolio za poslední den <span class="${dd>0?"up":dd<0?"down":""}">${sg(dd,2)}</span>`;
+  $("t-pf").innerHTML=`Portfolio dnes <span class="${dd>0?"up":dd<0?"down":""}">${sg(dd,2)}</span>`;
   $("n-pf").textContent=S.pocet_akcii;
   // overview cards
   $("o-ret").textContent=pct(S.ocek_vynos); $("o-vol").textContent=pct(S.volatilita); $("o-n").textContent=S.pocet_akcii; $("o-res").textContent=pct(S.rezerva,0);
@@ -521,6 +772,7 @@ function init(){
   $("o-med").textContent=eur(S.median_10let); $("o-paid").textContent=eur(S.vlozeno_10let); $("o-p10").textContent=eur(S.p10_10let); $("o-p90").textContent=eur(S.p90_10let); $("o-etf").textContent=eur(S.etf_median_10let);
   gauge($("o-gauge"),S.p_propad35_10let,S.etf_p_propad35_10let);
   drawHero();
+  if(!$("v-domu").hidden)drawHome();
   $("o-wk").textContent=S.minuly_tyden?"proti "+dte(S.minuly_tyden):"výchozí týden";
   $("o-sig").innerHTML=D.signaly.slice(0,6).map(s=>`<li><span class="pill ${s.typ==="nákup"?"p-up":s.typ==="prodej"||s.typ==="pozor"?"p-down":s.typ==="pásmo"?"p-warn":"p-flat"}">${esc(s.typ)}</span><span>${esc(s.text)}</span></li>`).join("");
   // categories
@@ -733,7 +985,9 @@ redrawers.push(()=>{if(!$("v-simulace").hidden)drawFan()});
 const TREND={up:"p-up",down:"p-down",flat:"p-flat"};
 const safeUrl=u=>/^https:\/\//.test(u||"")?u:null;
 function initInv(){
-  $("inv-nav").innerHTML=INV.tabs.map(t=>`<a href="#${esc(t.id)}" data-v="${esc(t.id)}"><span>${esc(t.icon||"")} ${esc(t.name)}</span><small class="${t.trend==="up"?"up":t.trend==="down"?"down":""}">${t.trend==="up"?"▲":t.trend==="down"?"▼":"●"}</small></a>`).join("");
+  const hy=(INV.tabs.find(t=>t.id==="nemovitosti")||{}).stats;if(hy&&hy[0])$("t-hypo").innerHTML=`Hypotéky <b>${esc(hy[0].v)}</b>`;
+  const ck=$("n-check");if(ck)ck.textContent=checkCount();
+  if($("inv-nav"))$("inv-nav").innerHTML=INV.tabs.map(t=>`<a href="#${esc(t.id)}" data-v="${esc(t.id)}"><span>${esc(t.icon||"")} ${esc(t.name)}</span><small class="${t.trend==="up"?"up":t.trend==="down"?"down":""}">${t.trend==="up"?"▲":t.trend==="down"?"▼":"●"}</small></a>`).join("");
 }
 function drawInvOverview(){
   if(!INV){$("inv-cards").innerHTML=`<p class="muted">Data se načítají…</p>`;return}
@@ -746,7 +1000,7 @@ function drawInvOverview(){
     <p>${esc(t.lead)}</p>
     <span class="mini">${(t.stats||[]).slice(0,2).map(x=>`<span>${esc(x.k)}</span><span class="${x.cls==="up"?"up":x.cls==="down"?"down":""}">${esc(x.v)}</span>`).join("")}</span><span class="go">Otevřít ${esc(t.name.toLowerCase())} →</span></a>`}).join("");
 }
-const PAL={nemovitosti:["#0F766E","#14B8A6"],auta:["#9A3412","#F97316"],mince:["#78350F","#CA8A04"]};
+const PAL={nemovitosti:["#0B2A8F","#1FA2FF"],auta:["#7A1E0A","#FF7A2F"],mince:["#6B3A00","#E7A21B"]};
 const ART={
  nemovitosti:`<svg viewBox="0 0 240 180"><g fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.85)" stroke-width="2.5" stroke-linejoin="round"><rect x="18" y="78" width="54" height="86" rx="4"/><rect x="150" y="54" width="70" height="110" rx="4"/><path d="M78 164V92l42-34 42 34v72Z" fill="rgba(255,255,255,.28)"/></g><g fill="rgba(255,255,255,.75)"><rect x="30" y="92" width="10" height="12" rx="2"/><rect x="50" y="92" width="10" height="12" rx="2"/><rect x="30" y="116" width="10" height="12" rx="2"/><rect x="50" y="116" width="10" height="12" rx="2"/><rect x="164" y="70" width="12" height="12" rx="2"/><rect x="194" y="70" width="12" height="12" rx="2"/><rect x="164" y="96" width="12" height="12" rx="2"/><rect x="194" y="96" width="12" height="12" rx="2"/><rect x="164" y="122" width="12" height="12" rx="2"/><rect x="194" y="122" width="12" height="12" rx="2"/><rect x="108" y="126" width="24" height="38" rx="3"/></g><path d="M10 164h220" stroke="rgba(255,255,255,.85)" stroke-width="2.5" stroke-linecap="round"/><path d="m176 34 10-14 10 14" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M186 22v28" stroke="rgba(255,255,255,.9)" stroke-width="3" stroke-linecap="round"/></svg>`,
  auta:`<svg viewBox="0 0 240 180"><path d="M20 118c0-10 6-16 18-18l26-4 24-24c6-6 14-8 22-8h44c10 0 18 4 24 12l16 20 28 6c10 2 16 8 16 18v12c0 4-3 6-6 6H26c-4 0-6-3-6-6Z" fill="rgba(255,255,255,.2)" stroke="rgba(255,255,255,.9)" stroke-width="2.6" stroke-linejoin="round"/><path d="M74 96l22-20c4-4 8-6 14-6h18v26Zm62 0V70h20c6 0 10 2 14 7l14 19Z" fill="rgba(255,255,255,.35)" stroke="rgba(255,255,255,.85)" stroke-width="2"/><g fill="rgba(0,0,0,.25)" stroke="#fff" stroke-width="3"><circle cx="64" cy="138" r="18"/><circle cx="182" cy="138" r="18"/></g><g fill="#fff"><circle cx="64" cy="138" r="6"/><circle cx="182" cy="138" r="6"/></g><path d="M8 158h224" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-dasharray="10 8" stroke-linecap="round"/><path d="M200 40a24 24 0 1 1-34 0" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.5" stroke-linecap="round"/><path d="m183 57 9-14" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>`,
@@ -757,10 +1011,10 @@ function drawInvTab(id,reg){
   reg=reg==="svet"&&t.world?"svet":"cz";
   const v=$("v-invtab"),p=PAL[id]||["#15803D","#22C55E"];v.style.setProperty("--h1",p[0]);v.style.setProperty("--h2",p[1]);
   const R=regData(t,reg);
-  $("it-eyebrow").textContent=reg==="svet"?"Další investice · Svět":"Další investice · Česko";
+  {const T={nemovitosti:"Nemovitosti",auta:"Auta",mince:"Mince a zlato"}[id]||"Další investice";$("it-eyebrow").textContent=T+(reg==="svet"?" · Svět":" · Česko");}
   $("it-h").textContent=t.name;
   $("it-art").innerHTML=ART[id]||"";
-  v.querySelectorAll(".seg button").forEach(b=>{b.setAttribute("aria-selected",b.dataset.reg===reg);b.disabled=b.dataset.reg==="svet"&&!t.world;b.onclick=()=>{location.hash=id+(b.dataset.reg==="svet"?"/svet":"")}});
+  v.querySelectorAll(".seg button").forEach(b=>{b.setAttribute("aria-selected",b.dataset.reg===reg);b.disabled=b.dataset.reg==="svet"&&!t.world;b.onclick=()=>{location.hash=(id==="nemovitosti"?"nemovitosti/trh":id)+(b.dataset.reg==="svet"?"/svet":"")}});
   const tr=$("it-trend");tr.className="pill";tr.textContent=R.trendText||"";
   $("it-lead").textContent=R.lead||"";
   $("it-stats").innerHTML=(R.stats||[]).map(x=>`<div class="card stat"><div class="k">${esc(x.k)}</div><div class="v ${x.cls==="up"?"up":x.cls==="down"?"down":"flat"}">${esc(x.v)}</div><div class="nn">${esc(x.n||"")}</div></div>`).join("");
@@ -774,6 +1028,183 @@ function drawInvTab(id,reg){
   $("it-watch").innerHTML=(R.watch||[]).map(w=>`<li>${esc(w)}</li>`).join("");
   $("it-links").innerHTML=(R.links||[]).map(l=>{const u=safeUrl(l[1]);return u?`<a class="chip" href="${esc(u)}" target="_blank" rel="noopener">${esc(l[0])} ↗</a>`:""}).join("");
 }
+/* ---------- společné pomůcky ---------- */
+const czk=v=>v==null||isNaN(v)?"–":nf(Math.round(v))+" Kč";
+const czkM=v=>v==null||isNaN(v)?"–":(Math.abs(v)>=1e6?nf(v/1e6,2)+" mil. Kč":nf(Math.round(v/1000))+" tis. Kč");
+const lsGet=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),2200)}
+function countUp(el,to,fmt){if(!el)return;if(RM||to==null||isNaN(to)){el.textContent=fmt(to);return}const t0=performance.now(),d=900;const st=()=>{const k=Math.min(1,(performance.now()-t0)/d),e=1-Math.pow(1-k,3);el.textContent=fmt(to*e);if(k<1)requestAnimationFrame(st)};st()}
+const NEM=()=>INV&&INV.tabs.find(t=>t.id==="nemovitosti");
+const annuity=(L,r,n)=>{const i=r/12,m=n*12;return L<=0?0:i===0?L/m:L*i/(1-Math.pow(1+i,-m))};
+
+/* ---------- výpočet výnosu bytu ---------- */
+const KDEF={cena:4000000,najem:17000,fond:2500,pojdan:4500,udrzba:.5,prazdne:1,poplatky:3,rekon:0,ltv:70,urok:5,splatnost:30,rust:3,rustN:3,dan:1};
+function kCalc(k){
+  const P=k.cena,R=k.najem,gross=P?12*R/P:0;
+  const effR=R*(12-k.prazdne),opex=12*k.fond+k.pojdan+k.udrzba/100*P,tax=k.dan?0.15*0.7*effR:0;
+  const noi=effR-opex-tax,fees=k.poplatky/100*P,inv=P+fees+k.rekon,netY=inv?noi/inv:0;
+  const L=k.ltv/100*P,pay=annuity(L,k.urok/100,k.splatnost),cash=P-L+fees+k.rekon;
+  const cf=noi-12*pay;let bal=L,int1=0;for(let m=0;m<12;m++){const it=bal*k.urok/1200;int1+=it;bal-=pay-it}
+  const princ=L-bal,coc=cash?cf/cash:0,tot=cash?(cf+princ+k.rust/100*P)/cash:0;
+  const beR=(opex+12*pay)/((12-k.prazdne)*(k.dan?1-0.105:1));
+  // 10 let
+  const yrs=[];let b=L,cum=0,rent=R,op=opex;
+  for(let y=1;y<=10;y++){let ecf=rent*(12-k.prazdne)-op-(k.dan?0.105*rent*(12-k.prazdne):0);for(let m=0;m<12;m++){const it=b*k.urok/1200;b=Math.max(0,b-(pay-it))}
+    ecf-=12*pay;cum+=ecf;const val=P*Math.pow(1+k.rust/100,y);yrs.push({y,eq:val-b,cum,cash,val,bal:b});rent*=1+k.rustN/100;op*=1.025}
+  return {gross,netY,noi,pay,cf,cash,coc,tot,beR,L,yrs};
+}
+function verdictOf(r){
+  if(r.gross>=0.05&&r.cf>=0)return ["v-good","✓","Vypadá to dobře","Hrubý výnos nad 5 % a nájem pokryje splátku i náklady. Ověř ještě poptávku po nájmu a technický stav."];
+  if(r.gross>=0.04||r.cf>=-24000)return ["v-ok","≈","Průměrná investice","Byt nese podobně jako státní dluhopisy nebo vyžaduje měsíční doplácení. Vydělat má hlavně růst ceny, ne nájem."];
+  return ["v-bad","!","Slabý výnos","Nájem zdaleka nepokryje náklady a splátku. Zkus vyjednat nižší cenu, vyšší vlastní zdroje nebo jinou lokalitu."];
+}
+const KF=[["cena","Kupní cena",500000,15000000,50000,czk],["najem","Nájem měsíčně",4000,60000,500,czk],["fond","Fond oprav a nevratné služby / měs.",0,8000,100,czk],
+ ["pojdan","Pojištění a daň z nemovitosti / rok",0,20000,500,czk],["udrzba","Údržba ročně (% ceny)",0,2,.1,v=>nf(v,1)+" %"],["prazdne","Prázdné měsíce za rok",0,3,.5,v=>nf(v,1)+" měs."],
+ ["poplatky","Poplatky při koupi (% ceny)",0,6,.5,v=>nf(v,1)+" %"],["rekon","Rekonstrukce",0,2000000,25000,czk],["ltv","Hypotéka (LTV)",0,90,5,v=>nf(v)+" %"],
+ ["urok","Úroková sazba",2,8,.05,v=>nf(v,2)+" %"],["splatnost","Splatnost",5,30,1,v=>nf(v)+" let"],["rust","Růst ceny bytu ročně",-2,8,.5,v=>nf(v,1)+" %"],["rustN","Růst nájmu ročně",0,6,.5,v=>nf(v,1)+" %"]];
+let K=Object.assign({},KDEF,lsGet("stit-kalk",{}));
+function sliderHTML(id,f,val){const[key,lab,mn,mx,st,fmt]=f;return `<label class="fld"><span class="row"><span>${lab}</span><output id="${id}-o-${key}">${fmt(val)}</output></span><input type="range" id="${id}-${key}" data-k="${key}" min="${mn}" max="${mx}" step="${st}" value="${val}" style="--p:${(val-mn)/(mx-mn)*100}%"></label>`}
+function drawKalk(){
+  const N=NEM(),form=$("k-form");
+  if(!form.dataset.ready){
+    form.innerHTML=KF.map(f=>sliderHTML("k",f,K[f[0]])).join("")+`<label class="fld"><span class="row"><span>Daň z příjmu z nájmu</span></span><select id="k-dan"><option value="1">15 % po paušálu 30 %</option><option value="0">nepočítat</option></select></label>`;
+    form.addEventListener("input",e=>{const i=e.target;if(i.dataset.k){K[i.dataset.k]=+i.value;const f=KF.find(x=>x[0]===i.dataset.k);$("k-o-"+f[0]).textContent=f[5](K[f[0]]);i.style.setProperty("--p",(i.value-f[2])/(f[3]-f[2])*100+"%");kUpdate()}});
+    $("k-dan").value=String(K.dan);$("k-dan").onchange=e=>{K.dan=+e.target.value;kUpdate()};
+    $("k-presets").addEventListener("click",e=>{const b=e.target.closest("button[data-p]");if(!b)return;const p=(N&&N.presets||{})[b.dataset.p];if(!p)return;Object.assign(K,p);syncSliders();kUpdate();$("k-presets").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));toast("Předvolba: "+b.textContent+" (orientační příklad)")});
+    $("k-save").onclick=()=>{const l=lsGet("stit-scen",[]);l.unshift({k:Object.assign({},K),at:Date.now()});lsSet("stit-scen",l.slice(0,8));drawScen();toast("Varianta uložena")};
+    form.dataset.ready=1;redrawers.push(()=>{if(!$("v-nem-kalk").hidden)kChart(kCalc(K))});
+  }
+  kUpdate();drawScen();
+}
+function syncSliders(){KF.forEach(f=>{const i=$("k-"+f[0]);if(!i)return;i.value=K[f[0]];i.style.setProperty("--p",(K[f[0]]-f[2])/(f[3]-f[2])*100+"%");$("k-o-"+f[0]).textContent=f[5](K[f[0]])});if($("k-dan"))$("k-dan").value=String(K.dan)}
+function kUpdate(){
+  lsSet("stit-kalk",K);const r=kCalc(K),v=verdictOf(r);
+  $("k-verdict").innerHTML=`<div class="verdict ${v[0]}"><span class="vi">${v[1]}</span><span><b>${v[2]}</b><p>${v[3]}</p></span></div>`;
+  const R=[["Hrubý výnos",pct(r.gross,2),"roční nájem ÷ cena",r.gross>=.05?"up":r.gross<.035?"down":""],["Čistý výnos",pct(r.netY,2),"po nákladech, daních a prázdných měsících, bez hypotéky",""],
+    ["Splátka hypotéky",czk(r.pay),"měsíčně, úvěr "+czkM(r.L),""],["Cashflow",czk(r.cf/12),"měsíčně po splátce a všech nákladech",r.cf>=0?"up":"down"],
+    ["Potřebná hotovost",czkM(r.cash),"vlastní zdroje + poplatky + rekonstrukce",""],["Výnos z vlastních peněz",pct(r.coc,1),"cashflow ÷ vložená hotovost",r.coc>=0?"up":"down"],
+    ["Celkový výnos 1. rok",pct(r.tot,1),"vč. splacené jistiny a růstu ceny",r.tot>=0?"up":"down"],["Nájem pro nulový cashflow",czk(r.beR),"měsíčně",K.najem>=r.beR?"up":"down"]];
+  $("k-res").innerHTML=R.map(x=>`<div class="r"><span>${x[0]}</span><b class="${x[3]}">${x[1]}</b><small>${x[2]}</small></div>`).join("");
+  kChart(r);
+}
+function kChart(r){
+  const box=$("k-chart"),W=Math.max(280,box.clientWidth),H=box.clientHeight||260,m={t:14,r:12,b:26,l:62};
+  const ys=r.yrs,mx=Math.max(...ys.map(x=>Math.max(x.eq,x.cash,x.cum)))*1.08,mn=Math.min(0,...ys.map(x=>x.cum))*1.1;
+  const bw=(W-m.l-m.r)/ys.length,X=i=>m.l+bw*i+bw/2,Y=v=>m.t+(1-(v-mn)/(mx-mn))*(H-m.t-m.b);
+  const st=[100000,250000,500000,1000000,2000000,5000000].find(s=>(mx-mn)/s<=6)||1e7,ticks=[];for(let t=Math.ceil(mn/st)*st;t<=mx;t+=st)ticks.push(t);
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Vývoj čistého majetku v bytě za 10 let">
+   <defs><linearGradient id="kg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--h2,var(--brand))"/><stop offset="1" stop-color="var(--h1,var(--brand2))" stop-opacity=".6"/></linearGradient></defs>
+   ${ticks.map(t=>`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--line)"/><text x="${m.l-8}" y="${Y(t)+4}" text-anchor="end" font-family="var(--mono)" font-size="11" fill="var(--dim)">${nf(t/1e6,1)} mil.</text>`).join("")}
+   ${ys.map((x,i)=>`<rect x="${X(i)-bw*.32}" y="${Y(Math.max(0,x.eq))}" width="${bw*.64}" height="${Math.abs(Y(0)-Y(Math.max(0,x.eq)))}" rx="6" fill="url(#kg)" opacity=".9"><title>Rok ${x.y}: čistý majetek ${czkM(x.eq)}, byt ${czkM(x.val)}, zbývá hypotéka ${czkM(x.bal)}, nasčítaný cashflow ${czkM(x.cum)}</title></rect>`).join("")}
+   <path d="M${ys.map((x,i)=>X(i)+","+Y(x.cum)).join("L")}" fill="none" stroke="var(--up)" stroke-width="2.5" stroke-linejoin="round"/>
+   ${ys.map((x,i)=>`<circle cx="${X(i)}" cy="${Y(x.cum)}" r="3.5" fill="var(--up)"/>`).join("")}
+   <line x1="${m.l}" x2="${W-m.r}" y1="${Y(r.cash)}" y2="${Y(r.cash)}" stroke="var(--warn)" stroke-width="1.6" stroke-dasharray="6 5"/>
+   ${ys.map((x,i)=>`<text x="${X(i)}" y="${H-8}" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--dim)">${x.y}. r</text>`).join("")}
+   <text x="${X(ys.length-1)}" y="${Y(ys[ys.length-1].eq)-8}" text-anchor="end" font-family="var(--mono)" font-size="12.5" font-weight="600" fill="var(--ink)">${czkM(ys[ys.length-1].eq)}</text></svg>`;
+}
+function drawScen(){
+  const l=lsGet("stit-scen",[]),box=$("k-scen");
+  if(!l.length){box.innerHTML=`<p class="muted" style="margin:0">Zatím nic. Ulož si variantu a porovnej různé byty vedle sebe.</p>`;return}
+  box.innerHTML=l.map((s,i)=>{const r=kCalc(s.k);return `<div class="sc"><span>Byt <b>${czkM(s.k.cena)}</b> · nájem <b>${czk(s.k.najem)}</b> · LTV ${s.k.ltv} %</span><span>hrubý <b>${pct(r.gross,1)}</b></span><span class="${r.cf>=0?"up":"down"}">cashflow <b>${czk(r.cf/12)}</b></span><span><button type="button" data-l="${i}" title="Načíst">↺</button><button type="button" data-d="${i}" title="Smazat">✕</button></span></div>`}).join("");
+  box.querySelectorAll("button").forEach(b=>b.onclick=()=>{const l2=lsGet("stit-scen",[]);if(b.dataset.d!=null){l2.splice(+b.dataset.d,1);lsSet("stit-scen",l2);drawScen();toast("Varianta smazána")}else{K=Object.assign({},KDEF,l2[+b.dataset.l].k);syncSliders();kUpdate();toast("Varianta načtena");window.scrollTo({top:0,behavior:RM?"auto":"smooth"})}});
+}
+
+/* ---------- jak nakupovat ---------- */
+function drawMetodika(){
+  const G=(NEM()||{}).guide;if(!G)return;
+  $("m-rules").innerHTML=G.rules.map(r=>`<a class="rb" href="${esc(safeUrl(r.u)||"#")}" target="_blank" rel="noopener" style="text-decoration:none"><b>${esc(r.v)}</b><span>${esc(r.k)}</span><p>${esc(r.t)}</p></a>`).join("");
+  $("m-princ").innerHTML=G.principles.map((p,i)=>`<div class="card pc lift"><span class="no">${String(i+1).padStart(2,"0")}</span><h3>${esc(p.h)}</h3><p>${esc(p.t)}</p><span class="src2">Zdroj: <a href="${esc(safeUrl(p.u)||"#")}" target="_blank" rel="noopener">${esc(p.s)} ↗</a></span></div>`).join("");
+  const Y=G.yield,my=kCalc(K).gross*100;
+  $("m-yield").innerHTML=`<p class="muted" style="margin:0 0 14px;font-size:14px">${esc(Y.lead)}</p>
+   <div style="position:relative;display:flex;height:14px;border-radius:8px;overflow:hidden;margin:26px 0 6px">${Y.bands.map(b=>`<i style="flex:${b.to-b.from};background:${b.c==="bad"?"var(--down)":b.c==="ok"?"var(--warn)":"var(--up)"};opacity:${b.l==="Výborné"?1:.75}"></i>`).join("")}</div>
+   <div style="position:relative;height:0"><span style="position:absolute;left:${Math.min(98,my/8*100)}%;top:-38px;transform:translateX(-50%);font:600 12px var(--mono);background:var(--panel);border:1px solid var(--line2);padding:2px 7px;border-radius:7px;white-space:nowrap">tvůj byt ${nf(my,1)} %</span></div>
+   <div style="display:flex;justify-content:space-between;font:11px var(--mono);color:var(--dim)"><span>0 %</span><span>3,5 %</span><span>4,5 %</span><span>5,5 %</span><span>8 %</span></div>
+   <div class="kv" style="grid-template-columns:auto 1fr;margin-top:14px">${Y.bands.map(b=>`<span><span class="pill ${b.c==="bad"?"p-down":b.c==="ok"?"p-warn":"p-up"}">${esc(b.l)} ${b.from}–${b.to} %</span></span><span style="font-family:var(--sans);text-align:left;color:var(--muted)">${esc(b.t)}</span>`).join("")}</div>
+   <p class="muted" style="font-size:13px;margin:14px 0 0">${esc(Y.note)} <a href="${esc(Y.u)}" target="_blank" rel="noopener">${esc(Y.s)} ↗</a></p>`;
+  $("m-src").innerHTML=G.sources.map(x=>`<a href="${esc(safeUrl(x.u)||"#")}" target="_blank" rel="noopener"><small>${esc(x.s)}</small><b>${esc(x.t)} ↗</b></a>`).join("")+`<p class="muted" style="font-size:12.5px;margin:0">Videa z YouTube se nepodařilo automaticky přepsat, rady vychází z Artemových článků a rozhovorů. Text je převyprávěný, ne citovaný.</p>`;
+}
+
+/* ---------- financování ---------- */
+const TIERS=[["own","Vlastní bydlení"],["inv12","1.–2. byt na pronájem"],["inv36","3.–6. nemovitost"],["inv7","7. a další"]];
+let F=Object.assign({age:"u36",tier:"inv36",cena:4000000,prijem:70000,dluhy:0,splatky:0,hotovost:1300000,urok:5,splatnost:30},lsGet("stit-fin",{}));
+const FF=[["cena","Cena nemovitosti",500000,15000000,50000,czk],["prijem","Čistý měsíční příjem (všech žadatelů)",15000,300000,1000,czk],["dluhy","Zbývající dluhy celkem",0,30000000,100000,czk],
+ ["splatky","Stávající měsíční splátky",0,150000,1000,czk],["hotovost","Hotovost, kterou máš",0,10000000,50000,czk],["urok","Úroková sazba",2,8,.05,v=>nf(v,2)+" %"],["splatnost","Splatnost",5,30,1,v=>nf(v)+" let"]];
+const ltvOf=()=>F.tier==="own"?(F.age==="u36"?90:80):F.tier==="inv7"?60:70;
+function drawFin(){
+  const G=(NEM()||{}).guide;
+  if(!$("f-form").dataset.ready){
+    $("f-form").innerHTML=FF.map(f=>sliderHTML("f",f,F[f[0]])).join("");
+    $("f-form").addEventListener("input",e=>{const i=e.target;if(!i.dataset.k)return;F[i.dataset.k]=+i.value;const f=FF.find(x=>x[0]===i.dataset.k);$("f-o-"+f[0]).textContent=f[5](F[f[0]]);i.style.setProperty("--p",(i.value-f[2])/(f[3]-f[2])*100+"%");finUpdate()});
+    $("f-age").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;F.age=b.dataset.v;finUpdate()});
+    $("f-form").dataset.ready=1;
+  }
+  if(G)$("f-tips").innerHTML=G.fin_tips.map(t=>`<li>${esc(t.t)} <a class="muted" style="font-size:12.5px" href="${esc(safeUrl(t.u)||"#")}" target="_blank" rel="noopener">zdroj ↗</a></li>`).join("");
+  finUpdate();
+}
+function finUpdate(){
+  lsSet("stit-fin",F);
+  $("f-age").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===F.age));
+  $("f-tier").innerHTML=TIERS.map(([k,l])=>{const save=F.tier;F.tier=k;const v=ltvOf();F.tier=save;return `<div role="button" tabindex="0" data-t="${k}" class="${k===F.tier?"on":""}"><b>${v} %</b><span>${l}</span></div>`}).join("");
+  $("f-tier").querySelectorAll("[data-t]").forEach(d=>{const go=()=>{F.tier=d.dataset.t;finUpdate()};d.onclick=go;d.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}}});
+  const inv=F.tier!=="own",ltv=ltvOf(),r=F.urok/100,n=F.splatnost;
+  const byLtv=F.cena*ltv/100,byDti=inv?Math.max(0,7*12*F.prijem-F.dluhy):Infinity;
+  const maxPay=Math.max(0,.4*F.prijem-F.splatky),i=r/12,mm=n*12,byDsti=i?maxPay*(1-Math.pow(1+i,-mm))/i:maxPay*mm;
+  const loan=Math.min(byLtv,byDti,byDsti),limit=loan===byLtv?"LTV":loan===byDti?"DTI 7":"splátka do 40 % příjmu";
+  const need=F.cena-loan+.03*F.cena,pay=annuity(loan,r,n),ok=F.hotovost>=need;
+  $("f-verdict").innerHTML=`<div class="verdict ${ok?"v-good":"v-bad"}"><span class="vi">${ok?"✓":"!"}</span><span><b>${ok?"Na tenhle byt máš":"Chybí ti "+czkM(need-F.hotovost)}</b><p>Banka půjčí nejvýš ${czkM(loan)}. Omezuje tě ${limit}. Potřebuješ ${czkM(need)} vlastních peněz včetně 3 % na poplatky.</p></span></div>`;
+  const R=[["Max. úvěr podle LTV "+ltv+" %",czkM(byLtv),loan===byLtv?"rozhoduje":""],["Max. úvěr podle DTI 7",inv?czkM(byDti):"neuplatňuje se",inv&&loan===byDti?"rozhoduje":"u vlastního bydlení zatím ne"],
+    ["Max. úvěr podle splátky",czkM(byDsti),loan===byDsti?"rozhoduje":"splátky do 40 % příjmu"],["Měsíční splátka",czk(pay),`při ${nf(F.urok,2)} % na ${n} let`],
+    ["Potřebná hotovost",czkM(need),"vlastní zdroje + 3 % poplatky"],["Máš",czkM(F.hotovost),ok?"stačí":"nestačí"]];
+  $("f-res").innerHTML=R.map(x=>`<div class="r"><span>${x[0]}</span><b class="${x[2]==="rozhoduje"?"":x[2]==="nestačí"?"down":x[2]==="stačí"?"up":""}">${x[1]}</b><small>${x[2]}</small></div>`).join("");
+}
+
+/* ---------- checklist ---------- */
+const checkState=()=>lsGet("stit-check",{});
+function checkCount(){const N=NEM();if(!N||!N.guide)return"0/0";const st=checkState(),all=N.guide.checklist.reduce((s,g)=>s+g[1].length,0);return Object.values(st).filter(Boolean).length+"/"+all}
+function drawCheck(){
+  const N=NEM();if(!N||!N.guide)return;const st=checkState(),C=N.guide.checklist;
+  $("cl-groups").innerHTML=C.map((g,gi)=>{const done=g[1].filter((_,ii)=>st[gi+"-"+ii]).length;return `<div class="card"><div class="cl-grp" style="margin:0"><h3><span>${esc(g[0])}</span><span class="pill ${done===g[1].length?"p-up":"p-flat"}">${done}/${g[1].length}</span></h3>
+    ${g[1].map((it,ii)=>`<label class="cl-item"><input type="checkbox" data-id="${gi}-${ii}" ${st[gi+"-"+ii]?"checked":""}><span><b>${esc(it[0])}</b><small>${esc(it[1])}</small></span></label>`).join("")}</div></div>`}).join("");
+  $("cl-groups").querySelectorAll("input").forEach(i=>i.onchange=()=>{const s=checkState();s[i.dataset.id]=i.checked;lsSet("stit-check",s);ring();$("n-check").textContent=checkCount();const p=i.closest(".card").querySelector(".pill"),all=i.closest(".card").querySelectorAll("input"),dn=[...all].filter(x=>x.checked).length;p.textContent=dn+"/"+all.length;p.className="pill "+(dn===all.length?"p-up":"p-flat");if(dn===all.length&&i.checked)toast("Skupina hotová ✓")});
+  $("cl-reset").onclick=()=>{lsSet("stit-check",{});drawCheck();$("n-check").textContent=checkCount();toast("Checklist vynulován pro další byt")};
+  ring();
+}
+function ring(){const[a,b]=checkCount().split("/").map(Number),p=b?a/b:0,R=50,C=2*Math.PI*R;
+  $("cl-ring").innerHTML=`<defs><linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="var(--h1,var(--brand))"/><stop offset="1" stop-color="var(--h2,var(--brand2))"/></linearGradient></defs><circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--hover)" stroke-width="12"/><circle cx="60" cy="60" r="${R}" fill="none" stroke="url(#rg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C*p} ${C}" transform="rotate(-90 60 60)" style="transition:stroke-dasharray .4s"/><text x="60" y="58" text-anchor="middle" font-family="var(--head)" font-size="24" font-weight="700" fill="var(--ink)">${Math.round(p*100)} %</text><text x="60" y="78" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--muted)">${a} z ${b}</text>`}
+
+/* ---------- přehled nemovitostí ---------- */
+function drawNemPrehled(){
+  const N=NEM();if(!N)return;
+  $("np-lead").textContent=N.lead;
+  $("np-kpi").innerHTML=N.stats.map(s=>`<span>${esc(s.k)} <b>${esc(s.v)}</b></span>`).join("")+(N.world?`<span>EU ceny bydlení <b>${esc(N.world.stats[0].v)}</b></span>`:"");
+  const yd=(N.guide||{}).yield;
+  const cards=[["Hrubý výnos v ČR","3–6 %","běžné rozpětí, průměr kolem 3,65 % (UniCredit)"],["Státní dluhopisy","≈ 4,5 %","bezriziková alternativa k nájmu"],["Vlastní zdroje na investiční byt","30 %","LTV 70 % od 1. 4. 2026"],["Tvůj byt z kalkulačky",pct(kCalc(K).gross,1),"hrubý výnos · "+czkM(K.cena)]];
+  $("np-stats").innerHTML=cards.map((c,i)=>`<a class="card stat" href="#nemovitosti/${i===3?"kalkulacka":"jak-nakupovat"}"><div class="k">${c[0]}</div><div class="v">${c[1]}</div><div class="nn">${c[2]}</div></a>`).join("");
+  $("np-opps").innerHTML=(N.opps||[]).map((o,i)=>{const u=safeUrl(o.u);return `<div class="opp"><span class="num">${i+1}</span><p>${esc(o.t)}</p>${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(o.s||"zdroj")} ↗</a>`:""}</div>`}).join("");
+}
+
+/* ---------- domů ---------- */
+function drawHome(){
+  if(INV)$("d-week").textContent=INV.week||"";
+  const N=NEM(),A=INV&&INV.tabs.find(t=>t.id==="auta"),M=INV&&INV.tabs.find(t=>t.id==="mince");
+  const tiles=[
+    {h:"prehled",c:["#0B1A7A","#3557FF"],ic:"📈",lab:"Akcie · model",num:D?D.souhrn.ocek_vynos:null,fmt:v=>pct(v),sub:D?`${D.souhrn.pocet_akcii} akcií + 15 % rezerva · medián za 10 let ${eur(D.souhrn.median_10let)}`:"Načítám…",go:"Otevřít akcie"},
+    {h:"nemovitosti",c:PAL.nemovitosti,ic:"🏠",lab:"Nemovitosti · hypotéky",num:N?parseFloat(N.stats[0].v.replace(",","."))/100:null,fmt:v=>pct(v,2),sub:N?N.trendText+" · byty "+N.stats[3].v+" ročně":"",go:"Kalkulačka, pravidla, trh"},
+    {h:"auta",c:PAL.auta,ic:"🚗",lab:"Auta · svět",num:null,txt:A&&A.world?A.world.stats[0].v:"–",sub:A?A.trendText:"",go:"Aukce a burzy"},
+    {h:"mince",c:PAL.mince,ic:"🪙",lab:"Zlato · unce",num:null,txt:M?M.stats[0].v:"–",sub:M?M.trendText:"",go:"Mince a zlato"}];
+  $("home-tiles").innerHTML=tiles.map((t,i)=>`<a class="htile" href="#${t.h}" style="--h1:${t.c[0]};--h2:${t.c[1]}"><span class="ic">${t.ic}</span><span class="lab">${t.lab}</span><span class="num" id="ht-${i}">${t.txt||"–"}</span><span class="sub">${esc(t.sub)}</span><span class="go">${t.go} →</span></a>`).join("");
+  tiles.forEach((t,i)=>{if(t.num!=null)countUp($("ht-"+i),t.num,t.fmt)});
+  if(D){const items=D.akcie.slice().sort((a,b)=>b.skore-a.skore).map(a=>`<span>${esc(a.ticker)} <b class="${a.zmena_tyden>=0?"up":"down"}">${sg(a.zmena_tyden)}</b></span>`).join("");$("tk1").innerHTML=items;$("tk2").innerHTML=items;
+    $("home-sig").innerHTML=D.signaly.slice(0,4).map(s=>`<li><span class="pill ${s.typ==="nákup"?"p-up":s.typ==="prodej"||s.typ==="pozor"?"p-down":s.typ==="pásmo"?"p-warn":"p-flat"}">${esc(s.typ)}</span><span>${esc(s.text)}</span></li>`).join("")}
+  if(INV){const nw=[];INV.tabs.forEach(t=>{(t.news||[]).slice(0,2).forEach(n=>nw.push({...n,c:t.icon+" "+t.name}));if(t.world)(t.world.news||[]).slice(0,1).forEach(n=>nw.push({...n,c:t.icon+" "+t.name+" · svět"}))});
+    $("home-news").innerHTML=nw.map(n=>{const u=safeUrl(n.u);return `<div class="ni"><p><span class="eyebrow" style="font-size:10px">${esc(n.c)}</span><br>${esc(n.t)}</p>${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n.s||"zdroj")} ↗</a>`:""}</div>`}).join("")}
+  const q=()=>{const k=Object.assign({},KDEF,{cena:+$("q-cena").value||0,najem:+$("q-najem").value||0}),r=kCalc(k);
+    $("q-res").innerHTML=`<div class="r"><span>Hrubý výnos</span><b class="${r.gross>=.05?"up":r.gross<.035?"down":""}">${pct(r.gross,2)}</b></div><div class="r"><span>Cashflow s hypotékou 70 %</span><b class="${r.cf>=0?"up":"down"}">${czk(r.cf/12)}</b><small>měsíčně</small></div>`};
+  $("q-cena").oninput=q;$("q-najem").oninput=q;q();
+}
+
 function drawCal(){
   if(!CFG||!CFG.fomc)return;
   const today=new Date().toISOString().slice(0,10),next=CFG.fomc.find(d=>d>=today);
@@ -782,5 +1213,6 @@ function drawCal(){
 }
 })();
 </script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
