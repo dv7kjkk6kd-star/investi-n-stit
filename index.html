@@ -348,6 +348,63 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .cal b{display:block;font:600 15px var(--mono);margin-top:2px;color:var(--ink)}
 .view:not([hidden]){animation:vin .25s ease-out}
 @keyframes vin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* ---------- auta, zajímavosti ---------- */
+.side .new{font:700 9px var(--mono);letter-spacing:.1em;padding:2px 6px;border-radius:99px;background:linear-gradient(135deg,#FF5FA2,#7C5CFF);color:#fff;opacity:1}
+.side .subl{font:600 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:6px 4px 2px;padding:8px 11px 8px 38px;border-radius:12px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
+.side .subl::-webkit-details-marker{display:none}
+.side .subl::after{content:"▸";margin-left:auto;font-size:12px;transition:transform .2s}
+.side .cgrp[open] .subl::after{transform:rotate(90deg)}
+.side .subl:hover{background:var(--hover);color:var(--ink)}
+.side .cats a.sub{padding-top:6px;padding-bottom:6px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.step{position:relative;padding-top:22px}
+.step .sn{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;font:700 15px var(--mono);color:#fff;background:linear-gradient(140deg,var(--h1),var(--h2));box-shadow:0 10px 22px -10px var(--h2);margin-bottom:10px}
+.step h3{margin:0 0 6px;font-family:var(--head);font-size:16.5px}
+.step p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+.src-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 22px}
+.zchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.zchips button{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;border-radius:99px;padding:7px 14px;font:600 13.5px var(--sans);cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:background .15s,transform .15s}
+.zchips button:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+.zchips button[aria-selected="true"]{background:#fff;color:#2A0E5C;box-shadow:0 8px 20px -8px rgba(0,0,0,.4)}
+.zgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}
+.zc{position:relative;overflow:hidden;border-radius:22px;padding:18px;min-height:200px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.14);background:linear-gradient(140deg,var(--z1),var(--z2));transition:transform .2s ease,box-shadow .2s ease}
+.zc::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 100% 0%,rgba(255,255,255,.28),transparent 60%);pointer-events:none}
+.zc>*{position:relative}
+.zc:hover{transform:translateY(-5px) rotate(-.4deg);box-shadow:0 36px 60px -34px var(--z2)}
+.zc[aria-current="true"]{outline:3px solid #fff;outline-offset:3px}
+.zc .ic{font-size:34px;line-height:1;filter:drop-shadow(0 8px 14px rgba(0,0,0,.3));transition:transform .3s}
+.zc:hover .ic{transform:scale(1.15) rotate(-8deg)}
+.zc .nm{font:700 18px var(--head);letter-spacing:-.01em}
+.zc .tp{align-self:flex-start;font:600 11.5px var(--sans);background:rgba(255,255,255,.2);border-radius:99px;padding:3px 9px}
+.zc .bn{font:600 30px/1 var(--head);letter-spacing:-.03em;margin-top:auto;text-shadow:0 6px 30px rgba(0,0,0,.25)}
+.zc .k{font-size:12.5px;opacity:.88;line-height:1.35}
+#z-detail{scroll-margin-top:110px}
+.zdet{border-radius:26px;overflow:hidden;margin-bottom:20px;border:1px solid var(--line);background:var(--glass);backdrop-filter:var(--blur)}
+.zdet .zh{display:flex;gap:16px;align-items:center;padding:22px 24px;color:#fff;background:linear-gradient(135deg,var(--z1),var(--z2));position:relative}
+.zdet .zh .ic{font-size:46px;line-height:1}
+.zdet .zh h2{margin:0;font:700 28px var(--head);letter-spacing:-.02em}
+.zdet .zh p{margin:4px 0 0;color:rgba(255,255,255,.9);max-width:72ch;line-height:1.5}
+.zdet .zh .x{position:absolute;right:14px;top:14px;border:0;background:rgba(0,0,0,.2);color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px}
+.zdet .zb{padding:20px 24px 22px}
+.zdet .stat{border-top-color:var(--z2)}
+.zdet .czbox{border-radius:16px;padding:14px 16px;background:color-mix(in srgb,var(--z2) 12%,transparent);border:1px solid color-mix(in srgb,var(--z2) 35%,transparent);margin:14px 0}
+.zdet .czbox b{font:700 11px var(--mono);letter-spacing:.14em;color:var(--z2);display:block;margin-bottom:4px}
+.zdet ul{margin:6px 0 0;padding-left:18px}.zdet li{margin:6px 0;line-height:1.5;font-size:14.5px}
+.zbars .zr{display:grid;grid-template-columns:minmax(0,170px) 1fr 62px;gap:12px;align-items:center;padding:7px 8px;border-radius:12px;font-size:13.5px;cursor:pointer;border:0;background:none;color:var(--ink);width:100%;text-align:left;font-family:var(--sans)}
+.zbars .zr:hover{background:var(--hover)}
+.zbars .zr.ro{cursor:default}.zbars .zr.ro:hover{background:none}
+.zbars .tr{position:relative;height:14px;border-radius:7px;background:var(--hover)}
+.zbars .tr::after{content:"";position:absolute;left:50%;top:-4px;bottom:-4px;width:1px;background:var(--line2)}
+.zbars .tr i{position:absolute;top:0;bottom:0;border-radius:7px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.zbars .v{font:600 13px var(--mono);text-align:right}
+.zstrip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:-6px 0 20px}
+.zstrip a{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:16px;text-decoration:none;color:#fff;background:linear-gradient(140deg,var(--z1),var(--z2));border:1px solid rgba(255,255,255,.14);transition:transform .2s}
+.zstrip a:hover{transform:translateY(-3px)}
+.zstrip span{font-size:12px;opacity:.85}.zstrip b{font:600 17px var(--head);letter-spacing:-.01em}
+@media (max-width:1180px){.zstrip{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){.zgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.zgrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.zstrip{grid-template-columns:repeat(2,minmax(0,1fr))}.zbars .zr{grid-template-columns:minmax(0,110px) 1fr 54px}.zdet .zh{flex-direction:column;align-items:flex-start}}
 @media (prefers-reduced-motion:reduce){.view:not([hidden]){animation:none}.card,.htile{transition:none}}
 
 @media (max-width:1180px){.hgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -355,7 +412,8 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 @media (max-width:860px){
   .app{grid-template-columns:1fr}
   .side{position:static;max-height:none;display:flex;flex-wrap:wrap;gap:4px;padding:8px}
-  .side .grp,.side .note,.side .cats,.side .cal,.side a.sub{display:none}
+  .side .grp,.side .note,.side .cats,.side .cal,.side a.sub,.side .cgrp{display:none}
+  .side a.sx{display:none}
   #inv-nav{display:contents}
   .side a{padding:7px 11px;font-size:13.5px} .side a svg{display:none}
   .top{position:static} .tstats{display:none}
@@ -392,20 +450,26 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     <a href="#temata" data-v="temata"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span class="t">Tržní témata</span><small>9</small></a>
     <a href="#simulace" data-v="simulace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/><circle cx="12" cy="12" r="1"/></svg><span class="t">Simulace</span></a>
     <a href="#pravidla" data-v="pravidla"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h10a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4Z"/><path d="M4 16a4 4 0 0 1 4-4h10"/></svg><span class="t">Pravidla</span></a>
+    <details class="cgrp" id="cgrp"><summary class="subl">Skupiny akcií a Fed</summary>
+    <div class="cats" id="cats"></div>
+    <div class="cal" id="cal"></div></details>
     <p class="grp">Nemovitosti</p>
     <a href="#nemovitosti" data-v="nem-prehled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-6h4v6"/></svg><span class="t">Přehled nemovitostí</span></a>
-    <a href="#nemovitosti/trh" data-v="nem-trh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="t">Trh Česko a svět</span></a>
-    <a href="#nemovitosti/kalkulacka" data-v="nem-kalk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg><span class="t">Kalkulačka výnosu</span></a>
-    <a href="#nemovitosti/jak-nakupovat" data-v="nem-metodika"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z"/></svg><span class="t">Jak nakupovat</span></a>
-    <a href="#nemovitosti/financovani" data-v="nem-fin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10 12 4l9 6"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18"/></svg><span class="t">Financování 2026</span></a>
-    <a href="#nemovitosti/checklist" data-v="nem-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="m8 12 3 3 5-6"/></svg><span class="t">Checklist před koupí</span><small id="n-check">0/0</small></a>
+    <a href="#nemovitosti/trh" data-v="nem-trh" class="sx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="t">Trh Česko a svět</span></a>
+    <a href="#nemovitosti/kalkulacka" data-v="nem-kalk" class="sx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg><span class="t">Kalkulačka výnosu</span></a>
+    <a href="#nemovitosti/jak-nakupovat" data-v="nem-metodika" class="sx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z"/></svg><span class="t">Jak nakupovat</span></a>
+    <a href="#nemovitosti/financovani" data-v="nem-fin" class="sx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10 12 4l9 6"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18"/></svg><span class="t">Financování 2026</span></a>
+    <a href="#nemovitosti/checklist" data-v="nem-check" class="sx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="m8 12 3 3 5-6"/></svg><span class="t">Checklist před koupí</span><small id="n-check">0/0</small></a>
+    <p class="grp">Auta</p>
+    <a href="#auta" data-v="aut-prehled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16h14l-1.5-6a2 2 0 0 0-2-1.5h-7a2 2 0 0 0-2 1.5Z"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></svg><span class="t">Přehled aut</span></a>
+    <a href="#auta/trh" data-v="aut-trh" class="sx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="t">Trh Česko a svět</span></a>
+    <a href="#auta/kalkulacka" data-v="aut-kalk" class="sx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg><span class="t">Kalkulačka nákladů</span></a>
+    <a href="#auta/jak-nakupovat" data-v="aut-metodika" class="sx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z"/></svg><span class="t">Jak nakupovat</span></a>
+    <a href="#auta/checklist" data-v="aut-check" class="sx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="m8 12 3 3 5-6"/></svg><span class="t">Checklist prohlídky</span><small id="n-acheck">0/0</small></a>
     <p class="grp">Další investice</p>
     <a href="#investice" data-v="investice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg><span class="t">Přehled investic</span></a>
-    <a href="#auta" data-v="auta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16h14l-1.5-6a2 2 0 0 0-2-1.5h-7a2 2 0 0 0-2 1.5Z"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></svg><span class="t">Auta</span></a>
     <a href="#mince" data-v="mince"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="7" rx="7" ry="3"/><path d="M5 7v5c0 1.7 3.1 3 7 3s7-1.3 7-3V7"/><path d="M5 12v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></svg><span class="t">Mince a zlato</span></a>
-    <p class="grp">Skupiny akcií</p>
-    <div class="cats" id="cats"></div>
-    <div class="cal" id="cal"></div>
+    <a href="#zajimavosti" data-v="zaj"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8Z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8Z"/></svg><span class="t">Zajímavosti</span><small class="new">NOVÉ</small></a>
     <p class="note">Vzdělávací model pro dlouhodobé investování. Výsledky nejsou předpovědí budoucích výnosů ani investičním doporučením.</p>
   </nav>
 
@@ -508,8 +572,9 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     <section class="view" id="v-domu" hidden>
       <span class="eyebrow">Investiční štít · týden <span id="d-week">–</span></span>
       <h1>Všechny tvoje investice <br>na jednom místě</h1>
-      <p class="lead">Akcie počítá matematický model, nemovitosti, auta a zlato hlídají týdenní přehledy trhu. Každou neděli večer se vše obnoví, takže v pondělí ráno máš čistý štít.</p>
+      <p class="lead">Akcie počítá matematický model, nemovitosti, auta, zlato a sběratelské zajímavosti hlídají týdenní přehledy trhu. Každou neděli večer se vše obnoví, takže v pondělí ráno máš čistý štít.</p>
       <div class="hgrid" id="home-tiles"></div>
+      <div class="zstrip" id="home-zaj"></div>
       <div class="ticker-strip" aria-hidden="true"><div class="tk" id="tk1"></div><div class="tk" id="tk2"></div></div>
       <div class="two" style="margin-top:0">
         <div class="card"><div class="ch"><h2>Co se tento týden stalo</h2><small>výběr ze všech sekcí</small></div><div class="tl" id="home-news"></div></div>
@@ -527,7 +592,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
     <!-- NEMOVITOSTI: PŘEHLED -->
     <section class="view nemv" id="v-nem-prehled" hidden>
-      <nav class="subnav" aria-label="Nemovitosti" data-subnav></nav>
+      <nav class="subnav" aria-label="Nemovitosti" data-subnav="nem"></nav>
       <div class="hero" data-mark="REALITY">
         <span class="eyebrow">Nemovitosti · Česko a svět</span>
         <h1>Nemovitosti</h1>
@@ -549,7 +614,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
     <!-- NEMOVITOSTI: KALKULAČKA -->
     <section class="view nemv" id="v-nem-kalk" hidden>
-      <nav class="subnav" aria-label="Nemovitosti" data-subnav></nav>
+      <nav class="subnav" aria-label="Nemovitosti" data-subnav="nem"></nav>
       <span class="eyebrow">Nemovitosti · nástroj</span>
       <h1>Kalkulačka výnosu bytu</h1>
       <p class="lead">Posuvníky mění výpočet okamžitě. Výchozí hodnoty odpovídají typickému bytu za 4 mil. Kč s investiční hypotékou podle pravidel ČNB (70 % LTV). Výpočet je orientační, před koupí ho ověř s hypotečním poradcem a daňovým poradcem.</p>
@@ -570,7 +635,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
     <!-- NEMOVITOSTI: JAK NAKUPOVAT -->
     <section class="view nemv" id="v-nem-metodika" hidden>
-      <nav class="subnav" aria-label="Nemovitosti" data-subnav></nav>
+      <nav class="subnav" aria-label="Nemovitosti" data-subnav="nem"></nav>
       <div class="hero" data-mark="AS.">
         <span class="eyebrow">Nemovitosti · jak nakupovat</span>
         <h1>Pravidla podle Artema Saykina</h1>
@@ -587,7 +652,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
     <!-- NEMOVITOSTI: FINANCOVÁNÍ -->
     <section class="view nemv" id="v-nem-fin" hidden>
-      <nav class="subnav" aria-label="Nemovitosti" data-subnav></nav>
+      <nav class="subnav" aria-label="Nemovitosti" data-subnav="nem"></nav>
       <span class="eyebrow">Nemovitosti · financování</span>
       <h1>Kolik ti banka půjčí v roce 2026</h1>
       <p class="lead">Od 1. 4. 2026 doporučuje ČNB pro investiční hypotéky (pronájem a každý třetí a další byt) LTV nejvýš 70 % a DTI nejvýš 7. Pro vlastní bydlení zůstává 90 % do 36 let a 80 % nad 36 let. Jde o doporučení, banky mají omezený prostor pro výjimky.</p>
@@ -608,7 +673,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
     <!-- NEMOVITOSTI: CHECKLIST -->
     <section class="view nemv" id="v-nem-check" hidden>
-      <nav class="subnav" aria-label="Nemovitosti" data-subnav></nav>
+      <nav class="subnav" aria-label="Nemovitosti" data-subnav="nem"></nav>
       <div class="card" style="margin-bottom:18px"><div class="cl-head">
         <svg class="ring" id="cl-ring" viewBox="0 0 120 120" role="img" aria-label="Postup checklistu"></svg>
         <div style="flex:1;min-width:220px"><span class="eyebrow">Nemovitosti · checklist</span><h1 style="margin:6px 0">Než podepíšeš rezervaci</h1>
@@ -616,6 +681,97 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
           <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn ghost" type="button" id="cl-reset">Začít nový byt</button></div></div>
       </div></div>
       <div class="two" style="margin-top:0" id="cl-groups"></div>
+    </section>
+
+    <!-- AUTA: PŘEHLED -->
+    <section class="view autv" id="v-aut-prehled" hidden>
+      <nav class="subnav" aria-label="Auta" data-subnav="aut"></nav>
+      <div class="hero" data-mark="KLASIKA">
+        <span class="eyebrow">Auta · Česko a svět</span>
+        <h1>Auta</h1>
+        <p id="ap-lead">–</p>
+        <div class="shero-kpi" id="ap-kpi"></div>
+      </div>
+      <div class="cards4" id="ap-stats"></div>
+      <div class="sec-h"><span class="eyebrow">Nástroje</span><h2>Co tu můžeš dělat</h2></div>
+      <div class="three" style="margin-bottom:22px">
+        <a class="card" href="#auta/kalkulacka"><span class="eyebrow">01 · Kalkulačka</span><h2 style="margin:8px 0 6px">Vydělá to auto, nebo je to koníček?</h2><p class="muted" style="margin:0;font-size:14px">Zadej cenu, renovaci, garáž, pojištění a servis. Uvidíš, kolik tě auto stojí, jaké zhodnocení potřebuješ k nule a jak by si vedly stejné peníze v ETF.</p></a>
+        <a class="card" href="#auta/jak-nakupovat"><span class="eyebrow">02 · Jak nakupovat</span><h2 style="margin:8px 0 6px">Pravidla pro veterány a youngtimery</h2><p class="muted" style="margin:0;font-size:14px">Originalita, zelené značky, daně, pojištění, co tipuje Hagerty na rok 2026 a proč teď mají navrch kupující.</p></a>
+        <a class="card" href="#auta/checklist"><span class="eyebrow">03 · Checklist</span><h2 style="margin:8px 0 6px">Prohlídka před koupí</h2><p class="muted" style="margin:0;font-size:14px">24 bodů od VIN po zkušební jízdu. Odškrtávej přímo u auta na mobilu, prohlížeč si postup pamatuje.</p></a>
+        <a class="card" href="#auta/trh"><span class="eyebrow">04 · Trh</span><h2 style="margin:8px 0 6px">Aukce a burzy tento týden</h2><p class="muted" style="margin:0;font-size:14px">Zprávy, aukce a příležitosti z Česka i ze světa. Přepínač Česko / Svět.</p></a>
+      </div>
+      <div class="sec-h"><span class="eyebrow">Česko</span><h2>Příležitosti tohoto týdne</h2></div>
+      <div class="opps" id="ap-opps"></div>
+    </section>
+
+    <!-- AUTA: KALKULAČKA -->
+    <section class="view autv" id="v-aut-kalk" hidden>
+      <nav class="subnav" aria-label="Auta" data-subnav="aut"></nav>
+      <span class="eyebrow">Auta · nástroj</span>
+      <h1>Vydělá to auto, nebo je to koníček?</h1>
+      <p class="lead">Posuvníky mění výpočet okamžitě. Hodnota auta roste ze kupní ceny podle zvoleného zhodnocení, renovace se počítá jako náklad (do ceny se často nepromítne celá). Roční náklady rostou o 2,5 % ročně. Výpočet je orientační.</p>
+      <div class="two split">
+        <div class="card">
+          <div class="ch"><h2>Auto a náklady</h2><div class="presets" id="a-presets"><button type="button" data-p="youngtimer">Youngtimer</button><button type="button" data-p="vychod">Klasika z východu</button><button type="button" data-p="sport">Sportovní z aukce</button><button type="button" data-p="usa">Dovoz z USA</button></div></div>
+          <div class="form" id="a-form"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+          <div id="a-verdict"></div>
+          <div class="card"><div class="ch"><h2>Výsledek</h2><small id="a-yrs">za celou dobu držení</small></div><div class="res" id="a-res"></div></div>
+          <div class="card"><div class="ch"><h2>Auto proti ETF</h2><small>hodnota po nákladech prodeje</small></div><div class="chart" id="a-chart" style="height:260px"></div>
+            <div class="legend"><span><i style="background:var(--h2)"></i>Hodnota auta</span><span><i style="background:var(--warn)"></i>Všechny náklady</span><span><i style="background:var(--up)"></i>Stejné peníze v ETF</span></div></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:18px"><div class="ch"><h2>Uložená auta</h2><button class="btn" type="button" id="a-save">Uložit toto auto</button></div><div class="scen-list" id="a-scen"></div></div>
+    </section>
+
+    <!-- AUTA: JAK NAKUPOVAT -->
+    <section class="view autv" id="v-aut-metodika" hidden>
+      <nav class="subnav" aria-label="Auta" data-subnav="aut"></nav>
+      <div class="hero" data-mark="VIN">
+        <span class="eyebrow">Auta · jak nakupovat</span>
+        <h1>Jak koupit veterána a neprodělat</h1>
+        <p>Pravidla z českých předpisů, daňového zákona a zkušeností sběratelů, doplněná o data trhu za rok 2026. U každé rady je odkaz na zdroj.</p>
+      </div>
+      <div class="rules-big" id="a-rules"></div>
+      <div class="sec-h"><span class="eyebrow">Zelené značky</span><h2>Cesta k historické registraci</h2></div>
+      <div class="steps" style="margin-bottom:22px">
+        <div class="card step"><span class="sn">1</span><h3>Auto starší 30 let</h3><p>Počítá se od data výroby. Vůz má být co nejvíc v původním stavu, úpravy a tuning nejsou dovolené.</p></div>
+        <div class="card step"><span class="sn">2</span><h3>Testace v klubu</h3><p>Komisař klubu z federace historických vozidel posoudí původnost. Potvrzení platí 5 let.</p></div>
+        <div class="card step"><span class="sn">3</span><h3>Prohlídka na STK</h3><p>Od září 2023 technický stav ověřuje STK místo druhé, krajské testace.</p></div>
+        <div class="card step"><span class="sn">4</span><h3>Zelené značky</h3><p>Zápis do registru historických vozidel. Na STK pak jednou za 5 let, auto ale nesmíš používat k podnikání.</p></div>
+      </div>
+      <div class="sec-h"><span class="eyebrow">Principy</span><h2>Jak vybírat a kupovat</h2></div>
+      <div class="princ" id="a-princ"></div>
+      <div class="card" style="margin-top:18px"><div class="ch"><h2>Zdroje</h2></div><div class="news src-grid" id="a-src"></div></div>
+    </section>
+
+    <!-- AUTA: CHECKLIST -->
+    <section class="view autv" id="v-aut-check" hidden>
+      <nav class="subnav" aria-label="Auta" data-subnav="aut"></nav>
+      <div class="card" style="margin-bottom:18px"><div class="cl-head">
+        <svg class="ring" id="acl-ring" viewBox="0 0 120 120" role="img" aria-label="Postup checklistu"></svg>
+        <div style="flex:1;min-width:220px"><span class="eyebrow">Auta · checklist</span><h1 style="margin:6px 0">Prohlídka před koupí</h1>
+          <p class="muted" style="margin:0">Otevři si to na mobilu přímo u auta a odškrtávej. Postup se ukládá jen v tomto prohlížeči.</p>
+          <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn ghost" type="button" id="acl-reset">Začít další auto</button></div></div>
+      </div></div>
+      <div class="two" style="margin-top:0" id="acl-groups"></div>
+    </section>
+
+    <!-- ZAJÍMAVOSTI -->
+    <section class="view zajv" id="v-zaj" hidden>
+      <div class="hero" data-mark="SBÍRKY">
+        <span class="eyebrow">Další investice · zajímavosti</span>
+        <h1>Zajímavosti</h1>
+        <p id="z-lead">–</p>
+        <div class="zchips" id="z-chips" role="tablist" aria-label="Kategorie"></div>
+      </div>
+      <div id="z-detail"></div>
+      <div class="zgrid" id="z-grid"></div>
+      <div class="two" style="margin-top:0">
+        <div class="card"><div class="ch"><h2 id="z-ch-t">Jak si vedly za rok 2025</h2><small>klikni na řádek</small></div><div class="zbars" id="z-chart"></div><p class="muted" style="font-size:12.5px;margin:12px 0 0" id="z-ch-n"></p></div>
+        <div class="card"><div class="ch"><h2>Novinky</h2><small>nejnovější nahoře</small></div><div class="tl" id="z-news"></div></div>
+      </div>
     </section>
 
     <!-- DALŠÍ INVESTICE -->
@@ -719,37 +875,45 @@ addEventListener("resize",()=>{clearTimeout(window.__rt);window.__rt=setTimeout(
 
 /* routing */
 let INV=null,CFG=null;
-const VIEWS=["domu","prehled","akcie","portfolio","temata","simulace","pravidla","investice","invtab","nem-prehled","nem-kalk","nem-metodika","nem-fin","nem-check"];
+const VIEWS=["domu","prehled","akcie","portfolio","temata","simulace","pravidla","investice","invtab","nem-prehled","nem-kalk","nem-metodika","nem-fin","nem-check","aut-prehled","aut-kalk","aut-metodika","aut-check","zaj"];
 const NEMSUB={"":"nem-prehled","trh":"invtab","kalkulacka":"nem-kalk","jak-nakupovat":"nem-metodika","financovani":"nem-fin","checklist":"nem-check"};
-const TITLES={domu:"Domů",prehled:"Přehled akcií",akcie:"Akcie",portfolio:"Portfolio",temata:"Tržní témata",simulace:"Simulace",pravidla:"Pravidla",investice:"Další investice","nem-prehled":"Nemovitosti","nem-kalk":"Kalkulačka výnosu","nem-metodika":"Jak nakupovat nemovitosti","nem-fin":"Financování 2026","nem-check":"Checklist před koupí"};
+const AUTSUB={"":"aut-prehled","trh":"invtab","kalkulacka":"aut-kalk","jak-nakupovat":"aut-metodika","checklist":"aut-check"};
+const TITLES={domu:"Domů",prehled:"Přehled akcií",akcie:"Akcie",portfolio:"Portfolio",temata:"Tržní témata",simulace:"Simulace",pravidla:"Pravidla",investice:"Další investice","nem-prehled":"Nemovitosti","nem-kalk":"Kalkulačka výnosu","nem-metodika":"Jak nakupovat nemovitosti","nem-fin":"Financování 2026","nem-check":"Checklist před koupí","aut-prehled":"Auta","aut-kalk":"Kalkulačka nákladů auta","aut-metodika":"Jak koupit veterána","aut-check":"Checklist prohlídky auta",zaj:"Zajímavosti"};
+let ZSEL=null;
 function route(){
   const h=(location.hash||"#domu").slice(1).split("/").map(decodeURIComponent);
-  let v=h[0]||"domu",tab=null,reg=null,cur=v;
-  if(v==="nemovitosti"){v=NEMSUB[h[1]||""]||"nem-prehled";cur=v==="invtab"?"nem-trh":v;if(v==="invtab"){tab="nemovitosti";reg=h[2]}}
-  else if(v==="auta"||v==="mince"){tab=v;reg=h[1];v="invtab";cur=tab}
+  let v=h[0]||"domu",tab=null,reg=null,cur=null;
+  if(v==="nemovitosti"){v=NEMSUB[h[1]||""]||"nem-prehled";if(v==="invtab"){tab="nemovitosti";reg=h[2];cur="nem-trh"}}
+  else if(v==="auta"){if(h[1]==="svet"){v="invtab";tab="auta";reg="svet";cur="aut-trh"}else{v=AUTSUB[h[1]||""]||"aut-prehled";if(v==="invtab"){tab="auta";reg=h[2];cur="aut-trh"}}}
+  else if(v==="mince"){tab=v;reg=h[1];v="invtab";cur="mince"}
+  else if(v==="zajimavosti"){v="zaj";ZSEL=h[1]||null}
   if(!VIEWS.includes(v)||(v==="invtab"&&!INV))v=VIEWS.includes(v)&&v!=="invtab"?v:"domu";
+  if(v!=="invtab")cur=v;
   VIEWS.forEach(x=>{$("v-"+x).hidden=x!==v});
-  if(v!=="invtab"&&cur!=="nem-trh")cur=v;
   document.querySelectorAll(".side a[data-v]").forEach(a=>{if(a.dataset.v===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   drawSubnav(cur);
-  document.title=(tab&&INV?(INV.tabs.find(t=>t.id===tab).name+(reg==="svet"?" ve světě":"")):TITLES[v]||"Investiční štít")+" · Investiční štít";
-  window.scrollTo(0,0);
+  const zt=v==="zaj"&&ZSEL&&INV&&INV.extras?(INV.extras.items.find(i=>i.id===ZSEL)||{}).name:null;
+  document.title=(tab&&INV?(INV.tabs.find(t=>t.id===tab).name+(reg==="svet"?" ve světě":"")):zt||TITLES[v]||"Investiční štít")+" · Investiční štít";
+  if(!(v==="zaj"&&h[1]))window.scrollTo(0,0);
   if(v==="domu")drawHome();
   if(v==="investice")drawInvOverview();
   if(v==="invtab"&&INV)drawInvTab(tab,reg);
-  if(INV){if(v==="nem-prehled")drawNemPrehled();if(v==="nem-kalk")drawKalk();if(v==="nem-metodika")drawMetodika();if(v==="nem-fin")drawFin();if(v==="nem-check")drawCheck();}
+  if(INV){if(v==="nem-prehled")drawNemPrehled();if(v==="nem-kalk")drawKalk();if(v==="nem-metodika")drawMetodika();if(v==="nem-fin")drawFin();if(v==="nem-check")drawCheck("nem");
+    if(v==="aut-prehled")drawAutPrehled();if(v==="aut-kalk")drawAKalk();if(v==="aut-metodika")drawAutMetodika();if(v==="aut-check")drawCheck("aut");if(v==="zaj")drawZaj();}
   if(!D)return;
   if(v==="akcie"){const t=h[1];if(t&&D.akcie.some(a=>a.ticker===t))sel=t;if(!sel)sel=D.akcie[0].ticker;drawList();drawDetail();}
   if(v==="simulace")drawFan();
 }
-const NEMLINKS=[["nemovitosti","nem-prehled","Přehled"],["nemovitosti/trh","nem-trh","Trh Česko a svět"],["nemovitosti/kalkulacka","nem-kalk","Kalkulačka"],["nemovitosti/jak-nakupovat","nem-metodika","Jak nakupovat"],["nemovitosti/financovani","nem-fin","Financování"],["nemovitosti/checklist","nem-check","Checklist"]];
+const SUBN={nem:[["nemovitosti","nem-prehled","Přehled"],["nemovitosti/trh","nem-trh","Trh Česko a svět"],["nemovitosti/kalkulacka","nem-kalk","Kalkulačka"],["nemovitosti/jak-nakupovat","nem-metodika","Jak nakupovat"],["nemovitosti/financovani","nem-fin","Financování"],["nemovitosti/checklist","nem-check","Checklist"]],
+  aut:[["auta","aut-prehled","Přehled"],["auta/trh","aut-trh","Trh Česko a svět"],["auta/kalkulacka","aut-kalk","Kalkulačka"],["auta/jak-nakupovat","aut-metodika","Jak nakupovat"],["auta/checklist","aut-check","Checklist"]]};
 function drawSubnav(cur){
-  const html=NEMLINKS.map(([h,v,t])=>`<a href="#${h}"${v===cur?' aria-current="page"':""}>${t}</a>`).join("");
-  document.querySelectorAll("[data-subnav]").forEach(n=>n.innerHTML=html);
-  const it=$("it-subnav");if(it){it.hidden=cur!=="nem-trh";if(cur==="nem-trh")it.innerHTML=html}
-  const p=PAL.nemovitosti;document.querySelectorAll(".nemv").forEach(x=>{x.style.setProperty("--h1",p[0]);x.style.setProperty("--h2",p[1])});
+  const html=k=>SUBN[k].map(([h,v,t])=>`<a href="#${h}"${v===cur?' aria-current="page"':""}>${t}</a>`).join("");
+  Object.keys(SUBN).forEach(k=>document.querySelectorAll(`[data-subnav="${k}"]`).forEach(n=>n.innerHTML=html(k)));
+  const it=$("it-subnav");if(it){const k=cur==="nem-trh"?"nem":cur==="aut-trh"?"aut":null;it.hidden=!k;if(k){it.innerHTML=html(k);it.setAttribute("aria-label",k==="nem"?"Nemovitosti":"Auta")}}
+  [["nemv","nemovitosti"],["autv","auta"],["zajv","zaj"]].forEach(([c,k])=>{const p=PAL[k];document.querySelectorAll("."+c).forEach(x=>{x.style.setProperty("--h1",p[0]);x.style.setProperty("--h2",p[1])})});
 }
 addEventListener("hashchange",route);
+setTimeout(()=>{const cg=$("cgrp");if(cg){if(lsGet("stit-cgrp",false))cg.open=true;cg.addEventListener("toggle",()=>lsSet("stit-cgrp",cg.open))}},0);
 
 function loadSeries(){if(SER)return Promise.resolve(SER);if(!serLoading)serLoading=fetch("stit-series.json?v="+(D?.souhrn?.data_k||"")).then(r=>r.ok?r.json():{}).then(j=>(SER=j)).catch(()=>(SER={}));return serLoading}
 
@@ -777,7 +941,7 @@ function init(){
   $("o-sig").innerHTML=D.signaly.slice(0,6).map(s=>`<li><span class="pill ${s.typ==="nákup"?"p-up":s.typ==="prodej"||s.typ==="pozor"?"p-down":s.typ==="pásmo"?"p-warn":"p-flat"}">${esc(s.typ)}</span><span>${esc(s.text)}</span></li>`).join("");
   // categories
   const groups=[...new Set(A.map(a=>a.skupina))].sort((a,b)=>a==="Ostatní"?1:b==="Ostatní"?-1:a.localeCompare(b,"cs"));
-  $("cats").innerHTML=groups.map(g=>`<a href="#prehled" data-g="${esc(g)}"><span><span class="tag" style="border:0;background:none;padding:0"><i style="background:${GCOL[g]}"></i></span> ${esc(g)}</span><small>${A.filter(a=>a.skupina===g).length}</small></a>`).join("");
+  $("cats").innerHTML=groups.map(g=>`<a class="sub" href="#prehled" data-g="${esc(g)}"><span><span class="tag" style="border:0;background:none;padding:0"><i style="background:${GCOL[g]}"></i></span> ${esc(g)}</span><small>${A.filter(a=>a.skupina===g).length}</small></a>`).join("");
   $("cats").querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{lbGroup=a.dataset.g;drawLb()}));
   $("lb-chips").innerHTML=`<button class="chip" type="button" data-g="" aria-pressed="true">Vše</button>`+groups.map(g=>`<button class="chip" type="button" data-g="${esc(g)}" aria-pressed="false"><i style="background:${GCOL[g]}"></i>${esc(g)}</button>`).join("")+`<button class="chip" type="button" data-g="__pf" aria-pressed="false">Jen portfolio</button>`;
   $("lb-chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;lbGroup=b.dataset.g;drawLb()});
@@ -986,21 +1150,24 @@ const TREND={up:"p-up",down:"p-down",flat:"p-flat"};
 const safeUrl=u=>/^https:\/\//.test(u||"")?u:null;
 function initInv(){
   const hy=(INV.tabs.find(t=>t.id==="nemovitosti")||{}).stats;if(hy&&hy[0])$("t-hypo").innerHTML=`Hypotéky <b>${esc(hy[0].v)}</b>`;
-  const ck=$("n-check");if(ck)ck.textContent=checkCount();
+  const ck=$("n-check");if(ck)ck.textContent=checkCount("nem");const ak=$("n-acheck");if(ak)ak.textContent=checkCount("aut");
   if($("inv-nav"))$("inv-nav").innerHTML=INV.tabs.map(t=>`<a href="#${esc(t.id)}" data-v="${esc(t.id)}"><span>${esc(t.icon||"")} ${esc(t.name)}</span><small class="${t.trend==="up"?"up":t.trend==="down"?"down":""}">${t.trend==="up"?"▲":t.trend==="down"?"▼":"●"}</small></a>`).join("");
 }
 function drawInvOverview(){
   if(!INV){$("inv-cards").innerHTML=`<p class="muted">Data se načítají…</p>`;return}
-  $("inv-lead").textContent=`Týden ${INV.week||""}. Nemovitosti, auta, mince a zlato v kostce. Další obnova: ${INV.next||"neděle večer"}.`;
+  $("inv-lead").textContent=`Týden ${INV.week||""}. Nemovitosti, auta, mince, zlato a sběratelské zajímavosti v kostce. Další obnova: ${INV.next||"neděle večer"}.`;
   const stock=D?`<a class="card icard" href="#prehled" style="--h1:#14532D;--h2:#22C55E"><span class="band"></span><span class="t"><b>📈 Akcie</b><span class="pill p-up">model ${pct(D.souhrn.ocek_vynos)} p.a.</span></span>
     <p>Portfolio ${D.souhrn.pocet_akcii} akcií z watchlistu a 15% rezerva. Šance na propad přes −35 % za 10 let: ${pct(D.souhrn.p_propad35_10let,0)}.</p>
     <span class="mini"><span>Medián za 10 let</span><span>${eur(D.souhrn.median_10let)}</span><span>Data k</span><span>${dte(D.souhrn.data_k)}</span></span><span class="go">Otevřít akcie →</span></a>`:"";
   $("inv-cards").innerHTML=stock+INV.tabs.map(t=>{const p=PAL[t.id]||["#15803D","#22C55E"];return `<a class="card icard" href="#${esc(t.id)}" style="--h1:${p[0]};--h2:${p[1]}"><span class="band"></span><span class="t"><b>${esc(t.icon||"")} ${esc(t.name)}</b></span>
     <span class="reg"><span class="pill ${TREND[t.trend]||"p-flat"}"><b>CZ</b>${esc(t.trendText)}</span>${t.world?`<span class="pill ${TREND[t.world.trend]||"p-flat"}"><b>SVĚT</b>${esc(t.world.trendText)}</span>`:""}</span>
     <p>${esc(t.lead)}</p>
-    <span class="mini">${(t.stats||[]).slice(0,2).map(x=>`<span>${esc(x.k)}</span><span class="${x.cls==="up"?"up":x.cls==="down"?"down":""}">${esc(x.v)}</span>`).join("")}</span><span class="go">Otevřít ${esc(t.name.toLowerCase())} →</span></a>`}).join("");
+    <span class="mini">${(t.stats||[]).slice(0,2).map(x=>`<span>${esc(x.k)}</span><span class="${x.cls==="up"?"up":x.cls==="down"?"down":""}">${esc(x.v)}</span>`).join("")}</span><span class="go">Otevřít ${esc(t.name.toLowerCase())} →</span></a>`}).join("")+zajCard();
 }
-const PAL={nemovitosti:["#0B2A8F","#1FA2FF"],auta:["#7A1E0A","#FF7A2F"],mince:["#6B3A00","#E7A21B"]};
+function zajCard(){const X=INV&&INV.extras;if(!X)return"";const p=PAL.zaj;return `<a class="card icard" href="#zajimavosti" style="--h1:${p[0]};--h2:${p[1]}"><span class="band"></span><span class="t"><b>✨ Zajímavosti</b></span>
+    <span class="reg">${X.items.map(i=>`<span class="pill ${TREND[i.trend]||"p-flat"}">${esc(i.icon)} ${esc(i.name)}</span>`).join("")}</span>
+    <p>${esc(X.lead)}</p><span class="mini">${X.items.slice(0,2).map(i=>`<span>${esc(i.name)}</span><span>${esc(i.big.v)}</span>`).join("")}</span><span class="go">Otevřít zajímavosti →</span></a>`}
+const PAL={nemovitosti:["#0B2A8F","#1FA2FF"],auta:["#7A1E0A","#FF7A2F"],mince:["#6B3A00","#E7A21B"],zaj:["#4A1D96","#FF5FA2"]};
 const ART={
  nemovitosti:`<svg viewBox="0 0 240 180"><g fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.85)" stroke-width="2.5" stroke-linejoin="round"><rect x="18" y="78" width="54" height="86" rx="4"/><rect x="150" y="54" width="70" height="110" rx="4"/><path d="M78 164V92l42-34 42 34v72Z" fill="rgba(255,255,255,.28)"/></g><g fill="rgba(255,255,255,.75)"><rect x="30" y="92" width="10" height="12" rx="2"/><rect x="50" y="92" width="10" height="12" rx="2"/><rect x="30" y="116" width="10" height="12" rx="2"/><rect x="50" y="116" width="10" height="12" rx="2"/><rect x="164" y="70" width="12" height="12" rx="2"/><rect x="194" y="70" width="12" height="12" rx="2"/><rect x="164" y="96" width="12" height="12" rx="2"/><rect x="194" y="96" width="12" height="12" rx="2"/><rect x="164" y="122" width="12" height="12" rx="2"/><rect x="194" y="122" width="12" height="12" rx="2"/><rect x="108" y="126" width="24" height="38" rx="3"/></g><path d="M10 164h220" stroke="rgba(255,255,255,.85)" stroke-width="2.5" stroke-linecap="round"/><path d="m176 34 10-14 10 14" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M186 22v28" stroke="rgba(255,255,255,.9)" stroke-width="3" stroke-linecap="round"/></svg>`,
  auta:`<svg viewBox="0 0 240 180"><path d="M20 118c0-10 6-16 18-18l26-4 24-24c6-6 14-8 22-8h44c10 0 18 4 24 12l16 20 28 6c10 2 16 8 16 18v12c0 4-3 6-6 6H26c-4 0-6-3-6-6Z" fill="rgba(255,255,255,.2)" stroke="rgba(255,255,255,.9)" stroke-width="2.6" stroke-linejoin="round"/><path d="M74 96l22-20c4-4 8-6 14-6h18v26Zm62 0V70h20c6 0 10 2 14 7l14 19Z" fill="rgba(255,255,255,.35)" stroke="rgba(255,255,255,.85)" stroke-width="2"/><g fill="rgba(0,0,0,.25)" stroke="#fff" stroke-width="3"><circle cx="64" cy="138" r="18"/><circle cx="182" cy="138" r="18"/></g><g fill="#fff"><circle cx="64" cy="138" r="6"/><circle cx="182" cy="138" r="6"/></g><path d="M8 158h224" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-dasharray="10 8" stroke-linecap="round"/><path d="M200 40a24 24 0 1 1-34 0" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.5" stroke-linecap="round"/><path d="m183 57 9-14" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>`,
@@ -1014,7 +1181,7 @@ function drawInvTab(id,reg){
   {const T={nemovitosti:"Nemovitosti",auta:"Auta",mince:"Mince a zlato"}[id]||"Další investice";$("it-eyebrow").textContent=T+(reg==="svet"?" · Svět":" · Česko");}
   $("it-h").textContent=t.name;
   $("it-art").innerHTML=ART[id]||"";
-  v.querySelectorAll(".seg button").forEach(b=>{b.setAttribute("aria-selected",b.dataset.reg===reg);b.disabled=b.dataset.reg==="svet"&&!t.world;b.onclick=()=>{location.hash=(id==="nemovitosti"?"nemovitosti/trh":id)+(b.dataset.reg==="svet"?"/svet":"")}});
+  v.querySelectorAll(".seg button").forEach(b=>{b.setAttribute("aria-selected",b.dataset.reg===reg);b.disabled=b.dataset.reg==="svet"&&!t.world;b.onclick=()=>{location.hash=(id==="nemovitosti"?"nemovitosti/trh":id==="auta"?"auta/trh":id)+(b.dataset.reg==="svet"?"/svet":"")}});
   const tr=$("it-trend");tr.className="pill";tr.textContent=R.trendText||"";
   $("it-lead").textContent=R.lead||"";
   $("it-stats").innerHTML=(R.stats||[]).map(x=>`<div class="card stat"><div class="k">${esc(x.k)}</div><div class="v ${x.cls==="up"?"up":x.cls==="down"?"down":"flat"}">${esc(x.v)}</div><div class="nn">${esc(x.n||"")}</div></div>`).join("");
@@ -1160,19 +1327,21 @@ function finUpdate(){
   $("f-res").innerHTML=R.map(x=>`<div class="r"><span>${x[0]}</span><b class="${x[2]==="rozhoduje"?"":x[2]==="nestačí"?"down":x[2]==="stačí"?"up":""}">${x[1]}</b><small>${x[2]}</small></div>`).join("");
 }
 
-/* ---------- checklist ---------- */
-const checkState=()=>lsGet("stit-check",{});
-function checkCount(){const N=NEM();if(!N||!N.guide)return"0/0";const st=checkState(),all=N.guide.checklist.reduce((s,g)=>s+g[1].length,0);return Object.values(st).filter(Boolean).length+"/"+all}
-function drawCheck(){
-  const N=NEM();if(!N||!N.guide)return;const st=checkState(),C=N.guide.checklist;
-  $("cl-groups").innerHTML=C.map((g,gi)=>{const done=g[1].filter((_,ii)=>st[gi+"-"+ii]).length;return `<div class="card"><div class="cl-grp" style="margin:0"><h3><span>${esc(g[0])}</span><span class="pill ${done===g[1].length?"p-up":"p-flat"}">${done}/${g[1].length}</span></h3>
+/* ---------- checklist (nemovitosti i auta) ---------- */
+const AUT=()=>INV&&INV.tabs.find(t=>t.id==="auta");
+const CHK={nem:{store:"stit-check",g:()=>(NEM()||{}).guide,grp:"cl-groups",ring:"cl-ring",reset:"cl-reset",cnt:"n-check",msg:"Checklist vynulován pro další byt"},
+  aut:{store:"stit-check-auto",g:()=>(AUT()||{}).guide,grp:"acl-groups",ring:"acl-ring",reset:"acl-reset",cnt:"n-acheck",msg:"Checklist vynulován pro další auto"}};
+function checkCount(k){const c=CHK[k],G=c.g();if(!G||!G.checklist)return"0/0";const st=lsGet(c.store,{}),all=G.checklist.reduce((s,g)=>s+g[1].length,0);return Object.values(st).filter(Boolean).length+"/"+all}
+function drawCheck(k){
+  const c=CHK[k],G=c.g();if(!G||!G.checklist)return;const st=lsGet(c.store,{}),C=G.checklist;
+  $(c.grp).innerHTML=C.map((g,gi)=>{const done=g[1].filter((_,ii)=>st[gi+"-"+ii]).length;return `<div class="card"><div class="cl-grp" style="margin:0"><h3><span>${esc(g[0])}</span><span class="pill ${done===g[1].length?"p-up":"p-flat"}">${done}/${g[1].length}</span></h3>
     ${g[1].map((it,ii)=>`<label class="cl-item"><input type="checkbox" data-id="${gi}-${ii}" ${st[gi+"-"+ii]?"checked":""}><span><b>${esc(it[0])}</b><small>${esc(it[1])}</small></span></label>`).join("")}</div></div>`}).join("");
-  $("cl-groups").querySelectorAll("input").forEach(i=>i.onchange=()=>{const s=checkState();s[i.dataset.id]=i.checked;lsSet("stit-check",s);ring();$("n-check").textContent=checkCount();const p=i.closest(".card").querySelector(".pill"),all=i.closest(".card").querySelectorAll("input"),dn=[...all].filter(x=>x.checked).length;p.textContent=dn+"/"+all.length;p.className="pill "+(dn===all.length?"p-up":"p-flat");if(dn===all.length&&i.checked)toast("Skupina hotová ✓")});
-  $("cl-reset").onclick=()=>{lsSet("stit-check",{});drawCheck();$("n-check").textContent=checkCount();toast("Checklist vynulován pro další byt")};
-  ring();
+  $(c.grp).querySelectorAll("input").forEach(i=>i.onchange=()=>{const s2=lsGet(c.store,{});s2[i.dataset.id]=i.checked;lsSet(c.store,s2);ring(k);$(c.cnt).textContent=checkCount(k);const p=i.closest(".card").querySelector(".pill"),all=i.closest(".card").querySelectorAll("input"),dn=[...all].filter(x=>x.checked).length;p.textContent=dn+"/"+all.length;p.className="pill "+(dn===all.length?"p-up":"p-flat");if(dn===all.length&&i.checked)toast("Skupina hotová ✓");if(checkCount(k).split("/").reduce((a,b)=>a===b)&&i.checked)toast("Všechno prověřeno 🎉")});
+  $(c.reset).onclick=()=>{lsSet(c.store,{});drawCheck(k);$(c.cnt).textContent=checkCount(k);toast(c.msg)};
+  ring(k);
 }
-function ring(){const[a,b]=checkCount().split("/").map(Number),p=b?a/b:0,R=50,C=2*Math.PI*R;
-  $("cl-ring").innerHTML=`<defs><linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="var(--h1,var(--brand))"/><stop offset="1" stop-color="var(--h2,var(--brand2))"/></linearGradient></defs><circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--hover)" stroke-width="12"/><circle cx="60" cy="60" r="${R}" fill="none" stroke="url(#rg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C*p} ${C}" transform="rotate(-90 60 60)" style="transition:stroke-dasharray .4s"/><text x="60" y="58" text-anchor="middle" font-family="var(--head)" font-size="24" font-weight="700" fill="var(--ink)">${Math.round(p*100)} %</text><text x="60" y="78" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--muted)">${a} z ${b}</text>`}
+function ring(k){const c=CHK[k],[a,b]=checkCount(k).split("/").map(Number),p=b?a/b:0,R=50,C=2*Math.PI*R;
+  $(c.ring).innerHTML=`<defs><linearGradient id="rg-${k}" x1="0" x2="1"><stop offset="0" stop-color="var(--h1,var(--brand))"/><stop offset="1" stop-color="var(--h2,var(--brand2))"/></linearGradient></defs><circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--hover)" stroke-width="12"/><circle cx="60" cy="60" r="${R}" fill="none" stroke="url(#rg-${k})" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C*p} ${C}" transform="rotate(-90 60 60)" style="transition:stroke-dasharray .4s"/><text x="60" y="58" text-anchor="middle" font-family="var(--head)" font-size="24" font-weight="700" fill="var(--ink)">${Math.round(p*100)} %</text><text x="60" y="78" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--muted)">${a} z ${b}</text>`}
 
 /* ---------- přehled nemovitostí ---------- */
 function drawNemPrehled(){
@@ -1183,6 +1352,121 @@ function drawNemPrehled(){
   const cards=[["Hrubý výnos v ČR","3–6 %","běžné rozpětí, průměr kolem 3,65 % (UniCredit)"],["Státní dluhopisy","≈ 4,5 %","bezriziková alternativa k nájmu"],["Vlastní zdroje na investiční byt","30 %","LTV 70 % od 1. 4. 2026"],["Tvůj byt z kalkulačky",pct(kCalc(K).gross,1),"hrubý výnos · "+czkM(K.cena)]];
   $("np-stats").innerHTML=cards.map((c,i)=>`<a class="card stat" href="#nemovitosti/${i===3?"kalkulacka":"jak-nakupovat"}"><div class="k">${c[0]}</div><div class="v">${c[1]}</div><div class="nn">${c[2]}</div></a>`).join("");
   $("np-opps").innerHTML=(N.opps||[]).map((o,i)=>{const u=safeUrl(o.u);return `<div class="opp"><span class="num">${i+1}</span><p>${esc(o.t)}</p>${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(o.s||"zdroj")} ↗</a>`:""}</div>`}).join("");
+}
+
+/* ---------- auta: přehled ---------- */
+function drawAutPrehled(){
+  const A=AUT();if(!A)return;
+  $("ap-lead").textContent=A.lead;
+  $("ap-kpi").innerHTML=A.stats.slice(0,3).map(s=>`<span>${esc(s.k)} <b>${esc(s.v)}</b></span>`).join("")+(A.world?`<span>Monterey 2026 <b>${esc(A.world.stats[0].v)}</b></span>`:"");
+  const r=aCalc(AK);
+  const cards=[["Klasická auta za rok 2025","−3,7 %","Knight Frank, index luxusních investic","auta/jak-nakupovat","down"],["Hagerty Market Rating","58,3","nejníž za skoro 15 let, trh přeje kupujícím","auta/jak-nakupovat","down"],["STK se zelenou značkou","1× za 5 let","místo každé 2 roky, auto musí mít 30+ let","auta/jak-nakupovat",""],["Tvoje auto z kalkulačky",pct(r.irr,1)+" ročně",`${czkM(AK.cena)} · držení ${AK.roky} let`,"auta/kalkulacka",r.irr>=0?"up":"down"]];
+  $("ap-stats").innerHTML=cards.map(c=>`<a class="card stat" href="#${c[3]}"><div class="k">${c[0]}</div><div class="v ${c[4]}">${c[1]}</div><div class="nn">${esc(c[2])}</div></a>`).join("");
+  $("ap-opps").innerHTML=(A.opps||[]).map((o,i)=>{const u=safeUrl(o.u);return `<div class="opp"><span class="num">${i+1}</span><p>${esc(o.t)}</p>${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(o.s||"zdroj")} ↗</a>`:""}</div>`}).join("");
+}
+
+/* ---------- auta: kalkulačka ---------- */
+const ADEF={cena:450000,prirazka:0,dovoz:8000,renovace:80000,garaz:2000,pojisteni:2000,servis:20000,rust:2,roky:10,prodej:5,alt:7};
+const p1=v=>nf(v,1)+" %";
+const AF=[["cena","Kupní cena",30000,10000000,10000,czk],["prirazka","Aukční přirážka nebo provize",0,20,1,v=>nf(v)+" %"],["dovoz","Přeprava, dovoz a registrace",0,300000,1000,czk],
+ ["renovace","Renovace a opravy po koupi",0,3000000,10000,czk],["garaz","Garáž měsíčně",0,15000,100,czk],["pojisteni","Pojištění ročně",0,60000,500,czk],["servis","Servis a údržba ročně",0,300000,1000,czk],
+ ["rust","Zhodnocení auta ročně",-5,15,.5,p1],["roky","Jak dlouho auto držet",1,25,1,v=>nf(v)+(v===1?" rok":v<5?" roky":" let")],["prodej","Náklady na prodej",0,15,.5,p1],["alt","Výnos alternativy (akciové ETF)",0,12,.5,p1]];
+let AK=Object.assign({},ADEF,lsGet("stit-auto",{}));
+function aCalc(k){
+  const n=Math.max(1,Math.round(k.roky)),buy=k.cena*(1+k.prirazka/100)+k.dovoz+k.renovace,run0=12*k.garaz+k.pojisteni+k.servis;
+  const runs=[];for(let t=1;t<=n;t++)runs.push(run0*Math.pow(1.025,t-1));
+  const saleAt=g=>k.cena*Math.pow(1+g,n)*(1-k.prodej/100);
+  const sale=saleAt(k.rust/100),cost=buy+runs.reduce((a,b)=>a+b,0),profit=sale-cost;
+  const npv=r=>-buy-runs.reduce((a,c,i)=>a+c/Math.pow(1+r,i+1),0)+sale/Math.pow(1+r,n);
+  let lo=-.99,hi=2,irr=null;if(npv(lo)*npv(hi)<0){for(let i=0;i<80;i++){const m=(lo+hi)/2;(npv(m)>0?lo=m:hi=m)}irr=(lo+hi)/2}else irr=npv(0)>0?hi:lo;
+  let gl=-.5,gh=1;for(let i=0;i<80;i++){const m=(gl+gh)/2;(saleAt(m)-cost>0?gh=m:gl=m)}const be=(gl+gh)/2;
+  const a=k.alt/100;let altV=buy;const yrs=[];let cum=buy;
+  for(let t=1;t<=n;t++){altV=altV*(1+a)+runs[t-1];cum+=runs[t-1];yrs.push({y:t,val:k.cena*Math.pow(1+k.rust/100,t)*(1-k.prodej/100),cost:cum,alt:altV})}
+  return {n,buy,run0,sale,cost,profit,irr,be,altV,diff:sale-altV,yrs,perMonth:profit<0?-profit/(n*12):0};
+}
+function aVerdict(r,k){
+  if(r.irr>=k.alt/100)return ["v-good","✓","Investice, která jezdí",`Při ${p1(k.rust)} zhodnocení ročně auto vydělá víc než ETF. Ověř si ale, jestli je takový růst u tohoto modelu realistický: trh klasických aut v roce 2025 zlevnil o 3,7 %.`];
+  if(r.irr>=0)return ["v-ok","≈","Koníček, který se zaplatí",`Peníze se ti vrátí i s malým ziskem, ale v ETF by stejné peníze udělaly o ${czkM(-r.diff)} víc. To je cena za radost z ježdění.`];
+  return ["v-bad","♥","Drahý koníček",`Náklady převáží růst ceny. Radost z ježdění tě vyjde zhruba na ${czk(r.perMonth)} měsíčně. K nule bys potřeboval zhodnocení ${p1(r.be*100)} ročně.`];
+}
+function drawAKalk(){
+  const A=AUT(),form=$("a-form");
+  if(!form.dataset.ready){
+    form.innerHTML=AF.map(f=>sliderHTML("a",f,AK[f[0]])).join("");
+    form.addEventListener("input",e=>{const i=e.target;if(!i.dataset.k)return;AK[i.dataset.k]=+i.value;const f=AF.find(x=>x[0]===i.dataset.k);$("a-o-"+f[0]).textContent=f[5](AK[f[0]]);i.style.setProperty("--p",(i.value-f[2])/(f[3]-f[2])*100+"%");$("a-presets").querySelectorAll("button").forEach(x=>x.removeAttribute("aria-pressed"));aUpdate()});
+    $("a-presets").addEventListener("click",e=>{const b=e.target.closest("button[data-p]");if(!b)return;const pr=(A&&A.presets||{})[b.dataset.p];if(!pr)return;Object.assign(AK,pr);aSync();aUpdate();$("a-presets").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));toast("Předvolba: "+b.textContent+" (orientační příklad)")});
+    $("a-save").onclick=()=>{const l=lsGet("stit-auto-scen",[]);l.unshift({k:Object.assign({},AK),at:Date.now()});lsSet("stit-auto-scen",l.slice(0,8));aScen();toast("Auto uloženo")};
+    form.dataset.ready=1;redrawers.push(()=>{if(!$("v-aut-kalk").hidden)aChart(aCalc(AK))});
+  }
+  aUpdate();aScen();
+}
+function aSync(){AF.forEach(f=>{const i=$("a-"+f[0]);if(!i)return;i.value=AK[f[0]];i.style.setProperty("--p",(AK[f[0]]-f[2])/(f[3]-f[2])*100+"%");$("a-o-"+f[0]).textContent=f[5](AK[f[0]])})}
+function aUpdate(){
+  lsSet("stit-auto",AK);const r=aCalc(AK),v=aVerdict(r,AK);
+  $("a-verdict").innerHTML=`<div class="verdict ${v[0]}"><span class="vi">${v[1]}</span><span><b>${v[2]}</b><p>${v[3]}</p></span></div>`;
+  $("a-yrs").textContent="za "+r.n+(r.n===1?" rok":r.n<5?" roky":" let")+" držení";
+  const R=[["Vložíš na začátku",czkM(r.buy),"cena, přirážka, dovoz a renovace",""],["Roční náklady",czk(r.run0),"garáž, pojištění a servis v 1. roce",""],
+    ["Všechny náklady",czkM(r.cost),"koupě a provoz za celou dobu",""],["Prodáš za",czkM(r.sale),"po odečtení nákladů na prodej",""],
+    ["Zisk nebo ztráta",czkM(r.profit),r.profit>=0?"čistě, v dnešních korunách nominálně":"radost z jízdy "+czk(r.perMonth)+" měsíčně",r.profit>=0?"up":"down"],["Roční výnos",pct(r.irr,1),"vnitřní výnosové procento všech plateb",r.irr>=0?"up":"down"],
+    ["Zhodnocení k nule",pct(r.be,1)+" ročně","tolik musí auto růst, aby ses dostal na nulu",AK.rust/100>=r.be?"up":"down"],["Stejné peníze v ETF",czkM(r.altV),(r.diff>=0?"auto je lepší o ":"ETF je lepší o ")+czkM(Math.abs(r.diff)),r.diff>=0?"up":"down"]];
+  $("a-res").innerHTML=R.map(x=>`<div class="r"><span>${x[0]}</span><b class="${x[3]}">${x[1]}</b><small>${x[2]}</small></div>`).join("");
+  aChart(r);
+}
+function aChart(r){
+  const box=$("a-chart"),W=Math.max(280,box.clientWidth),H=box.clientHeight||260,m={t:14,r:12,b:26,l:62},ys=r.yrs;
+  const mx=Math.max(...ys.map(x=>Math.max(x.val,x.cost,x.alt)))*1.08;
+  const bw=(W-m.l-m.r)/ys.length,X=i=>m.l+bw*i+bw/2,Y=v=>m.t+(1-v/mx)*(H-m.t-m.b);
+  const st=[50000,100000,250000,500000,1e6,2e6,5e6,1e7].find(s=>mx/s<=6)||2e7,ticks=[];for(let t=0;t<=mx;t+=st)ticks.push(t);
+  const lab=t=>t>=1e6?nf(t/1e6,1)+" mil.":nf(t/1000)+" tis.",step=ys.length>14?Math.ceil(ys.length/10):1;
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Hodnota auta, náklady a ETF v čase">
+   <defs><linearGradient id="ag" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--h2)"/><stop offset="1" stop-color="var(--h1)" stop-opacity=".6"/></linearGradient></defs>
+   ${ticks.map(t=>`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--line)"/><text x="${m.l-8}" y="${Y(t)+4}" text-anchor="end" font-family="var(--mono)" font-size="11" fill="var(--dim)">${lab(t)}</text>`).join("")}
+   ${ys.map((x,i)=>`<rect x="${X(i)-bw*.32}" y="${Y(x.val)}" width="${bw*.64}" height="${Y(0)-Y(x.val)}" rx="5" fill="url(#ag)"><title>Rok ${x.y}: auto ${czkM(x.val)}, náklady celkem ${czkM(x.cost)}, ETF ${czkM(x.alt)}</title></rect>`).join("")}
+   <path d="M${ys.map((x,i)=>X(i)+","+Y(x.cost)).join("L")}" fill="none" stroke="var(--warn)" stroke-width="2.4" stroke-linejoin="round"/>
+   <path d="M${ys.map((x,i)=>X(i)+","+Y(x.alt)).join("L")}" fill="none" stroke="var(--up)" stroke-width="2.4" stroke-dasharray="6 5" stroke-linejoin="round"/>
+   ${ys.map((x,i)=>i%step===0||i===ys.length-1?`<text x="${X(i)}" y="${H-8}" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--dim)">${x.y}. r</text>`:"").join("")}</svg>`;
+}
+function aScen(){
+  const l=lsGet("stit-auto-scen",[]),box=$("a-scen");
+  if(!l.length){box.innerHTML=`<p class="muted" style="margin:0">Zatím nic. Ulož si auta, která zvažuješ, a porovnej je vedle sebe.</p>`;return}
+  box.innerHTML=l.map((s2,i)=>{const r=aCalc(s2.k);return `<div class="sc"><span>Auto <b>${czkM(s2.k.cena)}</b> · ${s2.k.roky} let · růst ${p1(s2.k.rust)}</span><span>náklady <b>${czkM(r.cost)}</b></span><span class="${r.profit>=0?"up":"down"}">výsledek <b>${czkM(r.profit)}</b></span><span><button type="button" data-l="${i}" title="Načíst">↺</button><button type="button" data-d="${i}" title="Smazat">✕</button></span></div>`}).join("");
+  box.querySelectorAll("button").forEach(b=>b.onclick=()=>{const l2=lsGet("stit-auto-scen",[]);if(b.dataset.d!=null){l2.splice(+b.dataset.d,1);lsSet("stit-auto-scen",l2);aScen();toast("Smazáno")}else{AK=Object.assign({},ADEF,l2[+b.dataset.l].k);aSync();aUpdate();toast("Auto načteno");window.scrollTo({top:0,behavior:RM?"auto":"smooth"})}});
+}
+
+/* ---------- auta: jak nakupovat ---------- */
+function drawAutMetodika(){
+  const G=(AUT()||{}).guide;if(!G)return;
+  $("a-rules").innerHTML=G.rules.map(r=>`<a class="rb" href="${esc(safeUrl(r.u)||"#")}" target="_blank" rel="noopener" style="text-decoration:none"><b>${esc(r.v)}</b><span>${esc(r.k)}</span><p>${esc(r.t)}</p></a>`).join("");
+  $("a-princ").innerHTML=G.principles.map((p,i)=>`<div class="card pc lift"><span class="no">${String(i+1).padStart(2,"0")}</span><h3>${esc(p.h)}</h3><p>${esc(p.t)}</p><span class="src2">Zdroj: <a href="${esc(safeUrl(p.u)||"#")}" target="_blank" rel="noopener">${esc(p.s)} ↗</a></span></div>`).join("");
+  $("a-src").innerHTML=G.sources.map(x=>`<a href="${esc(safeUrl(x.u)||"#")}" target="_blank" rel="noopener"><small>${esc(x.s)}</small><b>${esc(x.t)} ↗</b></a>`).join("");
+}
+
+/* ---------- zajímavosti ---------- */
+function drawZaj(){
+  const X=INV&&INV.extras;if(!X)return;
+  $("z-lead").textContent=X.lead;
+  const cur=ZSEL&&X.items.find(i=>i.id===ZSEL)?ZSEL:null;
+  $("z-chips").innerHTML=`<button type="button" role="tab" data-z="" aria-selected="${!cur}">✨ Vše</button>`+X.items.map(i=>`<button type="button" role="tab" data-z="${esc(i.id)}" aria-selected="${i.id===cur}">${esc(i.icon)} ${esc(i.name)}</button>`).join("");
+  $("z-chips").onclick=e=>{const b=e.target.closest("button");if(!b)return;location.hash="zajimavosti"+(b.dataset.z?"/"+b.dataset.z:"")};
+  $("z-grid").innerHTML=X.items.map(i=>`<a class="zc" href="#zajimavosti/${esc(i.id)}" style="--z1:${i.c[0]};--z2:${i.c[1]}"${i.id===cur?' aria-current="true"':""}><span class="ic">${esc(i.icon)}</span><span class="nm">${esc(i.name)}</span><span class="tp">${i.trend==="up"?"▲":i.trend==="down"?"▼":"●"} ${esc(i.trendText)}</span><span class="bn">${esc(i.big.v)}</span><span class="k">${esc(i.big.k)}</span></a>`).join("");
+  const d=$("z-detail");
+  if(cur){const i=X.items.find(x=>x.id===cur),src=i.statsSrc&&safeUrl(i.statsSrc[1]),cs=i.czSrc&&safeUrl(i.czSrc[1]);
+    d.innerHTML=`<div class="zdet" style="--z1:${i.c[0]};--z2:${i.c[1]}"><div class="zh"><span class="ic">${esc(i.icon)}</span><div><h2>${esc(i.name)}</h2><p>${esc(i.lead)}</p></div><button class="x" type="button" aria-label="Zavřít detail">✕</button></div>
+     <div class="zb"><div class="cards4" style="margin-bottom:8px">${i.stats.map(x=>`<div class="card stat"><div class="k">${esc(x.k)}</div><div class="v flat">${esc(x.v)}</div><div class="nn">${esc(x.n||"")}</div></div>`).join("")}</div>
+     ${i.statsSrc?`<p class="src">Zdroj: ${src?`<a href="${esc(src)}" target="_blank" rel="noopener">${esc(i.statsSrc[0])} ↗</a>`:esc(i.statsSrc[0])}</p>`:""}
+     <div class="czbox"><b>V ČESKU</b>${esc(i.cz)}${cs?` <a class="muted" style="font-size:12.5px" href="${esc(cs)}" target="_blank" rel="noopener">${esc(i.czSrc[0])} ↗</a>`:""}</div>
+     <div class="two" style="margin-top:4px"><div><h3 class="hl" style="margin:0">Jak začít</h3><ul>${i.how.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div><div><h3 class="hl" style="margin:0">Na co si dát pozor</h3><ul>${i.risks.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>
+     <div class="chips" style="margin:16px 0 0">${i.links.map(l=>{const u=safeUrl(l[1]);return u?`<a class="chip" href="${esc(u)}" target="_blank" rel="noopener">${esc(l[0])} ↗</a>`:""}).join("")}</div></div></div>`;
+    d.querySelector(".x").onclick=()=>{location.hash="zajimavosti"};
+    d.scrollIntoView({behavior:RM?"auto":"smooth",block:"start"});
+  }else d.innerHTML="";
+  const C=X.chart,mx=Math.max(...C.rows.map(r=>Math.abs(r[1])));
+  $("z-ch-t").textContent=C.title;
+  $("z-chart").innerHTML=C.rows.map(r=>{const w=Math.abs(r[1])/mx*50,pos=r[1]>=0,go=r[2]?(r[2]==="auta"?"auta":"zajimavosti/"+r[2]):"";return `<${go?`a href="#${go}"`:"div"} class="zr${go?"":" ro"}"${go?' style="text-decoration:none"':""}><span>${esc(r[0])}</span><span class="tr"><i style="${pos?"left:50%":"right:50%"};width:0;background:${pos?"var(--up)":"var(--down)"}" data-w="${w}"></i></span><span class="v ${pos?"up":"down"}">${pos?"+":"−"}${nf(Math.abs(r[1]),1)} %</span></${go?"a":"div"}>`}).join("");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>$("z-chart").querySelectorAll("i[data-w]").forEach(i=>i.style.width=i.dataset.w+"%")));
+  $("z-ch-n").innerHTML=esc(C.note)+" Zdroj: "+C.src.map(x=>`<a href="${esc(safeUrl(x[1])||"#")}" target="_blank" rel="noopener">${esc(x[0])} ↗</a>`).join(", ");
+  const ic=id=>(X.items.find(i=>i.id===id)||{}).icon||"✨";
+  $("z-news").innerHTML=X.news.map(n=>{const u=safeUrl(n.u);return `<div class="ni"><p><span class="eyebrow" style="font-size:10px">${ic(n.c)} ${esc((X.items.find(i=>i.id===n.c)||{}).name||"")}</span><br>${esc(n.t)}</p>${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n.s||"zdroj")} ↗</a>`:""}</div>`}).join("");
 }
 
 /* ---------- domů ---------- */
@@ -1199,6 +1483,8 @@ function drawHome(){
   if(D){const items=D.akcie.slice().sort((a,b)=>b.skore-a.skore).map(a=>`<span>${esc(a.ticker)} <b class="${a.zmena_tyden>=0?"up":"down"}">${sg(a.zmena_tyden)}</b></span>`).join("");$("tk1").innerHTML=items;$("tk2").innerHTML=items;
     $("home-sig").innerHTML=D.signaly.slice(0,4).map(s=>`<li><span class="pill ${s.typ==="nákup"?"p-up":s.typ==="prodej"||s.typ==="pozor"?"p-down":s.typ==="pásmo"?"p-warn":"p-flat"}">${esc(s.typ)}</span><span>${esc(s.text)}</span></li>`).join("")}
   if(INV){const nw=[];INV.tabs.forEach(t=>{(t.news||[]).slice(0,2).forEach(n=>nw.push({...n,c:t.icon+" "+t.name}));if(t.world)(t.world.news||[]).slice(0,1).forEach(n=>nw.push({...n,c:t.icon+" "+t.name+" · svět"}))});
+    if(INV.extras){INV.extras.news.slice(0,2).forEach(n=>{const it=INV.extras.items.find(i=>i.id===n.c)||{};nw.push({...n,c:(it.icon||"✨")+" "+(it.name||"Zajímavosti")})});
+      $("home-zaj").innerHTML=INV.extras.items.map(i=>`<a href="#zajimavosti/${esc(i.id)}" style="--z1:${i.c[0]};--z2:${i.c[1]}"><span>${esc(i.icon)} ${esc(i.name)}</span><b>${esc(i.big.v)}</b></a>`).join("")}
     $("home-news").innerHTML=nw.map(n=>{const u=safeUrl(n.u);return `<div class="ni"><p><span class="eyebrow" style="font-size:10px">${esc(n.c)}</span><br>${esc(n.t)}</p>${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n.s||"zdroj")} ↗</a>`:""}</div>`}).join("")}
   const q=()=>{const k=Object.assign({},KDEF,{cena:+$("q-cena").value||0,najem:+$("q-najem").value||0}),r=kCalc(k);
     $("q-res").innerHTML=`<div class="r"><span>Hrubý výnos</span><b class="${r.gross>=.05?"up":r.gross<.035?"down":""}">${pct(r.gross,2)}</b></div><div class="r"><span>Cashflow s hypotékou 70 %</span><b class="${r.cf>=0?"up":"down"}">${czk(r.cf/12)}</b><small>měsíčně</small></div>`};

@@ -770,6 +770,318 @@
       "https://collectingcars.com"
      ]
     ]
+   },
+   "guide": {
+    "rules": [
+     {
+      "v": "30 let",
+      "k": "veterán",
+      "t": "Historickým vozidlem může být auto nejméně 30 let od data výroby. Musí být co nejvíc v původním stavu a projít testací.",
+      "u": "https://www.usetreno.cz/pojisteni-veteranu/",
+      "s": "Ušetřeno.cz"
+     },
+     {
+      "v": "5 let",
+      "k": "STK se zelenou značkou",
+      "t": "Veterán zapsaný v registru historických vozidel jezdí na STK jednou za 5 let místo každé 2 roky. Měří se bezpečnost, ne emise.",
+      "u": "https://www.autojournal.cz/?p=240907",
+      "s": "Autojournal, 12. 11. 2025"
+     },
+     {
+      "v": "1 rok",
+      "k": "drž, pak prodej",
+      "t": "Když auto prodáš po víc než roce od koupě a nebylo v podnikání, je příjem z prodeje osvobozený od daně.",
+      "u": "https://www.finance.cz/clanky/549746-prijem-z-prodeje-movite-veci-majetku-cenneho-papiru/",
+      "s": "Finance.cz"
+     },
+     {
+      "v": "−3,7 %",
+      "k": "klasická auta 2025",
+      "t": "Index luxusních investic Knight Frank: klasická auta za rok 2025 zlevnila. Kupuj proto, že tě auto baví, zisk je bonus.",
+      "u": "https://www.outlookbusiness.com/markets/luxury-investment-impressionist-art-sees-max-136-pc-price-rise-whisky-rates-down-11-pc",
+      "s": "Outlook Business, 23. 4. 2026"
+     },
+     {
+      "v": "35 %",
+      "k": "prodejů nad odhadem",
+      "t": "Jen 35,2 % soukromých prodejů v USA proběhlo nad pojistnou hodnotou, nejméně za skoro 4 roky. Trh přeje kupujícím, vyjednávej.",
+      "u": "https://www.motorious.com/articles/news/hagerty-market-rating-falls-to-lowest-level/",
+      "s": "Motorious / Hagerty, 28. 1. 2026"
+     }
+    ],
+    "principles": [
+     {
+      "h": "Nejdřív rozhodni, proč kupuješ",
+      "t": "Auto na ježdění a auto jako investice jsou dvě různé věci. Na ježdění vyber model, který tě baví a na který seženeš díly. Na investici hledej vzácný, původní kus s doložitelnou historií.",
+      "s": "TOP.cz, 10. 5. 2024",
+      "u": "https://www.top.cz/vyplati-se-investice-do-veteranu-podivejte-se-na-pozitiva-i-rizika-pripojime-osobni-zkusenost"
+     },
+     {
+      "h": "Originalita rozhoduje o ceně",
+      "t": "Vyměněný motor, jiná barva nebo nepůvodní díly cenu výrazně snižují. Zkontroluj VIN, číslo motoru a podle možnosti si původ ověř u výrobce nebo klubu.",
+      "s": "TOP.cz, 10. 5. 2024",
+      "u": "https://www.top.cz/vyplati-se-investice-do-veteranu-podivejte-se-na-pozitiva-i-rizika-pripojime-osobni-zkusenost"
+     },
+     {
+      "h": "Inzertní cena není prodejní cena",
+      "t": "Trh s veterány není regulovaný. Porovnej cenu s inzercí, výsledky aukcí a odbornými časopisy. U stejného modelu se ceny liší i násobně podle stavu.",
+      "s": "TOP.cz a Newstream",
+      "u": "https://www.top.cz/vyplati-se-investice-do-veteranu-podivejte-se-na-pozitiva-i-rizika-pripojime-osobni-zkusenost"
+     },
+     {
+      "h": "Spočítej všechny náklady předem",
+      "t": "Dovoz z USA vyjde zhruba na 80 tisíc Kč, přeprava v rámci EU až na 30 tisíc, registrace kolem 5 tisíc. K tomu garáž, servis a pojištění každý rok. Použij kalkulačku.",
+      "s": "TOP.cz, 10. 5. 2024",
+      "u": "https://www.top.cz/vyplati-se-investice-do-veteranu-podivejte-se-na-pozitiva-i-rizika-pripojime-osobni-zkusenost"
+     },
+     {
+      "h": "Zelené značky: testace a STK",
+      "t": "Klub ze svazu historických vozidel posoudí původnost, technický stav ověří STK. Potvrzení původnosti platí 5 let. Veterán se nesmí používat k podnikání.",
+      "s": "Právní prostor (vyhláška 257/2023 Sb.)",
+      "u": "https://pravniprostor.cz/zmeny-v-legislative/vyslo-ve-sbirce-zakonu/novela-vyhlasky-o-stanoveni-zpusobu-podminek-registrace-provozu-zpusobu-podminek-testovani-historickych-sportovnich-vozidel"
+     },
+     {
+      "h": "Pojištění je levné, havarijní hůř",
+      "t": "Povinné ručení veterána stojí obvykle jen stovky korun ročně. Havarijní pojištění ale nenabízí každá pojišťovna, protože opravy se těžko odhadují.",
+      "s": "Ušetřeno.cz",
+      "u": "https://www.usetreno.cz/pojisteni-veteranu/"
+     },
+     {
+      "h": "Počítej s pomalým prodejem",
+      "t": "Prodej trvá týdny až měsíce. Čím vzácnější a dražší auto, tím užší okruh kupců. Peníze, které můžeš potřebovat, do veterána nedávej.",
+      "s": "TOP.cz, 10. 5. 2024",
+      "u": "https://www.top.cz/vyplati-se-investice-do-veteranu-podivejte-se-na-pozitiva-i-rizika-pripojime-osobni-zkusenost"
+     },
+     {
+      "h": "Trh se ochladil, kupující mají navrch",
+      "t": "Hagerty Market Rating spadl na 58,3 bodu, nejníž za skoro 15 let, a klesá 37 ze 43 měsíců. Kdo kupuje teď, má prostor vyjednat cenu.",
+      "s": "Motorious / Hagerty, 28. 1. 2026",
+      "u": "https://www.motorious.com/articles/news/hagerty-market-rating-falls-to-lowest-level/"
+     },
+     {
+      "h": "Youngtimery a moderní klasiky",
+      "t": "Hagerty pro rok 2026 tipuje růst hlavně u aut z 90. a 2000. let: Mazda MX-5 (1999–2005), VW Golf GTI VR6, BMW M5 V10 nebo Porsche Carrera GT. Mladší generace kupuje auta svého dětství.",
+      "s": "Driven / Hagerty Bull Market List 2026",
+      "u": "https://www.drivencarguide.co.nz/news/hagertys-2026-bull-market-list-11-classics-ready-to-appreciate/"
+     },
+     {
+      "h": "V Česku táhne východní blok",
+      "t": "Zhruba 65 % obchodů Mototechny Classic tvoří vozy z východního bloku. Ceny některých typů ale klesají z covidových maxim, takže běžné modely v horším stavu se dají vyjednat.",
+      "s": "Newstream",
+      "u": "https://www.newstream.cz/enjoy/kdyz-auto-po-dedovi-stoji-statisice-veteranske-zavody-spojuji-nostalgii-rodiny-i-investory"
+     }
+    ],
+    "checklist": [
+     [
+      "Doklady a původ",
+      [
+       [
+        "VIN a číslo motoru",
+        "sedí s doklady a s typem vozu (matching numbers)"
+       ],
+       [
+        "Historie majitelů",
+        "kolik jich bylo, kde auto stálo, dovoz odkud"
+       ],
+       [
+        "Servisní knížka a faktury",
+        "doložené opravy a renovace, fotky z renovace"
+       ],
+       [
+        "Zástavy a exekuce",
+        "ověř, že auto není zastavené ani kradené"
+       ],
+       [
+        "Status veterána",
+        "platná testace, zelené značky, nebo co bude potřeba"
+       ]
+      ]
+     ],
+     [
+      "Karoserie",
+      [
+       [
+        "Koroze",
+        "prahy, podběhy, podlaha, rámy, spodky dveří"
+       ],
+       [
+        "Původní lak a barva",
+        "tloušťkoměr, sedí barva s výrobním štítkem?"
+       ],
+       [
+        "Mezery a sváry",
+        "nerovné spáry prozradí bouračku nebo špatnou opravu"
+       ],
+       [
+        "Chrom, skla, těsnění",
+        "u vzácných modelů se díly shánějí dlouho a draho"
+       ],
+       [
+        "Interiér",
+        "původní čalounění a palubní deska zvyšují cenu"
+       ]
+      ]
+     ],
+     [
+      "Technika",
+      [
+       [
+        "Motor za studena",
+        "startuje, nekouří, neklepe; nech ho nastartovat až u tebe"
+       ],
+       [
+        "Úniky oleje a vody",
+        "pod autem i v motorovém prostoru"
+       ],
+       [
+        "Brzdy a řízení",
+        "vůle v řízení, brzdění rovně"
+       ],
+       [
+        "Elektrika",
+        "světla, ukazatele, dobíjení"
+       ],
+       [
+        "Dostupnost dílů",
+        "zjisti v klubu, co se dá sehnat a za kolik"
+       ]
+      ]
+     ],
+     [
+      "Zkušební jízda",
+      [
+       [
+        "Aspoň 20 minut",
+        "za studena i zahřátý motor"
+       ],
+       [
+        "Převodovka a spojka",
+        "řazení všech rychlostí, prokluz spojky"
+       ],
+       [
+        "Teplota",
+        "drží se motor v normálu i ve stání?"
+       ],
+       [
+        "Nezávislá prohlídka",
+        "vezmi znalce z klubu nebo specializovaný servis"
+       ]
+      ]
+     ],
+     [
+      "Koupě a převod",
+      [
+       [
+        "Kupní smlouva",
+        "stav vozu, výbava a vady popsané písemně"
+       ],
+       [
+        "Platba převodem",
+        "žádná hotovost bez dokladu"
+       ],
+       [
+        "Pojištění od prvního dne",
+        "povinné ručení před první jízdou"
+       ],
+       [
+        "Přepis a registrace",
+        "termín přepisu, při dovozu i testace a STK"
+       ],
+       [
+        "Kde bude stát",
+        "suchá garáž, ideálně s větráním"
+       ]
+      ]
+     ]
+    ],
+    "sources": [
+     {
+      "t": "Kdy se z auta stane veterán a co je potřeba",
+      "s": "Carvertical (2020)",
+      "u": "https://www.carvertical.com/cz/blog/od-kdy-je-auto-veteran"
+     },
+     {
+      "t": "STK každých 5 let pro zelené značky",
+      "s": "Autojournal, 12. 11. 2025",
+      "u": "https://www.autojournal.cz/?p=240907"
+     },
+     {
+      "t": "Vyhláška 257/2023 Sb. o historických vozidlech",
+      "s": "Právní prostor",
+      "u": "https://pravniprostor.cz/zmeny-v-legislative/vyslo-ve-sbirce-zakonu/novela-vyhlasky-o-stanoveni-zpusobu-podminek-registrace-provozu-zpusobu-podminek-testovani-historickych-sportovnich-vozidel"
+     },
+     {
+      "t": "Daň z prodeje auta a movitých věcí",
+      "s": "Finance.cz",
+      "u": "https://www.finance.cz/clanky/549746-prijem-z-prodeje-movite-veci-majetku-cenneho-papiru/"
+     },
+     {
+      "t": "Vyplatí se investice do veteránů?",
+      "s": "TOP.cz, 10. 5. 2024",
+      "u": "https://www.top.cz/vyplati-se-investice-do-veteranu-podivejte-se-na-pozitiva-i-rizika-pripojime-osobni-zkusenost"
+     },
+     {
+      "t": "Hagerty Market Rating na 15letém minimu",
+      "s": "Motorious, 28. 1. 2026",
+      "u": "https://www.motorious.com/articles/news/hagerty-market-rating-falls-to-lowest-level/"
+     },
+     {
+      "t": "Hagerty Bull Market List 2026",
+      "s": "Driven, 9. 12. 2025",
+      "u": "https://www.drivencarguide.co.nz/news/hagertys-2026-bull-market-list-11-classics-ready-to-appreciate/"
+     },
+     {
+      "t": "Když auto po dědovi stojí statisíce",
+      "s": "Newstream",
+      "u": "https://www.newstream.cz/enjoy/kdyz-auto-po-dedovi-stoji-statisice-veteranske-zavody-spojuji-nostalgii-rodiny-i-investory"
+     }
+    ]
+   },
+   "presets": {
+    "youngtimer": {
+     "cena": 250000,
+     "prirazka": 0,
+     "dovoz": 5000,
+     "renovace": 40000,
+     "garaz": 1500,
+     "pojisteni": 3000,
+     "servis": 15000,
+     "rust": 3,
+     "roky": 8
+    },
+    "vychod": {
+     "cena": 450000,
+     "prirazka": 0,
+     "dovoz": 8000,
+     "renovace": 80000,
+     "garaz": 2000,
+     "pojisteni": 2000,
+     "servis": 20000,
+     "rust": 2,
+     "roky": 10
+    },
+    "sport": {
+     "cena": 1500000,
+     "prirazka": 12,
+     "dovoz": 30000,
+     "renovace": 100000,
+     "garaz": 3500,
+     "pojisteni": 15000,
+     "servis": 45000,
+     "rust": 4,
+     "roky": 10
+    },
+    "usa": {
+     "cena": 800000,
+     "prirazka": 0,
+     "dovoz": 85000,
+     "renovace": 150000,
+     "garaz": 2500,
+     "pojisteni": 5000,
+     "servis": 30000,
+     "rust": 3,
+     "roky": 10
+    }
    }
   },
   {
@@ -970,5 +1282,524 @@
    }
   }
  ],
- "updated": "14. 11. 2026"
+ "updated": "14. 11. 2026",
+ "extras": {
+  "lead": "Hodinky, umění, víno, whisky, sběratelské karty a LEGO. Věci, které se dají sbírat pro radost a někdy i se ziskem. Tady je, jak si vedou, co je nového a na co si dát pozor.",
+  "chart": {
+   "title": "Jak si vedly za rok 2025",
+   "note": "Index luxusních investic Knight Frank (KFLII) a pro víno index Liv-ex Fine Wine 100. Jde o změnu cen za kalendářní rok 2025.",
+   "rows": [
+    [
+     "Impresionistické umění",
+     13.6,
+     "umeni"
+    ],
+    [
+     "Hodinky",
+     5.1,
+     "hodinky"
+    ],
+    [
+     "Celý index luxusu",
+     -0.4,
+     ""
+    ],
+    [
+     "Víno (Liv-ex 100)",
+     -2.5,
+     "vino"
+    ],
+    [
+     "Klasická auta",
+     -3.7,
+     "auta"
+    ],
+    [
+     "Whisky",
+     -10.9,
+     "whisky"
+    ]
+   ],
+   "src": [
+    [
+     "Outlook Business, 23. 4. 2026 (Knight Frank Wealth Report 2026)",
+     "https://www.outlookbusiness.com/markets/luxury-investment-impressionist-art-sees-max-136-pc-price-rise-whisky-rates-down-11-pc"
+    ],
+    [
+     "Business Traveller (Liv-ex 100)",
+     "https://www.businesstraveller.com/news/vineyards-pre-loved-bags-and-modern-classic-cars-the-collector-investments-to-watch-in-2026/"
+    ]
+   ]
+  },
+  "items": [
+   {
+    "id": "hodinky",
+    "name": "Hodinky",
+    "icon": "⌚",
+    "c": [
+     "#0E3B43",
+     "#2BC4B6"
+    ],
+    "trend": "up",
+    "trendText": "Ojeté hodinky zase zdražují",
+    "big": {
+     "v": "+5,1 %",
+     "k": "hodinky za rok 2025",
+     "n": "Knight Frank; Patek Philippe +12,1 %, Rolex Market Index +4,6 %"
+    },
+    "lead": "Po propadu z let 2022–2023 se trh ojetých luxusních hodinek srovnal. Nad katalogovou cenou se ale drží jen pár značek, většina se dál prodává se slevou.",
+    "stats": [
+     {
+      "k": "Patek Philippe",
+      "v": "+15,4 %",
+      "n": "průměrně nad katalogovou cenou, 2. čtvrtletí 2026"
+     },
+     {
+      "k": "Rolex",
+      "v": "+9,8 %",
+      "n": "nad katalogovou cenou; Oyster Perpetual kolem +35 %"
+     },
+     {
+      "k": "Audemars Piguet",
+      "v": "+3 %",
+      "n": "jediná další značka nad katalogem"
+     },
+     {
+      "k": "Cartier",
+      "v": "≈ +10 %",
+      "n": "za půl roku podle Chrono24, ale pořád pod katalogem"
+     }
+    ],
+    "statsSrc": [
+     "DMARGE, 20. 7. 2026 (Morgan Stanley, WatchCharts, Chrono24)",
+     "https://www.dmarge.com/watches/luxury-watch-prices-are-climbing-again-and-rolex-isnt-the-biggest-surprise"
+    ],
+    "cz": "V Česku stojí za pozornost nezávislí hodináři jako Prokop & Brož, Robot, Chronotechna, Luděk Seryn nebo Ondřej Berkus. Z historických kusů starší Prim (Spartak, Orlík). Sázka na malou značku se ale vyplatí, jen když se z ní stane známé jméno.",
+    "czSrc": [
+     "Finance.cz, 23. 8. 2023",
+     "https://www.finance.cz/clanky/546230-alternativni-investice-do-hodinek/"
+    ],
+    "how": [
+     "Hodnotu drží hlavně Patek Philippe, Audemars Piguet, Rolex, Vacheron Constantin a A. Lange & Söhne, a to ne všechny modely.",
+     "Kupuj kompletní sadu: krabička, záruční list, servisní doklady. Bez papírů hodinky ztrácí.",
+     "Než koupíš, ověř cenu modelu na Chrono24 a WatchCharts a srovnej obchody.",
+     "Místo jednoho drahého kusu zvaž menší sbírku kolem jedné značky nebo typu (pilotky, potápěčky)."
+    ],
+    "risks": [
+     "Padělky a těžko ověřitelná pravost, hlavně u hodinek „po slavné osobě“.",
+     "Na aukcích se cena snadno vyšroubuje nad investiční hodnotu.",
+     "Servis luxusních hodinek stojí desítky tisíc korun a prodej může trvat."
+    ],
+    "links": [
+     [
+      "Chrono24",
+      "https://www.chrono24.cz"
+     ],
+     [
+      "WatchCharts",
+      "https://watchcharts.com"
+     ],
+     [
+      "Phillips Watches",
+      "https://www.phillips.com/watches"
+     ],
+     [
+      "Antiquorum",
+      "https://www.antiquorum.swiss"
+     ]
+    ]
+   },
+   {
+    "id": "umeni",
+    "name": "Umění",
+    "icon": "🎨",
+    "c": [
+     "#4A1D96",
+     "#FF5FA2"
+    ],
+    "trend": "up",
+    "trendText": "Česko roste, New York tento týden",
+    "big": {
+     "v": "766 mil. Kč",
+     "k": "české sálové aukce, 1. pololetí 2026",
+     "n": "+37,6 % meziročně (Artplus.cz)"
+    },
+    "lead": "Český trh s uměním se v 1. pololetí 2026 vrátil k růstu. Ve světě vrcholí podzimní aukce v New Yorku, kde se 17. a 18. listopadu draží díla za miliardy dolarů.",
+    "stats": [
+     {
+      "k": "Nejdražší dílo 1. pololetí",
+      "v": "34,1 mil. Kč",
+      "n": "Josef Čapek, Piják, rekord autora"
+     },
+     {
+      "k": "Děl nad 1 mil. Kč",
+      "v": "127",
+      "n": "z toho 9 nad 10 mil. Kč"
+     },
+     {
+      "k": "Český aukční rekord",
+      "v": "126,5 mil. Kč",
+      "n": "František Kupka, Početí, jaro 2024"
+     },
+     {
+      "k": "Impresionisté 2025",
+      "v": "+13,6 %",
+      "n": "Knight Frank, nejlepší kategorie roku"
+     }
+    ],
+    "statsSrc": [
+     "Novinky.cz, 23. 7. 2026 (Artplus.cz); Outlook Business, 23. 4. 2026",
+     "https://www.novinky.cz/clanek/kultura-trh-s-umenim-se-v-cesku-mezirocne-zvedl-o-200-milionu-korun-40589399"
+    ],
+    "cz": "Na českých aukcích se k vydražené ceně připočítává aukční přirážka, například u rekordního Kubišty v Galerii Kodl to bylo 20 %. Trh táhne klasická moderna (Kupka, Kubišta, Filla, Čapek, Toyen); u mladých autorů je větší riziko i větší prostor.",
+    "czSrc": [
+     "CC.cz, 30. 5. 2022",
+     "https://cc.cz/kubista-trumfl-kupku-cesko-ma-novy-aukcni-rekord-za-1236-milionu-korun/"
+    ],
+    "how": [
+     "Začni u autorů, kterým rozumíš, a sleduj výsledky aukcí na Artplus.cz.",
+     "Ptej se na provenienci (odkud dílo pochází) a znalecký posudek.",
+     "Počítej s aukční přirážkou a s tím, že prodej zpátky přes aukci zase stojí provizi.",
+     "Kupuj pro radost: obraz ti visí doma, i když se cena nehne."
+    ],
+    "risks": [
+     "Nízká likvidita: dílo se dá prodat hlavně na aukci, a to dvakrát do roka.",
+     "Padělky a sporná provenience.",
+     "Trh hodně závisí na tom, jestli se zrovna objeví nejdražší díla."
+    ],
+    "links": [
+     [
+      "Artplus.cz",
+      "https://www.artplus.cz"
+     ],
+     [
+      "Galerie Kodl",
+      "https://www.galeriekodl.cz"
+     ],
+     [
+      "European Arts",
+      "https://www.europeanarts.cz"
+     ],
+     [
+      "Adolf Loos Apartment and Gallery",
+      "https://www.adolfloos.cz"
+     ],
+     [
+      "Dorotheum Praha",
+      "https://www.dorotheum.com"
+     ],
+     [
+      "Artprice",
+      "https://www.artprice.com"
+     ]
+    ]
+   },
+   {
+    "id": "vino",
+    "name": "Víno",
+    "icon": "🍷",
+    "c": [
+     "#4A0A1E",
+     "#C2185B"
+    ],
+    "trend": "flat",
+    "trendText": "Trh se stabilizuje",
+    "big": {
+     "v": "+1,1 %",
+     "k": "Liv-ex Fine Wine 100, září 2026",
+     "n": "poměr poptávky k nabídce 1,13, nejvýš od října 2022"
+    },
+    "lead": "Po dvou slabých letech se ceny investičních vín zastavily a v září 2026 rostly. Táhne Itálie (Piemont) a starší ročníky Bordeaux, Burgundsko předběhlo Bordeaux v objemu obchodů.",
+    "stats": [
+     {
+      "k": "Liv-ex 100, září 2026",
+      "v": "+1,1 %",
+      "n": "nejsilnější signál stabilizace"
+     },
+     {
+      "k": "Liv-ex 100, rok 2025",
+      "v": "−2,5 %",
+      "n": "podle Knight Frank Wealth Report"
+     },
+     {
+      "k": "Bordeaux do roku 2010",
+      "v": "+36 %",
+      "n": "meziroční růst objemu obchodů, ne ceny"
+     }
+    ],
+    "statsSrc": [
+     "Vinetur, 17. 10. 2026 (Liv-ex); Business Traveller",
+     "https://www.vinetur.com/en/20261017109179/fine-wine-prices-rose-11-in-september-the-strongest-sign-yet-that-the-market-is-stabilizing.html"
+    ],
+    "cz": "Investiční víno se v Česku kupuje hlavně přes zahraniční obchodníky a sklady s celním režimem. Pro začátek stačí bedna vína, které by sis rád otevřel, i kdyby cena nerostla.",
+    "how": [
+     "Kupuj celé originální bedny se známým původem.",
+     "Skladuj v profesionálním skladu se stálou teplotou, ne ve sklepě panelového domu.",
+     "Sleduj ceny na Liv-ex a Wine-Searcher."
+    ],
+    "risks": [
+     "Sklad a pojištění stojí každý rok peníze.",
+     "Padělky u nejdražších vín.",
+     "Prodej přes obchodníka nebo aukci stojí provizi."
+    ],
+    "links": [
+     [
+      "Liv-ex",
+      "https://www.liv-ex.com"
+     ],
+     [
+      "Wine-Searcher",
+      "https://www.wine-searcher.com"
+     ],
+     [
+      "Decanter",
+      "https://www.decanter.com"
+     ]
+    ]
+   },
+   {
+    "id": "whisky",
+    "name": "Whisky",
+    "icon": "🥃",
+    "c": [
+     "#5A2A00",
+     "#E08A1E"
+    ],
+    "trend": "down",
+    "trendText": "Hluboko pod vrcholem",
+    "big": {
+     "v": "−42 %",
+     "k": "Icon 100 od vrcholu v květnu 2022",
+     "n": "Rare Whisky 101; v roce 2026 spíš do strany"
+    },
+    "lead": "Sběratelská whisky po covidovém boomu zlevnila skoro o polovinu. Ceny na aukcích jsou zpět na úrovni roku 2019. Je to levnější vstup, ale jasné oživení zatím není.",
+    "stats": [
+     {
+      "k": "Whisky za rok 2025",
+      "v": "−10,9 %",
+      "n": "Knight Frank, nejhorší kategorie"
+     },
+     {
+      "k": "Aukční ceny",
+      "v": "úroveň 2019",
+      "n": "podle DramX, září 2026"
+     },
+     {
+      "k": "Sudy skotské whisky",
+      "v": "−28 %",
+      "n": "proti cenám z let 2020–2023 (CaskID)"
+     }
+    ],
+    "statsSrc": [
+     "Vinetur, 29. 9. a 3. 11. 2026; Outlook Business, 23. 4. 2026",
+     "https://www.vinetur.com/it/20261103110182/collectible-whisky-prices-have-fallen-42-from-their-2022-peak.html"
+    ],
+    "cz": "V Česku se sběratelská whisky prodává hlavně na Aukru a přes specializované obchody. Pozor na nabídky „investic do sudů“ se slibovaným výnosem, sudy výrazně zlevnily.",
+    "how": [
+     "Kupuj lahve, které bys rád i vypil. Investice se může změnit v degustaci.",
+     "Sleduj aukční ceny na Whisky Auctioneer a indexy Rare Whisky 101.",
+     "Uchovávej lahve nastojato, v temnu a se stálou teplotou."
+    ],
+    "risks": [
+     "Trh ještě nenašel dno, ceny jdou do strany.",
+     "Investice do sudů bývají špatně likvidní a nabízí je i podvodníci.",
+     "Aukční poplatky platí kupující i prodávající."
+    ],
+    "links": [
+     [
+      "Rare Whisky 101",
+      "https://www.rarewhisky101.com"
+     ],
+     [
+      "Whisky Auctioneer",
+      "https://www.whiskyauctioneer.com"
+     ],
+     [
+      "Whiskystats",
+      "https://www.whiskystats.com"
+     ]
+    ]
+   },
+   {
+    "id": "karty",
+    "name": "Sběratelské karty",
+    "icon": "🃏",
+    "c": [
+     "#0B3D91",
+     "#FFC83D"
+    ],
+    "trend": "flat",
+    "trendText": "Staré rostou, nové padají",
+    "big": {
+     "v": "+15–25 %",
+     "k": "vintage Pokémon karty v roce 2026",
+     "n": "Base Set a karty z let 1999–2003 ve vysokém stupni"
+    },
+    "lead": "U Pokémon karet se trh rozděluje. Staré karty z let 1999–2003 v dobrém stavu rostou, nové sady ztrácí, protože se jich tiskne rekordně moc.",
+    "stats": [
+     {
+      "k": "Vytištěno za rok do března 2026",
+      "v": "≈ 10 mld.",
+      "n": "karet, historické maximum"
+     },
+     {
+      "k": "Mega Greninja ex SIR",
+      "v": "505 → 300 $",
+      "n": "během šesti týdnů po vydání"
+     },
+     {
+      "k": "Fronta na hodnocení PSA",
+      "v": "≈ 10 mil.",
+      "n": "karet, levné úrovně pozastaveny"
+     }
+    ],
+    "statsSrc": [
+     "Misprint, 24. 6. 2026",
+     "https://www.misprint.com/posts/pokemon-card-market-mid-2026"
+    ],
+    "cz": "V Česku se karty kupují a prodávají hlavně přes Cardmarket a specializované obchody. Hodnocení (grading) se posílá do zahraničí a stojí desítky dolarů za kartu.",
+    "how": [
+     "Jako investici ber hlavně staré karty v nejvyšším stupni (PSA 10, PSA 9).",
+     "Nové boostery kupuj pro zábavu, ne jako investici.",
+     "Ceny ověřuj na PriceCharting a Cardmarket."
+    ],
+    "risks": [
+     "Nadprodukce nových sad srazí ceny během týdnů.",
+     "Padělky a přebalené balíčky.",
+     "Grading trvá měsíce a výsledek není jistý."
+    ],
+    "links": [
+     [
+      "Cardmarket",
+      "https://www.cardmarket.com"
+     ],
+     [
+      "PriceCharting",
+      "https://www.pricecharting.com"
+     ],
+     [
+      "PSA",
+      "https://www.psacard.com"
+     ]
+    ]
+   },
+   {
+    "id": "lego",
+    "name": "LEGO",
+    "icon": "🧱",
+    "c": [
+     "#8A0F0F",
+     "#FFD000"
+    ],
+    "trend": "up",
+    "trendText": "Konec roku = konec prodeje",
+    "big": {
+     "v": "100+",
+     "k": "sad označených „Retiring Soon“ na konec 2026",
+     "n": "StoneWars čeká až 400 končících sad"
+    },
+    "lead": "Když LEGO stáhne sadu z prodeje, cena na bazarech často roste. Na konci roku 2026 končí i velké sady jako Millennium Falcon nebo Grand Piano.",
+    "stats": [
+     {
+      "k": "75192 Millennium Falcon",
+      "v": "849,99 $",
+      "n": "končí na konci 2026"
+     },
+     {
+      "k": "21323 Grand Piano",
+      "v": "399,99 $",
+      "n": "končí na konci 2026"
+     },
+     {
+      "k": "10326 Natural History Museum",
+      "v": "299,99 $",
+      "n": "končí na konci 2026"
+     }
+    ],
+    "statsSrc": [
+     "StoneWars, 14. 9. 2026",
+     "https://stonewars.com/news/lego-retiring-soon-sets-end-of-2026/"
+    ],
+    "cz": "Bakalářská práce z VŠE (2026) na datech BrickEconomy a BrickLink ukázala, že zhodnocení silně závisí na vlastnostech sady. Některé sady rostou výrazně, jiné vůbec.",
+    "czSrc": [
+     "VŠE, Petr Pauk, 2026",
+     "https://vskp.vse.cz/english/101365"
+    ],
+    "how": [
+     "Kupuj v akci před koncem prodeje a nech krabici zavřenou a nepoškozenou.",
+     "Licencované řady a velké sběratelské sady drží hodnotu lépe.",
+     "Ceny po konci prodeje sleduj na BrickEconomy."
+    ],
+    "risks": [
+     "Sklad zabírá místo a poškozená krabice srazí cenu.",
+     "Ne každá sada po konci prodeje zdraží.",
+     "Při prodeji platíš poštovné a poplatky bazaru."
+    ],
+    "links": [
+     [
+      "BrickEconomy",
+      "https://www.brickeconomy.com"
+     ],
+     [
+      "BrickLink",
+      "https://www.bricklink.com"
+     ],
+     [
+      "Brickfact, končící sady",
+      "https://brickfact.com/en-gb/end-of-life"
+     ]
+    ]
+   }
+  ],
+  "news": [
+   {
+    "t": "New York: Christie's 17. 11. a Sotheby's 18. 11. Aukční domy čekají za listopad přes 2,4 mld. $. Van Gogh (Blossoming Chestnut Trees) za zhruba 180 mil. $, Cézanne kolem 120 mil. $.",
+    "s": "USA Art News, 12. 11. 2026",
+    "u": "https://usaartnews.com/auctions/new-york-auction-houses-target-24-billion-in-november-sales/",
+    "c": "umeni"
+   },
+   {
+    "t": "Christie's 20th Century Evening Sale: 79 děl s odhadem 550,9–797,8 mil. $. Nejdražší Kandinsky a Klimt, každý 60–80 mil. $.",
+    "s": "HENI, 29. 10. 2026",
+    "u": "https://heni.com/news/article/christie-s-20th-century-evening-sale-in-new-york-2026-11-17",
+    "c": "umeni"
+   },
+   {
+    "t": "Whisky Icon 100 je 42 % pod vrcholem z roku 2022. Letos se index spíš drží na místě.",
+    "s": "Vinetur, 3. 11. 2026",
+    "u": "https://www.vinetur.com/it/20261103110182/collectible-whisky-prices-have-fallen-42-from-their-2022-peak.html",
+    "c": "whisky"
+   },
+   {
+    "t": "Ceny sudů skotské whisky jsou podle CaskID o 28 % níž než v letech 2020–2023.",
+    "s": "Vinetur, 3. 11. 2026",
+    "u": "https://www.vinetur.com/en/20261103110305/caskid-estimates-uk-scotch-whisky-cask-prices-fell-28-from-2020-23-levels.html",
+    "c": "whisky"
+   },
+   {
+    "t": "Liv-ex Fine Wine 100 v září +1,1 %, poptávka převyšuje nabídku nejvíc od října 2022.",
+    "s": "Vinetur, 17. 10. 2026",
+    "u": "https://www.vinetur.com/en/20261017109179/fine-wine-prices-rose-11-in-september-the-strongest-sign-yet-that-the-market-is-stabilizing.html",
+    "c": "vino"
+   },
+   {
+    "t": "LEGO označilo přes 100 sad jako „Retiring Soon“, mezi nimi Millennium Falcon za 849,99 $.",
+    "s": "StoneWars, 14. 9. 2026",
+    "u": "https://stonewars.com/news/lego-retiring-soon-sets-end-of-2026/",
+    "c": "lego"
+   },
+   {
+    "t": "Patek Philippe se na trhu ojetých hodinek prodává průměrně 15,4 % nad katalogovou cenou, Rolex 9,8 %.",
+    "s": "DMARGE, 20. 7. 2026",
+    "u": "https://www.dmarge.com/watches/luxury-watch-prices-are-climbing-again-and-rolex-isnt-the-biggest-surprise",
+    "c": "hodinky"
+   },
+   {
+    "t": "České sálové aukce umění v 1. pololetí za 766 mil. Kč, o víc než 200 milionů víc než loni.",
+    "s": "Novinky.cz, 23. 7. 2026",
+    "u": "https://www.novinky.cz/clanek/kultura-trh-s-umenim-se-v-cesku-mezirocne-zvedl-o-200-milionu-korun-40589399",
+    "c": "umeni"
+   }
+  ]
+ }
 }
